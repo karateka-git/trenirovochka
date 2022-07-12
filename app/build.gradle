@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    alias(libs.plugins.hilt)
 }
 
 apply from: "$rootDir/versions.gradle"
@@ -50,6 +52,10 @@ dependencies {
 
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:${libs.versions.hilt.get()}"
+    kapt "com.google.dagger:hilt-compiler:${libs.versions.hilt.get()}"
 
     // Test
     testImplementation 'junit:junit:4.13.2'

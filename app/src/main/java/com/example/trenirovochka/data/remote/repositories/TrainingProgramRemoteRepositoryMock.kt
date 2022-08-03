@@ -3,8 +3,11 @@ package com.example.trenirovochka.data.remote.repositories
 import com.example.trenirovochka.domain.datacontracts.ITrainingProgramRemoteRepository
 import com.example.trenirovochka.domain.models.TrainingProgram
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class TrainingProgramRemoteRepositoryMock : ITrainingProgramRemoteRepository {
+class TrainingProgramRemoteRepositoryMock @Inject constructor(
+    // TODO add service
+) : ITrainingProgramRemoteRepository {
     override fun getTrainingProgram(date: String) = flow {
         emit(
             TrainingProgram(

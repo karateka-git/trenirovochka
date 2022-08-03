@@ -2,13 +2,14 @@ package com.example.trenirovochka.presentation.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.trenirovochka.data.remote.repositories.TrainingProgramRemoteRepositoryMock
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
-import com.example.trenirovochka.domain.interactors.interfaces.TrainingProgramsInteractor
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
-    var programsInteractor: ITrainingProgramsInteractor =
-        TrainingProgramsInteractor(TrainingProgramRemoteRepositoryMock())
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val programsInteractor: ITrainingProgramsInteractor
+) : ViewModel() {
 
     val trainingProgram = programsInteractor.getTrainingProgram("").asLiveData()
 }

@@ -27,8 +27,19 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.trainingProgram.observe(viewLifecycleOwner) {
-            binding.text.text = it.name
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.apply {
+            binding.apply {
+                trainingProgram.observe(viewLifecycleOwner) {
+                    text.text = it.name
+                }
+                selectedDate.observe(viewLifecycleOwner) {
+                    datePickerSelectedDateText.text = it
+                }
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.trenirovochka.presentation.main
+package com.example.trenirovochka.presentation.activity.main
 
 import android.os.Bundle
 import androidx.activity.viewModels

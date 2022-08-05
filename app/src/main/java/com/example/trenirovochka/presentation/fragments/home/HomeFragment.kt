@@ -1,4 +1,4 @@
-package com.example.trenirovochka.presentation.home
+package com.example.trenirovochka.presentation.fragments.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.trenirovochka.presentation.home
+package com.example.trenirovochka.presentation.fragments.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.trenirovochka.data.local.ActionWithDate
 import com.example.trenirovochka.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +29,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
+        initListeners()
     }
 
     private fun initObservers() {
@@ -39,6 +41,17 @@ class HomeFragment : Fragment() {
                 selectedDate.observe(viewLifecycleOwner) {
                     datePickerSelectedDateText.text = it
                 }
+            }
+        }
+    }
+
+    private fun initListeners() {
+        binding.apply {
+            datePickerForwardButton.setOnClickListener {
+                viewModel.updateSelectedDate(ActionWithDate.NEXT)
+            }
+            datePickerBackButton.setOnClickListener {
+                viewModel.updateSelectedDate(ActionWithDate.PREV)
             }
         }
     }

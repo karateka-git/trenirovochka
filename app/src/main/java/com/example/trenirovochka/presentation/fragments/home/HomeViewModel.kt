@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
     val selectedDate: LiveData<String> = _selectedDate.map { formatAsFullDate(it) }
 
     fun updateSelectedDate(action: ActionWithDate) {
-        when(action) {
+        when (action) {
             ActionWithDate.NEXT -> {
                 _selectedDate.value = calendar.run {
                     add(Calendar.DAY_OF_YEAR, 1)

@@ -4,7 +4,9 @@ import androidx.lifecycle.*
 import com.example.trenirovochka.data.local.ActionWithDate
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
+import com.example.trenirovochka.domain.models.TrainingProgram
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -14,13 +16,17 @@ class HomeViewModel @Inject constructor(
     private val calendar: Calendar
 ) : ViewModel() {
 
-    val trainingProgram = programsInteractor.getTrainingProgram("").asLiveData()
     private val _selectedDate: MutableLiveData<Date> by lazy {
         MutableLiveData<Date>(
             getCurrentDate()
         )
     }
-    val selectedDate: LiveData<String> = _selectedDate.map { formatAsFullDate(it) }
+    val selectedDate: LiveData<String> = _selectedDate.map {
+        updateCurrentTrainingProgram(it)
+        formatAsFullDate(it)
+    }
+    private val _trainingProgram: MutableLiveData<TrainingProgram> = MutableLiveData()
+    val trainingProgram: LiveData<TrainingProgram> = _trainingProgram
 
     fun updateSelectedDate(action: ActionWithDate) {
         when (action) {
@@ -40,4 +46,12 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getCurrentDate(): Date = calendar.time
+
+    private fun updateCurrentTrainingProgram(date: Date) {
+        viewModelScope.launch {
+            programsInteractor.getTrainingProgram(formatAsFullDate(date)).collect {
+                _trainingProgram.value = it
+            }
+        }
+    }
 }

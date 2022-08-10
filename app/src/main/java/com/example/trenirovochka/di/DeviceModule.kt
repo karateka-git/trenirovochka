@@ -13,7 +13,7 @@ class DeviceModule {
 
     @Singleton
     @Provides
-    fun bindCalendar(): Calendar {
+    fun provideCalendar(): Calendar {
         return Calendar.getInstance()
     }
 }

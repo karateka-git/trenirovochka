@@ -1,6 +1,7 @@
-package com.example.trenirovochka.domain.interactors.interfaces
+package com.example.trenirovochka.domain.interactors
 
 import com.example.trenirovochka.domain.datacontracts.ITrainingProgramRemoteRepository
+import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.domain.models.TrainingProgram
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

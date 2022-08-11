@@ -1,5 +1,8 @@
 package com.example.trenirovochka.di
 
+import com.example.trenirovochka.data.local.repositories.AndroidResourcesRepository
+import com.example.trenirovochka.domain.datacontracts.local.IResourcesRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,11 +12,17 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class DeviceModule {
+abstract class DeviceModule {
+
+    companion object {
+        @Singleton
+        @Provides
+        fun provideCalendar(): Calendar {
+            return Calendar.getInstance()
+        }
+    }
 
     @Singleton
-    @Provides
-    fun provideCalendar(): Calendar {
-        return Calendar.getInstance()
-    }
+    @Binds
+    abstract fun bindResourcesRepository(implementation: AndroidResourcesRepository): IResourcesRepository
 }

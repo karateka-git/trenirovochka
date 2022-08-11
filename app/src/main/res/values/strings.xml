@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">trenirovochka</string>
+    <string name="execution_description">%1$d подхода по %2$d раз, %3$s кг</string>
 </resources>

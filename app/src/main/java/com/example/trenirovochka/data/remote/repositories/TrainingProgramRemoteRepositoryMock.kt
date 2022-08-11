@@ -27,6 +27,30 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
                         3,
                         10,
                         "5",
+                    ),
+                    Exercise(
+                        "Гиперэкстензия",
+                        3,
+                        10,
+                        "5",
+                    ),
+                    Exercise(
+                        "Гиперэкстензия",
+                        3,
+                        10,
+                        "5",
+                    ),
+                    Exercise(
+                        "Гиперэкстензия",
+                        3,
+                        10,
+                        "5",
+                    ),
+                    Exercise(
+                        "Гиперэкстензия",
+                        3,
+                        10,
+                        "5",
                     )
                 )
             )

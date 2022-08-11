@@ -1,5 +1,8 @@
 package com.example.trenirovochka.domain.models
 
+import android.content.Context
+import com.example.trenirovochka.R
+
 data class TrainingProgram(
     val date: String,
     val name: String,
@@ -12,4 +15,12 @@ data class Exercise(
     val numberOfRepetitions: Int,
     val usedWeight: String,
     val description: String? = null,
-)
+) {
+    fun getExecutionDescription(context: Context): String =
+        context.getString(
+            R.string.execution_description,
+            numberOfSets,
+            numberOfRepetitions,
+            usedWeight
+        )
+}

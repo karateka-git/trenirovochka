@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.trenirovochka.R
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.databinding.FragmentHomeBinding

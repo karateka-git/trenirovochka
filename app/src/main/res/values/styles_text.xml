@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Стиль название стиля текста формируется по шаблону:
+    ШрифтНачертаниеЦветРазмер, например AvantgardeBold.White.Small.
+    Шрифты:
+        - Merriweather
+    Начертания:
+        - Regular;
+        - Bold.
+    Цвет:
+        - Dark;
+        - Grey;
+        - Green;
+        - White.
+    Размер:
+        - 8sp;
+        - 10sp;
+        - 12sp;
+        - 14sp;
+        - 16sp;
+        - 18sp;
+        - 20sp;
+        - 38sp.
+    Можно брать не конечные стили исключая последующие, например: AvantgardeMedium., AvantgardeBold.Grey;
+    -->
+
+
+    <!--_________________________________TYPEFACE_________________________________-->
+    <!--_____________________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular">
+        <item name="android:fontFamily">@font/merriweather_regular</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+    </style>
+
+    <style name="MerriweatherBold">
+        <item name="android:fontFamily">@font/merriweather_bold</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <!--___________________________COLOR_________________________________-->
+    <!--_______________________DARK___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--_______________________GREY___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Grey">
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="MerriweatherBold.Grey">
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <!--_______________________WHITE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MerriweatherBold.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--_______________________ERROR___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Error">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="MerriweatherBold.Error">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <!--___________________________SIZE_________________________________-->
+    <!--_______________________38___________________________-->
+    <!--___________________DARK____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark.38">
+        <item name="android:textSize">@dimen/text_size_38</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark.38">
+        <item name="android:textSize">@dimen/text_size_38</item>
+    </style>
+
+    <!--___________________ERROR____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Error.38">
+        <item name="android:textSize">@dimen/text_size_38</item>
+    </style>
+
+    <style name="MerriweatherBold.Error.38">
+        <item name="android:textSize">@dimen/text_size_38</item>
+    </style>
+
+    <!--_______________________20___________________________-->
+    <!--___________________DARK____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark.20">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark.20">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <!--_______________________GREY___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Grey.20">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <style name="MerriweatherBold.Grey.20">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <!--_______________________WHITE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.White.20">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <style name="MerriweatherBold.White.20">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <!--_______________________18___________________________-->
+    <!--___________________DARK____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark.18">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark.18">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <!--_______________________GREY___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Grey.18">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="MerriweatherBold.Grey.18">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <!--_______________________WHITE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.White.18">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="MerriweatherBold.White.18">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <!--_______________________16___________________________-->
+    <!--___________________DARK____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark.16">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark.16">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <!--_______________________GREY___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Grey.16">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="MerriweatherBold.Grey.16">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <!--_______________________WHITE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.White.16">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="MerriweatherBold.White.16">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <!--_______________________ERROR___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Error.16">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="MerriweatherBold.Error.16">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <!--_______________________14___________________________-->
+    <!--___________________DARK____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark.14">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark.14">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <!--_______________________GREY___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Grey.14">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="MerriweatherBold.Grey.14">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <!--_______________________WHITE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.White.14">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="MerriweatherBold.White.14">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <!--_______________________ERROR___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Error.14">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="MerriweatherBold.Error.14">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <!--_______________________12___________________________-->
+    <!--___________________DARK____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark.12">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark.12">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <!--_______________________GREY___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Grey.12">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="MerriweatherBold.Grey.12">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <!--_______________________WHITE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.White.12">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="MerriweatherBold.White.12">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <!--_______________________ERROR___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Error.12">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="MerriweatherBold.Error.12">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <!--_______________________10___________________________-->
+    <!--___________________DARK____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark.10">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark.10">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <!--_______________________GREY___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Grey.10">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <style name="MerriweatherBold.Grey.10">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <!--_______________________WHITE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.White.10">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <style name="MerriweatherBold.White.10">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <!--_______________________8___________________________-->
+    <!--___________________DARK____________________-->
+    <!--_______________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Dark.8">
+        <item name="android:textSize">@dimen/text_size_8</item>
+    </style>
+
+    <style name="MerriweatherBold.Dark.8">
+        <item name="android:textSize">@dimen/text_size_8</item>
+    </style>
+
+    <!--_______________________GREY___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.Grey.8">
+        <item name="android:textSize">@dimen/text_size_8</item>
+    </style>
+
+    <style name="MerriweatherBold.Grey.8">
+        <item name="android:textSize">@dimen/text_size_8</item>
+    </style>
+
+    <!--_______________________WHITE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.White.8">
+        <item name="android:textSize">@dimen/text_size_8</item>
+    </style>
+
+    <style name="MerriweatherBold.White.8">
+        <item name="android:textSize">@dimen/text_size_8</item>
+    </style>
+</resources>

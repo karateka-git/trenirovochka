@@ -1,7 +1,7 @@
 package com.example.trenirovochka.presentation.fragments.home
 
 import androidx.lifecycle.*
-import com.example.trenirovochka.data.local.ActionWithDate
+import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.domain.models.TrainingProgram

@@ -65,7 +65,6 @@ class HomeFragment : Fragment() {
             binding.apply {
                 trainingProgram.observe(viewLifecycleOwner) {
                     trainingProgramAdapter.swapItems(it.exercise)
-                    text.text = it.date
                 }
                 selectedDate.observe(viewLifecycleOwner) {
                     datePickerSelectedDateText.text = it
@@ -81,6 +80,9 @@ class HomeFragment : Fragment() {
             }
             datePickerBackButton.setOnClickListener {
                 viewModel.updateSelectedDate(ActionWithDate.PREV)
+            }
+            startTrainingButton.setOnClickListener {
+                viewModel.onStartTrainingButtonClick()
             }
         }
     }

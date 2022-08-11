@@ -9,4 +9,7 @@
     <color name="grey">#727577</color>
     <color name="red">#da0025</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cultured">#EFF1F3</color>
+
+    <color name="primary_button">#009FB7</color>
 </resources>

@@ -43,5 +43,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun onStartTrainingButtonClick() {
+        // TODO
+    }
+
     private fun getCurrentDate(): Date = calendar.time
 }

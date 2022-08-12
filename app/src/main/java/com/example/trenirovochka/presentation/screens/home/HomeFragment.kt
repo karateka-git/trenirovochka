@@ -1,42 +1,31 @@
 package com.example.trenirovochka.presentation.screens.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.trenirovochka.R
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.databinding.FragmentHomeBinding
 import com.example.trenirovochka.databinding.ViewHolderExerciseBinding
+import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.common.recycler.decorations.VerticalDividerDecoration
 import com.example.trenirovochka.presentation.screens.home.viewHolders.ExerciseViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
+    FragmentHomeBinding::inflate
+) {
 
-    private lateinit var binding: FragmentHomeBinding
-    private val viewModel: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModels()
 
     private val trainingProgramAdapter by lazy {
         SimpleAdapter(
             ViewHolderExerciseBinding::inflate,
             { ExerciseViewHolder(it) }
         )
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

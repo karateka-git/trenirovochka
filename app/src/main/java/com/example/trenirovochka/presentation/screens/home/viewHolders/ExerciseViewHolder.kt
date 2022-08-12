@@ -1,4 +1,4 @@
-package com.example.trenirovochka.presentation.fragments.home.viewHolders
+package com.example.trenirovochka.presentation.screens.home.viewHolders
 
 import com.example.trenirovochka.databinding.ViewHolderExerciseBinding
 import com.example.trenirovochka.domain.models.Exercise

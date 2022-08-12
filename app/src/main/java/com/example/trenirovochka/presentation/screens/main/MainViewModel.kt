@@ -1,4 +1,4 @@
-package com.example.trenirovochka.presentation.activity.main
+package com.example.trenirovochka.presentation.screens.main
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

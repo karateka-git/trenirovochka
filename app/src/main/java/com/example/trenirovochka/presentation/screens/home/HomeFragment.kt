@@ -1,4 +1,4 @@
-package com.example.trenirovochka.presentation.fragments.home
+package com.example.trenirovochka.presentation.screens.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.example.trenirovochka.databinding.FragmentHomeBinding
 import com.example.trenirovochka.databinding.ViewHolderExerciseBinding
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.common.recycler.decorations.VerticalDividerDecoration
-import com.example.trenirovochka.presentation.fragments.home.viewHolders.ExerciseViewHolder
+import com.example.trenirovochka.presentation.screens.home.viewHolders.ExerciseViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

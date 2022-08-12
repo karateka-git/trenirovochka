@@ -1,4 +1,4 @@
-package com.example.trenirovochka.presentation.fragments.home
+package com.example.trenirovochka.presentation.screens.home
 
 import androidx.lifecycle.*
 import com.example.trenirovochka.data.local.models.ActionWithDate

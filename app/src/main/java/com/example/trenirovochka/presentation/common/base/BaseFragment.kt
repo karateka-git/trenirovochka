@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
@@ -32,11 +33,24 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initNavigationObserver()
+        initOnBackPressedCallback()
+    }
+
+    protected open fun onBackPressed() {
+        findNavController().navigateUp()
     }
 
     private fun initNavigationObserver() {
         viewModel.navigationEvent.observe(viewLifecycleOwner) {
             it?.getNotConsumedContent()?.invoke(findNavController())
         }
+    }
+
+    private fun initOnBackPressedCallback() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner) {
+                onBackPressed()
+            }
     }
 }

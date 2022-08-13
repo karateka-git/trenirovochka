@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.trenirovochka.domain.extensions.onDestroyNullable
 
@@ -26,5 +27,16 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(
     ): View {
         binding = inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initNavigationObserver()
+    }
+
+    private fun initNavigationObserver() {
+        viewModel.navigationEvent.observe(viewLifecycleOwner) {
+            it?.getNotConsumedContent()?.invoke(findNavController())
+        }
     }
 }

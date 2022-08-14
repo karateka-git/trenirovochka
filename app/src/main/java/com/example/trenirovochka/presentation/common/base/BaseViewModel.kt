@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.trenirovochka.domain.common.SingleEvent
-import com.example.trenirovochka.domain.navigation.RouteDestination
+import com.example.trenirovochka.presentation.common.navigation.RouteDestination
 
 abstract class BaseViewModel<in D : RouteDestination> : ViewModel() {
     private val _navigationEvent: MutableLiveData<SingleEvent<NavController.() -> Any>> = MutableLiveData()

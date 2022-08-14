@@ -3,14 +3,21 @@ package com.example.trenirovochka.domain.navigation
 import androidx.annotation.IdRes
 import com.example.trenirovochka.R
 
-sealed class RouteSection(@IdRes val graph: Int) {
-    object Home : RouteSection(R.id.main_graph)
+sealed class RouteSection<T : RouteDestination>(
+    @IdRes val graph: Int,
+    private val destinations: List<T>
+) {
+    object HomeSection : RouteSection<HomeDestination>(
+        R.id.main_graph,
+        HomeDestination.values().toList()
+    )
 }
 
-sealed class RouteDestination(@IdRes val destination: Int) {
+enum class HomeDestination(@IdRes override val destination: Int) : RouteDestination {
+    HomeScreen(R.id.homeFragment),
+    PerformTrainingScreen(R.id.performTrainingFragment)
+}
 
-    sealed class Home(@IdRes destination: Int) : RouteDestination(destination) {
-        object HomeScreen : Home(R.id.homeFragment)
-        object PerformTrainingScreen : Home(R.id.performTrainingFragment)
-    }
+interface RouteDestination {
+    val destination: Int
 }

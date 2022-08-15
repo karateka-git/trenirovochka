@@ -1,13 +1,21 @@
 package com.example.trenirovochka.presentation.screens.performTraining
 
-import com.example.trenirovochka.presentation.common.navigation.HomeDestination
+import androidx.lifecycle.MutableLiveData
+import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import com.example.trenirovochka.presentation.common.navigation.HomeDestination
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 
-@HiltViewModel
-class PerformTrainingViewModel @Inject constructor(
-    // TODO
+@AssistedFactory
+interface PerformTrainingViewModelAssistedFactory {
+    fun create(trainingProgram: TrainingProgram): PerformTrainingViewModel
+}
+
+class PerformTrainingViewModel @AssistedInject constructor(
+    @Assisted private val trainingProgram: TrainingProgram
 ) : BaseViewModel<HomeDestination>() {
-    // TODO
+
+    val test: MutableLiveData<String> = MutableLiveData(trainingProgram.name)
 }

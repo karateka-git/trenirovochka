@@ -1,5 +1,6 @@
 package com.example.trenirovochka.presentation.screens.home
 
+import android.os.Bundle
 import androidx.lifecycle.*
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
@@ -7,6 +8,7 @@ import com.example.trenirovochka.domain.interactors.interfaces.ITrainingPrograms
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.navigation.HomeDestination
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
+import com.example.trenirovochka.presentation.screens.performTraining.PerformTrainingFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -46,7 +48,15 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onStartTrainingButtonClick() {
-        navigateTo(HomeDestination.PerformTrainingScreen)
+        navigateTo(
+            HomeDestination.PerformTrainingScreen,
+            Bundle().apply {
+                putParcelable(
+                    PerformTrainingFragment.TRAINING_PROGRAM_TAG,
+                    trainingProgram.value
+                )
+            }
+        )
     }
 
     private fun getCurrentDate(): Date = calendar.time

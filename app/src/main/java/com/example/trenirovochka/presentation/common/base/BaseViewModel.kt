@@ -1,5 +1,6 @@
 package com.example.trenirovochka.presentation.common.base
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +12,8 @@ abstract class BaseViewModel<in D : RouteDestination> : ViewModel() {
     private val _navigationEvent: MutableLiveData<SingleEvent<NavController.() -> Any>> = MutableLiveData()
     val navigationEvent: LiveData<SingleEvent<NavController.() -> Any>> = _navigationEvent
 
-    fun navigateTo(route: D) {
-        withNavController { navigate(route.destination) }
+    fun navigateTo(route: D, args: Bundle?) {
+        withNavController { navigate(route.destination, args) }
     }
 
     fun backTo(route: D) {

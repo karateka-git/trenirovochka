@@ -1,13 +1,12 @@
 package com.example.trenirovochka.presentation.screens.home
 
-import android.os.Bundle
 import androidx.lifecycle.*
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.domain.models.TrainingProgram
-import com.example.trenirovochka.presentation.common.navigation.HomeDestination
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
+import com.example.trenirovochka.presentation.common.navigation.HomeDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject

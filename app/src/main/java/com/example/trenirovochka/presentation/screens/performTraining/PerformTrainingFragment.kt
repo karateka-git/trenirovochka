@@ -17,19 +17,14 @@ class PerformTrainingFragment(
 ) : BaseFragment<FragmentPerformTrainingBinding, PerformTrainingViewModel>(
     FragmentPerformTrainingBinding::inflate
 ) {
-
-    companion object {
-        const val TRAINING_PROGRAM_TAG = "TRAINING_PROGRAM_TAG"
-    }
+    private val args by navArgs<PerformTrainingFragmentArgs>()
 
     @Inject
     lateinit var assistedFactory: PerformTrainingViewModelAssistedFactory
 
     override val viewModel: PerformTrainingViewModel by viewModelCreator {
         assistedFactory.create(
-            arguments?.getParcelable(
-                TRAINING_PROGRAM_TAG
-            )!!
+            args.trainingProgram
         )
     }
 

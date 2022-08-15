@@ -49,13 +49,9 @@ class HomeViewModel @Inject constructor(
 
     fun onStartTrainingButtonClick() {
         navigateTo(
-            HomeDestination.PerformTrainingScreen,
-            Bundle().apply {
-                putParcelable(
-                    PerformTrainingFragment.TRAINING_PROGRAM_TAG,
-                    trainingProgram.value
-                )
-            }
+            HomeFragmentDirections.actionHomeFragmentToPerformTraining(
+                trainingProgram.value
+            )
         )
     }
 

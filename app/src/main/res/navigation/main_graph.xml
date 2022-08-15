@@ -8,10 +8,18 @@
         android:id="@+id/homeFragment"
         android:name="com.example.trenirovochka.presentation.screens.home.HomeFragment"
         android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_performTraining"
+            app:destination="@id/performTrainingFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/performTrainingFragment"
         android:name="com.example.trenirovochka.presentation.screens.performTraining.PerformTrainingFragment"
-        android:label="PerformTraining" />
+        android:label="PerformTraining">
+        <argument
+            android:name="trainingProgram"
+            app:nullable="false"
+            app:argType="com.example.trenirovochka.domain.models.TrainingProgram"/>
+    </fragment>
 </navigation>

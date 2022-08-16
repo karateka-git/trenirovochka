@@ -17,6 +17,8 @@ dependencyResolutionManagement {
             plugin('hilt', 'com.google.dagger.hilt.android').versionRef('hilt')
 
             version('navigation', '2.5.1')
+
+            plugin('safeargs', 'androidx.navigation.safeargs').versionRef('navigation')
         }
     }
 }

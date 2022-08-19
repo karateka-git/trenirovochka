@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentPerformTrainingBinding
-import com.example.trenirovochka.domain.models.TrainingProgram
+import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
+import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
+import com.example.trenirovochka.presentation.screens.performTraining.viewHolders.ActiveExerciseViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,7 +27,18 @@ class PerformTrainingFragment(
 
     override val viewModel: PerformTrainingViewModel by viewModelCreator {
         assistedFactory.create(
-            MutableLiveData<TrainingProgram>(args.trainingProgram)
+            args.trainingProgram
+        )
+    }
+
+    private val trainingProgramAdapter by lazy {
+        SimpleAdapter(
+            ViewHolderActiveExerciseBinding::inflate,
+            {
+                ActiveExerciseViewHolder(it) { item ->
+                    viewModel.updateExerciseStatus(item)
+                }
+            }
         )
     }
 
@@ -42,12 +54,25 @@ class PerformTrainingFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclers()
         initObservers()
         initListeners()
     }
 
+    private fun initRecyclers() {
+        binding.exerciseRecycler.apply {
+            adapter = trainingProgramAdapter
+        }
+    }
+
     private fun initObservers() {
-        // TODO
+        viewModel.apply {
+            binding.apply {
+                trainingProgramVM.observe(viewLifecycleOwner) {
+                    trainingProgramAdapter.swapItems(it.exercise)
+                }
+            }
+        }
     }
 
     private fun initListeners() {

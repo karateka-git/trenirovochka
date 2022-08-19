@@ -9,7 +9,8 @@ import kotlinx.parcelize.Parcelize
 data class TrainingProgram(
     val date: String,
     val name: String,
-    val exercise: List<Exercise>
+    val exercise: List<Exercise>,
+    val active: Boolean = false,
 ) : Parcelable
 
 @Parcelize
@@ -19,6 +20,7 @@ data class Exercise(
     val numberOfRepetitions: Int,
     val usedWeight: String,
     val description: String? = null,
+    var status: Boolean = false, // TODO do enum ExecutionStatus(NotStarted, InProgress, InPause, Completed)
 ) : Parcelable {
     fun getExecutionDescription(context: Context): String =
         context.getString(

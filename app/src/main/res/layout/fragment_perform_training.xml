@@ -5,19 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exercise_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/MerriweatherBold.Dark.16"
-        android:text="Hello from perform training fragment"/>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@+id/timer_container"/>
 
+    <FrameLayout
+        android:id="@+id/timer_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/cultured"
+        app:layout_constraintBottom_toBottomOf="parent">
+<!--        TODO    -->
+
+        <TextView
+            android:id="@+id/timer_status_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MerriweatherBold.Dark.16"
+            android:gravity="center"
+            tools:text="Отдых/работа"/>
+
+        <EditText
+            android:id="@+id/timer_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MerriweatherBold.Dark.38"
+            android:gravity="center"
+            tools:text="01:20"/>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

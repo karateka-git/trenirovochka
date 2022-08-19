@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentPerformTrainingBinding
+import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +26,7 @@ class PerformTrainingFragment(
 
     override val viewModel: PerformTrainingViewModel by viewModelCreator {
         assistedFactory.create(
-            args.trainingProgram
+            MutableLiveData<TrainingProgram>(args.trainingProgram)
         )
     }
 
@@ -45,15 +47,10 @@ class PerformTrainingFragment(
     }
 
     private fun initObservers() {
-        viewModel.test.observe(viewLifecycleOwner) {
-            binding.button.text = it
-        }
+        // TODO
     }
 
     private fun initListeners() {
-        binding.button.setOnClickListener {
-            viewModel.test.value = "hello"
-//            viewModel.backTo(HomeDestination.HomeScreen)
-        }
+        // TODO
     }
 }

@@ -10,9 +10,9 @@ class ExerciseViewHolder(
 
     override fun bindTo(
         item: Exercise,
-        pos: Int,
-        onClickCallback: ((Exercise, Int) -> Unit)?
+        pos: Int
     ) {
+        super.bindTo(item, pos)
         binding.apply {
             title.text = item.name
             executionDescription.text = item.getExecutionDescription(root.context)

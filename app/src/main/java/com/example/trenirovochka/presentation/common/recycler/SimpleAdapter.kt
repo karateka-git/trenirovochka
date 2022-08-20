@@ -8,8 +8,7 @@ import androidx.viewbinding.ViewBinding
 
 open class SimpleAdapter<T, VB : ViewBinding>(
     private val inflate: (LayoutInflater, ViewGroup?, Boolean) -> VB,
-    private val createViewHolder: (VB) -> SimpleViewHolder<T>,
-    private val onClickCallback: ((T, pos: Int) -> Unit)? = null
+    private val createViewHolder: (VB) -> SimpleViewHolder<T>
 ) : RecyclerView.Adapter<SimpleViewHolder<T>>() {
 
     private val items: MutableList<T> = mutableListOf()
@@ -34,6 +33,6 @@ open class SimpleAdapter<T, VB : ViewBinding>(
 
     override fun onBindViewHolder(holder: SimpleViewHolder<T>, position: Int) {
         val item = items[position]
-        holder.bindTo(item, position, onClickCallback)
+        holder.bindTo(item, position)
     }
 }

@@ -9,15 +9,21 @@ class ActiveExerciseViewHolder(
     private val actionClickListener: (Exercise) -> Unit
 ) : SimpleViewHolder<Exercise>(binding.root) {
 
-    override fun bindTo(item: Exercise, pos: Int, onClickCallback: ((Exercise, Int) -> Unit)?) {
+    init {
+        binding.exerciseActionButton.setOnClickListener {
+            getItem()?.let {
+                actionClickListener(it)
+            }
+        }
+    }
+
+    override fun bindTo(item: Exercise, pos: Int) {
+        super.bindTo(item, pos)
         binding.apply {
             exerciseName.text = item.name
             exerciseDescription.text = item.getActiveExecutionDescription(root.context)
             exerciseActionButton.apply {
                 isChecked = item.status
-                setOnClickListener {
-                    actionClickListener(item)
-                }
             }
         }
     }

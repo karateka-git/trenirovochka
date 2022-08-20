@@ -23,7 +23,13 @@ class PerformTrainingViewModel @AssistedInject constructor(
     val trainingProgramVM: LiveData<TrainingProgram> = _trainingProgramVM
 
     fun updateExerciseStatus(item: Exercise) {
-        item.status = !item.status // TODO change
-        _trainingProgramVM.postValue(trainingProgram)
+        trainingProgram.exercise.forEach {
+            if (it == item) {
+                it.status = !it.status // TODO change
+            } else {
+                it.status = false
+            }
+        }
+        _trainingProgramVM.value = trainingProgram
     }
 }

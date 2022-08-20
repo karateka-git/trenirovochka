@@ -16,7 +16,10 @@ open class SimpleAdapter<T, VB : ViewBinding>(
 
     @SuppressLint("NotifyDataSetChanged")
     fun swapItems(newItems: List<T>) {
-        if (newItems == items) return
+        if (newItems === items) {
+            notifyDataSetChanged()
+            return
+        }
         items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()

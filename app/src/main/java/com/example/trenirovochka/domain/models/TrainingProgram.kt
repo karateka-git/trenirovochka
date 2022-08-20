@@ -16,17 +16,27 @@ data class TrainingProgram(
 @Parcelize
 data class Exercise(
     val name: String,
-    val numberOfSets: Int,
+    val numberOfTotalSets: Int,
+    val numberOfCompletedSets: Int = 0,
     val numberOfRepetitions: Int,
     val usedWeight: String,
     val description: String? = null,
     var status: Boolean = false, // TODO do enum ExecutionStatus(NotStarted, InProgress, InPause, Completed)
 ) : Parcelable {
+
     fun getExecutionDescription(context: Context): String =
         context.getString(
             R.string.execution_description,
-            numberOfSets,
+            numberOfTotalSets,
             numberOfRepetitions,
             usedWeight
+        )
+
+    fun getActiveExecutionDescription(context: Context): String =
+        context.getString(
+            R.string.active_execution_description,
+            usedWeight,
+            numberOfCompletedSets,
+            numberOfTotalSets
         )
 }

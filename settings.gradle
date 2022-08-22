@@ -10,15 +10,23 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'https://jitpack.io'
+        }
     }
     versionCatalogs {
         libs {
+            version('kotlin', '1.7.0')
+            plugin('kotlin', 'org.jetbrains.kotlin.android').versionRef('kotlin')
+
             version('hilt', '2.42')
             plugin('hilt', 'com.google.dagger.hilt.android').versionRef('hilt')
 
             version('navigation', '2.5.1')
 
             plugin('safeargs', 'androidx.navigation.safeargs').versionRef('navigation')
+
+            version('inputMask', '6.1.0')
         }
     }
 }

@@ -11,7 +11,12 @@ data class TrainingProgram(
     val name: String,
     val exercise: List<Exercise>,
     val active: Boolean = false,
-) : Parcelable
+) : Parcelable {
+
+    fun hasActiveExercise(): Boolean {
+        return exercise.any { it.status }
+    }
+}
 
 @Parcelize
 data class Exercise(

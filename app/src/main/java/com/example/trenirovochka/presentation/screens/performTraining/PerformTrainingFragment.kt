@@ -71,6 +71,9 @@ class PerformTrainingFragment(
                 trainingProgramVM.observe(viewLifecycleOwner) {
                     trainingProgramAdapter.swapItems(it.exercise)
                 }
+                timeTraining.observe(viewLifecycleOwner) {
+                    timerEditText.setText(it)
+                }
             }
         }
     }

@@ -8,8 +8,10 @@ import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentPerformTrainingBinding
 import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
 import com.example.trenirovochka.presentation.common.base.BaseFragment
+import com.example.trenirovochka.presentation.common.extensions.addMaskedChangeListener
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
+import com.example.trenirovochka.presentation.common.util.TextMask.TIME_SHORT_MASK
 import com.example.trenirovochka.presentation.screens.performTraining.viewHolders.ActiveExerciseViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -79,6 +81,8 @@ class PerformTrainingFragment(
     }
 
     private fun initListeners() {
-        // TODO
+        binding.apply {
+            timerEditText.addMaskedChangeListener(TIME_SHORT_MASK)
+        }
     }
 }

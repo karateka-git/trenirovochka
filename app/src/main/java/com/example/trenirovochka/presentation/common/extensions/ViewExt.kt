@@ -3,6 +3,9 @@ package com.example.trenirovochka.presentation.common.extensions
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import com.example.trenirovochka.presentation.common.util.TextMask
+import com.redmadrobot.inputmask.MaskedTextChangedListener
 
 /**
  * Extension method to show a keyboard for View.
@@ -25,4 +28,8 @@ fun View.hideKeyboard(): Boolean {
     } catch (ignored: RuntimeException) {
     }
     return false
+}
+
+fun EditText.addMaskedChangeListener(mask: String) {
+    this.addTextChangedListener(MaskedTextChangedListener(mask, this))
 }

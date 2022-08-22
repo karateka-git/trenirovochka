@@ -34,8 +34,12 @@
             android:id="@+id/timer_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
+            android:digits="1234567890:"
             style="@style/MerriweatherBold.Dark.38"
             android:gravity="center"
-            tools:text="01:20"/>
+            tools:text="01:20"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

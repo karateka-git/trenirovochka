@@ -2,6 +2,7 @@ package com.example.trenirovochka.di
 
 import com.example.trenirovochka.data.local.repositories.AndroidResourcesRepository
 import com.example.trenirovochka.domain.datacontracts.local.IResourcesRepository
+import com.example.trenirovochka.presentation.common.util.CountTimer
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -19,6 +20,12 @@ abstract class DeviceModule {
         @Provides
         fun provideCalendar(): Calendar {
             return Calendar.getInstance()
+        }
+
+        @Singleton
+        @Provides
+        fun provideCountTimer(): CountTimer {
+            return CountTimer()
         }
     }
 

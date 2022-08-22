@@ -2,9 +2,9 @@ package com.example.trenirovochka.presentation.common.extensions
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import com.example.trenirovochka.presentation.common.util.TextMask
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 
 /**
@@ -28,6 +28,18 @@ fun View.hideKeyboard(): Boolean {
     } catch (ignored: RuntimeException) {
     }
     return false
+}
+
+fun View.changeTopMargin(marginInPx: Int) {
+    val mpl = layoutParams as ViewGroup.MarginLayoutParams
+    mpl.topMargin = marginInPx
+    layoutParams = mpl
+}
+
+fun View.changeBottomMargin(marginInPx: Int) {
+    val mpl = layoutParams as ViewGroup.MarginLayoutParams
+    mpl.bottomMargin = marginInPx
+    layoutParams = mpl
 }
 
 fun EditText.addMaskedChangeListener(mask: String) {

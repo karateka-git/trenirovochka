@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_DOWN) {
+        if (event.action == MotionEvent.ACTION_UP) {
             val currentFocusView: View? = currentFocus
             if (currentFocusView is EditText) {
                 val outRect = Rect()

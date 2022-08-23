@@ -61,13 +61,7 @@ class PerformTrainingViewModel @AssistedInject constructor(
                 it.status = false
             }
         }
-        if (trainingProgram.hasActiveExercise()) {
-            _isEnableChangeTimer.value = false
-            updateCountTimer(TimerState.TIMER_UP, DEFAULT_START_VALUE)
-        } else {
-            _isEnableChangeTimer.value = true
-            updateCountTimer(TimerState.TIMER_DOWN, timeForRelax)
-        }
+        updateCountTimer(item.status)
         _trainingProgramVM.value = trainingProgram
     }
 
@@ -82,6 +76,19 @@ class PerformTrainingViewModel @AssistedInject constructor(
             countTimer.cancelTimer()
         } else {
             countTimer.startTimer(viewModelScope)
+        }
+    }
+
+    private fun updateCountTimer(exerciseStatus: Boolean) {
+        when (exerciseStatus) {
+            true -> {
+                _isEnableChangeTimer.value = false
+                updateCountTimer(TimerState.TIMER_UP, DEFAULT_START_VALUE)
+            }
+            else -> {
+                _isEnableChangeTimer.value = true
+                updateCountTimer(TimerState.TIMER_DOWN, timeForRelax)
+            }
         }
     }
 

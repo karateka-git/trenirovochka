@@ -19,6 +19,8 @@ class CountTimer {
 
     private var timer: Job? = null
     private var timeDuration: Duration = 0.toDuration(DurationUnit.SECONDS)
+    private var timerState: TimerState = TimerState.TIMER_DOWN
+    private var timerListener: ((Duration) -> Unit)? = null
 
     private fun startCoroutineTimer(
         scope: CoroutineScope,
@@ -34,16 +36,22 @@ class CountTimer {
         timeDuration = time
     }
 
+    fun setState(state: TimerState) {
+        timerState = state
+    }
+
+    fun setTimerListener(listener: (Duration) -> Unit) {
+        timerListener = listener
+    }
+
     fun startTimer(
-        state: TimerState,
         scope: CoroutineScope,
-        action: (Duration) -> Unit,
     ) {
         cancelTimer()
         timer = startCoroutineTimer(scope) {
-            timeDuration = actionWithTime(timeDuration, state)
+            timeDuration = actionWithTime(timeDuration)
             scope.launch(Dispatchers.Main) {
-                action(timeDuration)
+                timerListener?.invoke(timeDuration)
             }
         }.also {
             it.start()
@@ -54,8 +62,8 @@ class CountTimer {
         timer?.cancel()
     }
 
-    private fun actionWithTime(time: Duration, state: TimerState): Duration {
-        return when (state) {
+    private fun actionWithTime(time: Duration): Duration {
+        return when (timerState) {
             TimerState.TIMER_UP -> time.plus(DEFAULT_VALUE_TIMER_CHANGE_IN_SECOND)
             TimerState.TIMER_DOWN -> time.minus(DEFAULT_VALUE_TIMER_CHANGE_IN_SECOND)
         }

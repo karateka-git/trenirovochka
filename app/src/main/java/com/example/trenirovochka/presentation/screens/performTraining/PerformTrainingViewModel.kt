@@ -31,9 +31,17 @@ class PerformTrainingViewModel @AssistedInject constructor(
     companion object {
         private val DEFAULT_START_VALUE = 0.toDuration(DurationUnit.SECONDS)
     }
+
+    init {
+        countTimer.setTimerListener {
+            _timeTraining.value = it
+        }
+    }
+
     private val timeForRelax = 2.toDuration(DurationUnit.MINUTES)
 
-    private val _trainingProgramVM: MutableLiveData<TrainingProgram> = MutableLiveData(trainingProgram)
+    private val _trainingProgramVM: MutableLiveData<TrainingProgram> =
+        MutableLiveData(trainingProgram)
     val trainingProgramVM: LiveData<TrainingProgram> = _trainingProgramVM
     private val _timeTraining: MutableLiveData<Duration> = MutableLiveData(timeForRelax)
     val timeTraining: LiveData<String> = _timeTraining.map { formatAsTime(it) }
@@ -56,12 +64,16 @@ class PerformTrainingViewModel @AssistedInject constructor(
     private fun updateCountTimer(state: TimerState, time: Duration) {
         countTimer.apply {
             setTime(time)
-            startTimer(
-                state,
-                viewModelScope,
-            ) {
-                _timeTraining.value = it
-            }
+            setState(state)
+            startTimer(viewModelScope)
+        }
+    }
+
+    fun onTimerFocusChange(isFocusState: Boolean) {
+        if (isFocusState) {
+            countTimer.cancelTimer()
+        } else {
+            countTimer.startTimer(viewModelScope)
         }
     }
 }

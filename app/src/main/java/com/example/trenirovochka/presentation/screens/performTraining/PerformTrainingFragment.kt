@@ -77,6 +77,9 @@ class PerformTrainingFragment(
                 timeTraining.observe(viewLifecycleOwner) {
                     timerEditText.setText(it)
                 }
+                isEnableChangeTimer.observe(viewLifecycleOwner) {
+                    timerEditText.isEnabled = it
+                }
             }
         }
     }

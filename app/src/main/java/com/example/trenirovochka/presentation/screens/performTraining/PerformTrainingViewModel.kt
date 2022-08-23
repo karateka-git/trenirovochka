@@ -50,6 +50,8 @@ class PerformTrainingViewModel @AssistedInject constructor(
     val trainingProgramVM: LiveData<TrainingProgram> = _trainingProgramVM
     private val _timeTraining: MutableLiveData<Duration> = MutableLiveData(timeForRelax)
     val timeTraining: LiveData<String> = _timeTraining.map { formatAsTime(it) }
+    private val _isEnableChangeTimer: MutableLiveData<Boolean> = MutableLiveData()
+    val isEnableChangeTimer: LiveData<Boolean> = _isEnableChangeTimer
 
     fun updateExerciseStatus(item: Exercise) {
         trainingProgram.exercise.forEach {
@@ -59,9 +61,12 @@ class PerformTrainingViewModel @AssistedInject constructor(
                 it.status = false
             }
         }
-        when (trainingProgram.hasActiveExercise()) {
-            true -> updateCountTimer(TimerState.TIMER_UP, DEFAULT_START_VALUE)
-            false -> updateCountTimer(TimerState.TIMER_DOWN, timeForRelax)
+        if (trainingProgram.hasActiveExercise()) {
+            _isEnableChangeTimer.value = false
+            updateCountTimer(TimerState.TIMER_UP, DEFAULT_START_VALUE)
+        } else {
+            _isEnableChangeTimer.value = true
+            updateCountTimer(TimerState.TIMER_DOWN, timeForRelax)
         }
         _trainingProgramVM.value = trainingProgram
     }

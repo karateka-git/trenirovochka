@@ -82,7 +82,12 @@ class PerformTrainingFragment(
 
     private fun initListeners() {
         binding.apply {
-            timerEditText.addMaskedChangeListener(TIME_SHORT_MASK)
+            timerEditText.apply {
+                addMaskedChangeListener(TIME_SHORT_MASK)
+                setOnFocusChangeListener { view, isFocusState ->
+                    viewModel.onTimerFocusChange(isFocusState)
+                }
+            }
         }
     }
 }

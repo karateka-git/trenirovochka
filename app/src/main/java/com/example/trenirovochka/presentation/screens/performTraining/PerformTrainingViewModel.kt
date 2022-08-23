@@ -73,9 +73,9 @@ class PerformTrainingViewModel @AssistedInject constructor(
 
     fun onTimerFocusChange(isFocusState: Boolean) {
         if (isFocusState) {
-            countTimer.cancelTimer()
+            countTimer.pause()
         } else {
-            countTimer.startTimer(viewModelScope)
+            countTimer.resume()
         }
     }
 

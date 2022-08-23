@@ -21,14 +21,17 @@ class CountTimer {
     private var timeDuration: Duration = 0.toDuration(DurationUnit.SECONDS)
     private var timerState: TimerState = TimerState.TIMER_DOWN
     private var timerListener: ((Duration) -> Unit)? = null
+    private var isPause: Boolean = false
 
     private fun startCoroutineTimer(
         scope: CoroutineScope,
         action: () -> Unit
     ) = scope.launch(Dispatchers.IO) {
         while (true) {
-            action()
-            delay(DEFAULT_VALUE_TIMER_CHANGE_IN_SECOND.inWholeMilliseconds)
+            if (isPause.not()) {
+                action()
+                delay(DEFAULT_VALUE_TIMER_CHANGE_IN_SECOND.inWholeMilliseconds)
+            }
         }
     }
 
@@ -60,6 +63,14 @@ class CountTimer {
 
     fun cancelTimer() {
         timer?.cancel()
+    }
+
+    fun pause() {
+        isPause = true
+    }
+
+    fun resume() {
+        isPause = false
     }
 
     private fun actionWithTime(time: Duration): Duration {

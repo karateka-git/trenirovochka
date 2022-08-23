@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentPerformTrainingBinding
 import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
 import com.example.trenirovochka.presentation.common.base.BaseFragment
+import com.example.trenirovochka.presentation.common.extensions.addKeyDoneListener
 import com.example.trenirovochka.presentation.common.extensions.addMaskedChangeListener
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
@@ -86,6 +87,9 @@ class PerformTrainingFragment(
                 addMaskedChangeListener(TIME_SHORT_MASK)
                 setOnFocusChangeListener { view, isFocusState ->
                     viewModel.onTimerFocusChange(isFocusState)
+                }
+                addKeyDoneListener {
+                    viewModel.changeTimeForRelax(text.toString())
                 }
             }
         }

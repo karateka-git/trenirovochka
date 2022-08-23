@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.trenirovochka.domain.extensions.formatAsTime
+import com.example.trenirovochka.domain.extensions.parseTime
 import com.example.trenirovochka.domain.models.Exercise
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
@@ -38,7 +39,11 @@ class PerformTrainingViewModel @AssistedInject constructor(
         }
     }
 
-    private val timeForRelax = 2.toDuration(DurationUnit.MINUTES)
+    private var timeForRelax: Duration = 2.toDuration(DurationUnit.MINUTES)
+        set(value) {
+            field = value
+            countTimer.setTime(value)
+        }
 
     private val _trainingProgramVM: MutableLiveData<TrainingProgram> =
         MutableLiveData(trainingProgram)
@@ -59,6 +64,12 @@ class PerformTrainingViewModel @AssistedInject constructor(
             false -> updateCountTimer(TimerState.TIMER_DOWN, timeForRelax)
         }
         _trainingProgramVM.value = trainingProgram
+    }
+
+    fun changeTimeForRelax(time: String) {
+        parseTime(time)?.let {
+            timeForRelax = it
+        }
     }
 
     private fun updateCountTimer(state: TimerState, time: Duration) {

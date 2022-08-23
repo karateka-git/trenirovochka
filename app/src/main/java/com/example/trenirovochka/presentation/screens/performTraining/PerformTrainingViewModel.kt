@@ -72,19 +72,19 @@ class PerformTrainingViewModel @AssistedInject constructor(
         }
     }
 
-    private fun updateCountTimer(state: TimerState, time: Duration) {
-        countTimer.apply {
-            setTime(time)
-            setState(state)
-            startTimer(viewModelScope)
-        }
-    }
-
     fun onTimerFocusChange(isFocusState: Boolean) {
         if (isFocusState) {
             countTimer.cancelTimer()
         } else {
             countTimer.startTimer(viewModelScope)
+        }
+    }
+
+    private fun updateCountTimer(state: TimerState, time: Duration) {
+        countTimer.apply {
+            setTime(time)
+            setState(state)
+            startTimer(viewModelScope)
         }
     }
 }

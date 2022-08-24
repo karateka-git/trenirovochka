@@ -62,9 +62,12 @@ class PerformTrainingViewModel @AssistedInject constructor(
     private val _recoveryLevelState: MutableLiveData<RecoveryLevel> = MutableLiveData(RecoveryLevel.NONE)
     val recoveryLevelState: LiveData<RecoveryLevel> = _recoveryLevelState.distinctUntilChanged()
 
-    fun updateExerciseStatus(item: Exercise) {
+    fun updateExercises(item: Exercise) {
         trainingProgram.exercise.forEach {
             if (it == item) {
+                if (it.status) {
+                    it.addCompletedSet()
+                }
                 it.status = !it.status // TODO change
             } else {
                 it.status = false

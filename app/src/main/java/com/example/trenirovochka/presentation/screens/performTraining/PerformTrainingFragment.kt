@@ -40,13 +40,12 @@ class PerformTrainingFragment(
 
     private val trainingProgramAdapter by lazy {
         SimpleAdapter(
-            ViewHolderActiveExerciseBinding::inflate,
-            {
-                ActiveExerciseViewHolder(it) { item ->
-                    viewModel.updateExerciseStatus(item)
-                }
+            ViewHolderActiveExerciseBinding::inflate
+        ) {
+            ActiveExerciseViewHolder(it) { item ->
+                viewModel.updateExercises(item)
             }
-        )
+        }
     }
 
     override fun onCreateView(

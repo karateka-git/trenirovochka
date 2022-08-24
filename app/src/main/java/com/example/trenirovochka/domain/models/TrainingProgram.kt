@@ -22,7 +22,7 @@ data class TrainingProgram(
 data class Exercise(
     val name: String,
     val numberOfTotalSets: Int,
-    val numberOfCompletedSets: Int = 0,
+    var numberOfCompletedSets: Int = 0,
     val numberOfRepetitions: Int,
     val usedWeight: String,
     val description: String? = null,
@@ -44,4 +44,8 @@ data class Exercise(
             numberOfCompletedSets,
             numberOfTotalSets
         )
+
+    fun addCompletedSet() {
+        numberOfCompletedSets += 1
+    }
 }

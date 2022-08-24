@@ -65,15 +65,12 @@ class PerformTrainingViewModel @AssistedInject constructor(
     fun updateExercises(item: Exercise) {
         trainingProgram.exercise.forEach {
             if (it == item) {
-                if (it.status) {
-                    it.addCompletedSet()
-                }
-                it.status = !it.status // TODO change
-            } else {
-                it.status = false
+                it.updateExecutionStatus()
+            } else if (it.isStatusInProgress()) {
+                it.updateExecutionStatus()
             }
         }
-        _isActiveExerciseStatus.value = item.status
+        _isActiveExerciseStatus.value = item.isStatusInProgress()
         _trainingProgramVM.value = trainingProgram
     }
 

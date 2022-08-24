@@ -22,9 +22,7 @@ class ActiveExerciseViewHolder(
         binding.apply {
             exerciseName.text = item.name
             exerciseDescription.text = item.getActiveExecutionDescription(root.context)
-            exerciseActionButton.apply {
-                isChecked = item.status
-            }
+            exerciseActionButton.isChecked = item.isStatusInProgress()
         }
     }
 }

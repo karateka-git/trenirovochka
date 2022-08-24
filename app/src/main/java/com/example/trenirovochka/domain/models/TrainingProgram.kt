@@ -3,6 +3,7 @@ package com.example.trenirovochka.domain.models
 import android.content.Context
 import android.os.Parcelable
 import com.example.trenirovochka.R
+import com.example.trenirovochka.domain.models.Exercise.Companion.ExecutionStatus.*
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -11,12 +12,7 @@ data class TrainingProgram(
     val name: String,
     val exercise: List<Exercise>,
     val active: Boolean = false,
-) : Parcelable {
-
-    fun hasActiveExercise(): Boolean {
-        return exercise.any { it.status }
-    }
-}
+) : Parcelable
 
 @Parcelize
 data class Exercise(
@@ -26,8 +22,17 @@ data class Exercise(
     val numberOfRepetitions: Int,
     val usedWeight: String,
     val description: String? = null,
-    var status: Boolean = false, // TODO do enum ExecutionStatus(NotStarted, InProgress, InPause, Completed)
+    var status: ExecutionStatus = NOT_STARTED,
 ) : Parcelable {
+
+    companion object {
+        enum class ExecutionStatus {
+            NOT_STARTED,
+            IN_PROGRESS,
+            IN_PAUSE,
+            COMPLETED,
+        }
+    }
 
     fun getExecutionDescription(context: Context): String =
         context.getString(
@@ -47,5 +52,25 @@ data class Exercise(
 
     fun addCompletedSet() {
         numberOfCompletedSets += 1
+    }
+
+    fun updateExecutionStatus() {
+        status = when (status) {
+            NOT_STARTED -> IN_PROGRESS
+            IN_PROGRESS -> {
+                addCompletedSet()
+                if (numberOfCompletedSets < numberOfTotalSets) {
+                    IN_PAUSE
+                } else {
+                    COMPLETED
+                }
+            }
+            IN_PAUSE -> IN_PROGRESS
+            COMPLETED -> IN_PROGRESS
+        }
+    }
+
+    fun isStatusInProgress(): Boolean {
+        return status == IN_PROGRESS
     }
 }

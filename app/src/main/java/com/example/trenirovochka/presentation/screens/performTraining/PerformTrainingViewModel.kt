@@ -1,9 +1,6 @@
 package com.example.trenirovochka.presentation.screens.performTraining
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.trenirovochka.domain.extensions.formatAsTime
 import com.example.trenirovochka.domain.extensions.parseTime
 import com.example.trenirovochka.domain.models.Exercise
@@ -31,11 +28,19 @@ class PerformTrainingViewModel @AssistedInject constructor(
 
     companion object {
         private val DEFAULT_START_VALUE = 0.toDuration(DurationUnit.SECONDS)
+
+        enum class RecoveryLevel(val partTime: Int) {
+            NONE(0),
+            HIGH(4),
+            MEDIUM(2),
+            LOW(1),
+        }
     }
 
     init {
         countTimer.setTimerListener {
             _timeTraining.value = it
+            countTimerChanged(it)
         }
     }
 
@@ -50,8 +55,12 @@ class PerformTrainingViewModel @AssistedInject constructor(
     val trainingProgramVM: LiveData<TrainingProgram> = _trainingProgramVM
     private val _timeTraining: MutableLiveData<Duration> = MutableLiveData(timeForRelax)
     val timeTraining: LiveData<String> = _timeTraining.map { formatAsTime(it) }
-    private val _isEnableChangeTimer: MutableLiveData<Boolean> = MutableLiveData()
-    val isEnableChangeTimer: LiveData<Boolean> = _isEnableChangeTimer
+    private val _isActiveExerciseStatus: MutableLiveData<Boolean> = MutableLiveData()
+    val isActiveExerciseStatus: LiveData<Boolean> = _isActiveExerciseStatus.map {
+        it.also { status -> isActiveExerciseStatusChanged(status) }
+    }
+    private val _recoveryLevelState: MutableLiveData<RecoveryLevel> = MutableLiveData(RecoveryLevel.NONE)
+    val recoveryLevelState: LiveData<RecoveryLevel> = _recoveryLevelState.distinctUntilChanged()
 
     fun updateExerciseStatus(item: Exercise) {
         trainingProgram.exercise.forEach {
@@ -61,7 +70,7 @@ class PerformTrainingViewModel @AssistedInject constructor(
                 it.status = false
             }
         }
-        updateCountTimer(item.status)
+        _isActiveExerciseStatus.value = item.status
         _trainingProgramVM.value = trainingProgram
     }
 
@@ -79,14 +88,12 @@ class PerformTrainingViewModel @AssistedInject constructor(
         }
     }
 
-    private fun updateCountTimer(exerciseStatus: Boolean) {
+    private fun isActiveExerciseStatusChanged(exerciseStatus: Boolean) {
         when (exerciseStatus) {
             true -> {
-                _isEnableChangeTimer.value = false
                 updateCountTimer(TimerState.TIMER_UP, DEFAULT_START_VALUE)
             }
             else -> {
-                _isEnableChangeTimer.value = true
                 updateCountTimer(TimerState.TIMER_DOWN, timeForRelax)
             }
         }
@@ -97,6 +104,25 @@ class PerformTrainingViewModel @AssistedInject constructor(
             setTime(time)
             setState(state)
             startTimer(viewModelScope)
+        }
+    }
+
+    private fun countTimerChanged(time: Duration) {
+        if (time <= DEFAULT_START_VALUE) countTimer.cancelTimer()
+        if (isActiveExerciseStatus.value == false) {
+            updateRecoveryLevelState(time)
+        } else {
+            _recoveryLevelState.value = RecoveryLevel.NONE
+        }
+    }
+
+    private fun updateRecoveryLevelState(time: Duration) {
+        _recoveryLevelState.value = if (time > timeForRelax.div(RecoveryLevel.MEDIUM.partTime)) {
+            RecoveryLevel.LOW
+        } else if (time > timeForRelax.div(RecoveryLevel.HIGH.partTime)) {
+            RecoveryLevel.MEDIUM
+        } else {
+            RecoveryLevel.HIGH
         }
     }
 }

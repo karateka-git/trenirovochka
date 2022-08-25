@@ -49,9 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@color/cultured"
+        android:background="?attr/colorSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="parent">
-<!--        TODO    -->
 
         <TextView
             android:id="@+id/timer_status_title"

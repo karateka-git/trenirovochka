@@ -8,12 +8,12 @@
     </style>
 
     <style name="ActionButton.Primary">
-        <item name="android:background">@color/primary_button</item>
+        <item name="android:background">?attr/colorPrimary</item>
         <item name="android:textAppearance">@style/MerriweatherRegular.Dark.18</item>
     </style>
 
     <style name="ProgressHorizontalIndicator">
-        <item name="trackColor">@color/purple_200</item>
-        <item name="indicatorColor">@color/purple_500</item>
+        <item name="trackColor">?attr/colorSurfaceVariant</item>
+        <item name="indicatorColor">?attr/colorSecondary</item>
     </style>
 </resources>

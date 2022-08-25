@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.example.trenirovochka.R
 import com.example.trenirovochka.databinding.FragmentPerformTrainingBinding
 import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.addKeyDoneListener
 import com.example.trenirovochka.presentation.common.extensions.addMaskedChangeListener
+import com.example.trenirovochka.presentation.common.extensions.getThemeColor
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.common.util.TextMask.TIME_SHORT_MASK
@@ -18,6 +18,7 @@ import com.example.trenirovochka.presentation.screens.performTraining.PerformTra
 import com.example.trenirovochka.presentation.screens.performTraining.PerformTrainingViewModel.Companion.RecoveryLevel.LOW
 import com.example.trenirovochka.presentation.screens.performTraining.PerformTrainingViewModel.Companion.RecoveryLevel.MEDIUM
 import com.example.trenirovochka.presentation.screens.performTraining.viewHolders.ActiveExerciseViewHolder
+import com.google.android.material.R.attr.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -92,10 +93,16 @@ class PerformTrainingFragment(
 
     private fun updateRecoveryState(recoveryLevel: RecoveryLevel) {
         binding.apply {
-            when (recoveryLevel) {
-                LOW -> timerContainer.setBackgroundResource(R.color.red)
-                MEDIUM -> timerContainer.setBackgroundResource(R.color.teal_700)
-                else -> timerContainer.setBackgroundResource(R.color.cultured)
+            requireContext().apply {
+                timerContainer.setBackgroundColor(
+                    requireContext().getThemeColor(
+                        when (recoveryLevel) {
+                            LOW -> colorSecondaryVariant
+                            MEDIUM -> colorSecondary
+                            else -> colorSurfaceVariant
+                        }
+                    )
+                )
             }
         }
     }

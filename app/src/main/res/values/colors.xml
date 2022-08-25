@@ -11,5 +11,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="cultured">#EFF1F3</color>
 
-    <color name="primary_button">#009FB7</color>
+    <color name="new_york_pink">#dc857d</color>
+    <color name="matrix">#a85751</color>
+    <color name="nutmeg">#752B29</color>
+
+    <color name="turquoise_blue">#5AD0E9</color>
+    <color name="blue_green">#359EB4</color>
+    <color name="blue_lagoon">#007087</color>
+
+    <color name="pale_canary">#ffff97</color>
+    <color name="goldenrod">#FED766</color>
+    <color name="earls_green">#c8a636</color>
 </resources>

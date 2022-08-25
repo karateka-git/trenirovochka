@@ -42,7 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 VerticalDividerDecoration(
                     ContextCompat.getDrawable(
                         context,
-                        R.drawable.vertical_divider_dark
+                        R.drawable.vertical_divider
                     )
                 )
             )

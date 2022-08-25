@@ -111,6 +111,7 @@ class PerformTrainingFragment(
                     viewModel.changeTimeForRelax(text.toString())
                 }
             }
+            backButton.setOnClickListener { onBackPressed() }
         }
     }
 }

@@ -11,4 +11,9 @@
         <item name="android:background">@color/primary_button</item>
         <item name="android:textAppearance">@style/MerriweatherRegular.Dark.18</item>
     </style>
+
+    <style name="ProgressHorizontalIndicator">
+        <item name="trackColor">@color/purple_200</item>
+        <item name="indicatorColor">@color/purple_500</item>
+    </style>
 </resources>

@@ -13,7 +13,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/exercise_action_button">
+        app:layout_constraintEnd_toStartOf="@+id/exercise_action_button">
 
         <TextView
             android:id="@+id/exercise_name"
@@ -30,6 +30,14 @@
             app:layout_constraintTop_toBottomOf="@+id/exercise_name"
             style="@style/MerriweatherRegular.Dark.16"
             tools:text="Вес 20 кг, подход 1 из 3" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ProgressHorizontalIndicator"
+            android:layout_marginTop="4dp"
+            tools:progress="30"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <CheckBox

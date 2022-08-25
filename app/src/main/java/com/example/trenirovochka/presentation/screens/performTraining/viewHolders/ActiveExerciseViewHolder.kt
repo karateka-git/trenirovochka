@@ -2,6 +2,8 @@ package com.example.trenirovochka.presentation.screens.performTraining.viewHolde
 
 import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
 import com.example.trenirovochka.domain.models.Exercise
+import com.example.trenirovochka.domain.models.Exercise.Companion.ExecutionStatus.NOT_STARTED
+import com.example.trenirovochka.presentation.common.extensions.setVisible
 import com.example.trenirovochka.presentation.common.recycler.SimpleViewHolder
 
 class ActiveExerciseViewHolder(
@@ -23,6 +25,11 @@ class ActiveExerciseViewHolder(
             exerciseName.text = item.name
             exerciseDescription.text = item.getActiveExecutionDescription(root.context)
             exerciseActionButton.isChecked = item.isStatusInProgress()
+            progressIndicator.apply {
+                setVisible(item.status != NOT_STARTED)
+                max = item.numberOfTotalSets
+                progress = item.numberOfCompletedSets
+            }
         }
     }
 }

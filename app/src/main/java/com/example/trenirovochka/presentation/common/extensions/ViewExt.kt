@@ -39,3 +39,7 @@ fun View.changeBottomMargin(marginInPx: Int) {
     mpl.bottomMargin = marginInPx
     layoutParams = mpl
 }
+
+fun View.setVisible(visible: Boolean, invisibilityType: Int = View.GONE) {
+    visibility = if (visible) View.VISIBLE else invisibilityType
+}

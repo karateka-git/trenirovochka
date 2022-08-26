@@ -2,17 +2,18 @@
     <!-- Base application theme. -->
     <style name="Theme.Trenirovochka" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_green</item>
-        <item name="colorPrimaryVariant">@color/blue_lagoon</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary_dark</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/goldenrod</item>
-        <item name="colorSecondaryVariant">@color/earls_green</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorSecondaryVariant">@color/color_secondary_dark</item>
+        <item name="colorOnSecondary">@color/color_on_secondary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="colorSurface">@color/white</item>
-        <item name="colorSurfaceVariant">@color/cultured</item>
+        <item name="colorSurface">@color/color_surface</item>
+        <item name="colorSurfaceVariant">@color/color_surface_variant</item>
+        <item name="android:colorBackground">?attr/colorSurface</item>
     </style>
 </resources>

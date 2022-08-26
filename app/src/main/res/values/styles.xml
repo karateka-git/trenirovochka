@@ -9,7 +9,7 @@
 
     <style name="ActionButton.Primary">
         <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:textAppearance">@style/MerriweatherRegular.Dark.18</item>
+        <item name="android:textAppearance">@style/MerriweatherRegular.OnPrimary.18</item>
     </style>
 
     <style name="ProgressHorizontalIndicator">

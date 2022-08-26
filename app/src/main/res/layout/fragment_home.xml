@@ -30,6 +30,7 @@
             app:layout_constraintStart_toEndOf="@+id/date_picker_back_button"
             app:layout_constraintEnd_toStartOf="@+id/date_picker_forward_button"
             android:gravity="center"
+            style="@style/MerriweatherRegular.OnPrimary.20"
             tools:text="01.01.1991"/>
 
         <ImageView

@@ -3,17 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/drawable/ic_back.xml" value="0.1445" />
+        <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/drawable/ic_chevron_left.xml" value="0.1405" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/drawable/ic_play_and_stop.xml" value="0.1495" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/drawable/ic_play_and_stop_circle.xml" value="0.1495" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/drawable/primary_button_background.xml" value="0.2485" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/drawable/vertical_divider_dark.xml" value="0.2485" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/font/merriweather.xml" value="0.1" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/activity_main.xml" value="0.29720853858784896" />
-        <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/fragment_perform_training.xml" value="0.1718683197947841" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/training_program_item.xml" value="0.15703125" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/view_holder_active_exercise.xml" value="0.26036767849508335" />
-        <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/view_holder_exercise.xml" value="0.31216216216216214" />
+        <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/view_holder_exercise.xml" value="0.33" />
         <entry key="..\:/Projects/PetProjects/trenirovochka/app/src/main/res/layout/view_holder_training_program.xml" value="0.41797961075069506" />
       </map>
     </option>

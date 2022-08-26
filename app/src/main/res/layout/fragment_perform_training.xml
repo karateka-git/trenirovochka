@@ -32,7 +32,7 @@
             app:layout_constraintStart_toEndOf="@+id/back_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
-            style="@style/MerriweatherBold.Dark.20"
+            style="@style/MerriweatherBold.OnPrimary.20"
             tools:text="Название"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -56,7 +56,7 @@
             android:id="@+id/timer_status_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/MerriweatherBold.Dark.16"
+            style="@style/MerriweatherBold.OnPrimary.16"
             android:gravity="center"
             tools:text="Отдых/работа"/>
 
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:digits="1234567890:"
-            style="@style/MerriweatherBold.Dark.38"
+            style="@style/MerriweatherBold.OnPrimary.38"
             android:gravity="center"
             tools:text="01:20"
             android:importantForAutofill="no"

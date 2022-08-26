@@ -8,10 +8,10 @@
         - Regular;
         - Bold.
     Цвет:
-        - Dark;
+        - OnPrimary;
         - Grey;
         - Green;
-        - White.
+        - OnSecondary.
     Размер:
         - 8sp;
         - 10sp;
@@ -40,15 +40,15 @@
     </style>
 
     <!--___________________________COLOR_________________________________-->
-    <!--_______________________DARK___________________________-->
+    <!--_______________________ON_PRIMARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark">
-        <item name="android:textColor">@color/black</item>
+    <style name="MerriweatherRegular.OnPrimary">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
-    <style name="MerriweatherBold.Dark">
-        <item name="android:textColor">@color/black</item>
+    <style name="MerriweatherBold.OnPrimary">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
     <!--_______________________GREY___________________________-->
@@ -62,15 +62,15 @@
         <item name="android:textColor">@color/grey</item>
     </style>
 
-    <!--_______________________WHITE___________________________-->
+    <!--_______________________ON_SECONDARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.White">
-        <item name="android:textColor">@color/white</item>
+    <style name="MerriweatherRegular.OnSecondary">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
     </style>
 
-    <style name="MerriweatherBold.White">
-        <item name="android:textColor">@color/white</item>
+    <style name="MerriweatherBold.OnSecondary">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
     </style>
 
     <!--_______________________ERROR___________________________-->
@@ -86,14 +86,14 @@
 
     <!--___________________________SIZE_________________________________-->
     <!--_______________________38___________________________-->
-    <!--___________________DARK____________________-->
+    <!--___________________ON_PRIMARY____________________-->
     <!--_______________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark.38">
+    <style name="MerriweatherRegular.OnPrimary.38">
         <item name="android:textSize">@dimen/text_size_38</item>
     </style>
 
-    <style name="MerriweatherBold.Dark.38">
+    <style name="MerriweatherBold.OnPrimary.38">
         <item name="android:textSize">@dimen/text_size_38</item>
     </style>
 
@@ -109,14 +109,14 @@
     </style>
 
     <!--_______________________20___________________________-->
-    <!--___________________DARK____________________-->
+    <!--___________________ON_PRIMARY____________________-->
     <!--_______________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark.20">
+    <style name="MerriweatherRegular.OnPrimary.20">
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
-    <style name="MerriweatherBold.Dark.20">
+    <style name="MerriweatherBold.OnPrimary.20">
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
@@ -131,26 +131,26 @@
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
-    <!--_______________________WHITE___________________________-->
+    <!--_______________________ON_SECONDARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.White.20">
+    <style name="MerriweatherRegular.OnSecondary.20">
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
-    <style name="MerriweatherBold.White.20">
+    <style name="MerriweatherBold.OnSecondary.20">
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
     <!--_______________________18___________________________-->
-    <!--___________________DARK____________________-->
+    <!--___________________ON_PRIMARY____________________-->
     <!--_______________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark.18">
+    <style name="MerriweatherRegular.OnPrimary.18">
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
-    <style name="MerriweatherBold.Dark.18">
+    <style name="MerriweatherBold.OnPrimary.18">
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
@@ -165,26 +165,26 @@
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
-    <!--_______________________WHITE___________________________-->
+    <!--_______________________ON_SECONDARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.White.18">
+    <style name="MerriweatherRegular.OnSecondary.18">
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
-    <style name="MerriweatherBold.White.18">
+    <style name="MerriweatherBold.OnSecondary.18">
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
     <!--_______________________16___________________________-->
-    <!--___________________DARK____________________-->
+    <!--___________________ON_PRIMARY____________________-->
     <!--_______________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark.16">
+    <style name="MerriweatherRegular.OnPrimary.16">
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
-    <style name="MerriweatherBold.Dark.16">
+    <style name="MerriweatherBold.OnPrimary.16">
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
@@ -199,14 +199,14 @@
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
-    <!--_______________________WHITE___________________________-->
+    <!--_______________________ON_SECONDARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.White.16">
+    <style name="MerriweatherRegular.OnSecondary.16">
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
-    <style name="MerriweatherBold.White.16">
+    <style name="MerriweatherBold.OnSecondary.16">
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
@@ -222,14 +222,14 @@
     </style>
 
     <!--_______________________14___________________________-->
-    <!--___________________DARK____________________-->
+    <!--___________________ON_PRIMARY____________________-->
     <!--_______________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark.14">
+    <style name="MerriweatherRegular.OnPrimary.14">
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
-    <style name="MerriweatherBold.Dark.14">
+    <style name="MerriweatherBold.OnPrimary.14">
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
@@ -244,14 +244,14 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
-    <!--_______________________WHITE___________________________-->
+    <!--_______________________ON_SECONDARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.White.14">
+    <style name="MerriweatherRegular.OnSecondary.14">
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
-    <style name="MerriweatherBold.White.14">
+    <style name="MerriweatherBold.OnSecondary.14">
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
@@ -267,14 +267,14 @@
     </style>
 
     <!--_______________________12___________________________-->
-    <!--___________________DARK____________________-->
+    <!--___________________ON_PRIMARY____________________-->
     <!--_______________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark.12">
+    <style name="MerriweatherRegular.OnPrimary.12">
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
-    <style name="MerriweatherBold.Dark.12">
+    <style name="MerriweatherBold.OnPrimary.12">
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
@@ -289,14 +289,14 @@
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
-    <!--_______________________WHITE___________________________-->
+    <!--_______________________ON_SECONDARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.White.12">
+    <style name="MerriweatherRegular.OnSecondary.12">
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
-    <style name="MerriweatherBold.White.12">
+    <style name="MerriweatherBold.OnSecondary.12">
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
@@ -312,14 +312,14 @@
     </style>
 
     <!--_______________________10___________________________-->
-    <!--___________________DARK____________________-->
+    <!--___________________ON_PRIMARY____________________-->
     <!--_______________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark.10">
+    <style name="MerriweatherRegular.OnPrimary.10">
         <item name="android:textSize">@dimen/text_size_10</item>
     </style>
 
-    <style name="MerriweatherBold.Dark.10">
+    <style name="MerriweatherBold.OnPrimary.10">
         <item name="android:textSize">@dimen/text_size_10</item>
     </style>
 
@@ -334,26 +334,26 @@
         <item name="android:textSize">@dimen/text_size_10</item>
     </style>
 
-    <!--_______________________WHITE___________________________-->
+    <!--_______________________ON_SECONDARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.White.10">
+    <style name="MerriweatherRegular.OnSecondary.10">
         <item name="android:textSize">@dimen/text_size_10</item>
     </style>
 
-    <style name="MerriweatherBold.White.10">
+    <style name="MerriweatherBold.OnSecondary.10">
         <item name="android:textSize">@dimen/text_size_10</item>
     </style>
 
     <!--_______________________8___________________________-->
-    <!--___________________DARK____________________-->
+    <!--___________________ON_PRIMARY____________________-->
     <!--_______________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Dark.8">
+    <style name="MerriweatherRegular.OnPrimary.8">
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 
-    <style name="MerriweatherBold.Dark.8">
+    <style name="MerriweatherBold.OnPrimary.8">
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 
@@ -368,14 +368,14 @@
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 
-    <!--_______________________WHITE___________________________-->
+    <!--_______________________ON_SECONDARY___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.White.8">
+    <style name="MerriweatherRegular.OnSecondary.8">
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 
-    <style name="MerriweatherBold.White.8">
+    <style name="MerriweatherBold.OnSecondary.8">
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 </resources>

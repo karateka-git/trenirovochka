@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/MerriweatherRegular.Dark.20"
+        style="@style/MerriweatherRegular.OnPrimary.20"
         tools:text="Test" />
 
     <TextView
@@ -19,6 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        style="@style/MerriweatherRegular.Dark.16"
+        style="@style/MerriweatherRegular.OnPrimary.16"
         tools:text="Test" />
 </androidx.constraintlayout.widget.ConstraintLayout>

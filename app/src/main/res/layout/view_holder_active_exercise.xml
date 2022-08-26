@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/MerriweatherRegular.OnPrimary.20"
+            style="@style/MerriweatherRegular.OnSurface.20"
             tools:text="Test" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/exercise_name"
-            style="@style/MerriweatherRegular.OnPrimary.16"
+            style="@style/MerriweatherRegular.OnSurface.16"
             tools:text="Вес 20 кг, подход 1 из 3" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator

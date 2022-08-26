@@ -30,7 +30,7 @@
             app:layout_constraintStart_toEndOf="@+id/date_picker_back_button"
             app:layout_constraintEnd_toStartOf="@+id/date_picker_forward_button"
             android:gravity="center"
-            style="@style/MerriweatherRegular.OnPrimary.20"
+            style="@style/MerriweatherRegular.OnSurface.20"
             tools:text="01.01.1991"/>
 
         <ImageView
@@ -59,7 +59,7 @@
         android:background="?attr/colorSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/start_training_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

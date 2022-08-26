@@ -9,7 +9,7 @@
         - Bold.
     Цвет:
         - OnPrimary;
-        - Grey;
+        - OnSurface;
         - Green;
         - OnSecondary.
     Размер:
@@ -21,7 +21,7 @@
         - 18sp;
         - 20sp;
         - 38sp.
-    Можно брать не конечные стили исключая последующие, например: AvantgardeMedium., AvantgardeBold.Grey;
+    Можно брать не конечные стили исключая последующие, например: AvantgardeMedium., AvantgardeBold.OnSurface;
     -->
 
 
@@ -51,15 +51,15 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
-    <!--_______________________GREY___________________________-->
+    <!--_______________________ON_SURFACE___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Grey">
-        <item name="android:textColor">@color/grey</item>
+    <style name="MerriweatherRegular.OnSurface">
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
-    <style name="MerriweatherBold.Grey">
-        <item name="android:textColor">@color/grey</item>
+    <style name="MerriweatherBold.OnSurface">
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
     <!--_______________________ON_SECONDARY___________________________-->
@@ -97,6 +97,18 @@
         <item name="android:textSize">@dimen/text_size_38</item>
     </style>
 
+    <!--_______________________38___________________________-->
+    <!--____________________ON_SURFACE___________________________-->
+    <!--___________________Merriweather____________________-->
+
+    <style name="MerriweatherRegular.OnSurface.38">
+        <item name="android:textSize">@dimen/text_size_38</item>
+    </style>
+
+    <style name="MerriweatherBold.OnSurface.38">
+        <item name="android:textSize">@dimen/text_size_38</item>
+    </style>
+
     <!--___________________ERROR____________________-->
     <!--_______________Merriweather____________________-->
 
@@ -120,14 +132,14 @@
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
-    <!--_______________________GREY___________________________-->
+    <!--_______________________ON_SURFACE___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Grey.20">
+    <style name="MerriweatherRegular.OnSurface.20">
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
-    <style name="MerriweatherBold.Grey.20">
+    <style name="MerriweatherBold.OnSurface.20">
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
@@ -154,14 +166,14 @@
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
-    <!--_______________________GREY___________________________-->
+    <!--_______________________ON_SURFACE___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Grey.18">
+    <style name="MerriweatherRegular.OnSurface.18">
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
-    <style name="MerriweatherBold.Grey.18">
+    <style name="MerriweatherBold.OnSurface.18">
         <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
@@ -188,14 +200,14 @@
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
-    <!--_______________________GREY___________________________-->
+    <!--_______________________ON_SURFACE___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Grey.16">
+    <style name="MerriweatherRegular.OnSurface.16">
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
-    <style name="MerriweatherBold.Grey.16">
+    <style name="MerriweatherBold.OnSurface.16">
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
@@ -233,14 +245,14 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
-    <!--_______________________GREY___________________________-->
+    <!--_______________________ON_SURFACE___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Grey.14">
+    <style name="MerriweatherRegular.OnSurface.14">
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
-    <style name="MerriweatherBold.Grey.14">
+    <style name="MerriweatherBold.OnSurface.14">
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
@@ -278,14 +290,14 @@
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
-    <!--_______________________GREY___________________________-->
+    <!--_______________________ON_SURFACE___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Grey.12">
+    <style name="MerriweatherRegular.OnSurface.12">
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
-    <style name="MerriweatherBold.Grey.12">
+    <style name="MerriweatherBold.OnSurface.12">
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
 
@@ -323,14 +335,14 @@
         <item name="android:textSize">@dimen/text_size_10</item>
     </style>
 
-    <!--_______________________GREY___________________________-->
+    <!--_______________________ON_SURFACE___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Grey.10">
+    <style name="MerriweatherRegular.OnSurface.10">
         <item name="android:textSize">@dimen/text_size_10</item>
     </style>
 
-    <style name="MerriweatherBold.Grey.10">
+    <style name="MerriweatherBold.OnSurface.10">
         <item name="android:textSize">@dimen/text_size_10</item>
     </style>
 
@@ -357,14 +369,14 @@
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 
-    <!--_______________________GREY___________________________-->
+    <!--_______________________ON_SURFACE___________________________-->
     <!--___________________Merriweather____________________-->
 
-    <style name="MerriweatherRegular.Grey.8">
+    <style name="MerriweatherRegular.OnSurface.8">
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 
-    <style name="MerriweatherBold.Grey.8">
+    <style name="MerriweatherBold.OnSurface.8">
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 

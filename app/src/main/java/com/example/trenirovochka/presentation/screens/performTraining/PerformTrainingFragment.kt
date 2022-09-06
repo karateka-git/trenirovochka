@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentPerformTrainingBinding
 import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
+import com.example.trenirovochka.domain.models.RecoveryLevel
+import com.example.trenirovochka.domain.models.TrainingProgram
+import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.IN_PROGRESS
+import com.example.trenirovochka.domain.models.UserStatus
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.addKeyDoneListener
 import com.example.trenirovochka.presentation.common.extensions.addMaskedChangeListener
@@ -14,9 +19,6 @@ import com.example.trenirovochka.presentation.common.extensions.getThemeColor
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.common.util.TextMask.TIME_SHORT_MASK
-import com.example.trenirovochka.presentation.screens.performTraining.PerformTrainingViewModel.Companion.RecoveryLevel
-import com.example.trenirovochka.presentation.screens.performTraining.PerformTrainingViewModel.Companion.RecoveryLevel.LOW
-import com.example.trenirovochka.presentation.screens.performTraining.PerformTrainingViewModel.Companion.RecoveryLevel.MEDIUM
 import com.example.trenirovochka.presentation.screens.performTraining.viewHolders.ActiveExerciseViewHolder
 import com.google.android.material.R.attr.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,32 +79,14 @@ class PerformTrainingFragment(
             binding.apply {
                 trainingProgramVM.observe(viewLifecycleOwner) {
                     trainingProgramAdapter.swapItems(it.exercise)
+                    updateProgramState(it)
                 }
                 timeTraining.observe(viewLifecycleOwner) {
                     timerEditText.setText(it)
                 }
-                isActiveExerciseStatus.observe(viewLifecycleOwner) {
-                    timerEditText.isEnabled = it.not()
+                userState.observe(viewLifecycleOwner) {
+                    updateUserState(it)
                 }
-                recoveryLevelState.observe(viewLifecycleOwner) {
-                    updateRecoveryState(it)
-                }
-            }
-        }
-    }
-
-    private fun updateRecoveryState(recoveryLevel: RecoveryLevel) {
-        binding.apply {
-            requireContext().apply {
-                timerContainer.setBackgroundColor(
-                    requireContext().getThemeColor(
-                        when (recoveryLevel) {
-                            LOW -> colorSecondaryVariant
-                            MEDIUM -> colorSecondary
-                            else -> colorSurfaceVariant
-                        }
-                    )
-                )
             }
         }
     }
@@ -120,5 +104,40 @@ class PerformTrainingFragment(
             }
             backButton.setOnClickListener { onBackPressed() }
         }
+    }
+
+    private fun updateProgramState(program: TrainingProgram) {
+        binding.timerEditText.isEnabled = program.status != IN_PROGRESS
+    }
+
+    private fun updateUserState(userStatus: UserStatus) {
+        when (userStatus) {
+            is UserStatus.NotStarted -> {
+                changeBackgroundTimerContainer()
+            }
+            is UserStatus.InProgress -> {
+                changeBackgroundTimerContainer()
+            }
+            is UserStatus.InPause -> {
+                changeBackgroundTimerContainer(
+                    when (userStatus.recoveryLevel) {
+                        RecoveryLevel.LOW -> colorSecondaryVariant
+                        RecoveryLevel.MEDIUM -> colorSecondary
+                        else -> colorSurfaceVariant
+                    }
+                )
+            }
+            is UserStatus.Completed -> {
+                changeBackgroundTimerContainer()
+            }
+        }
+    }
+
+    private fun changeBackgroundTimerContainer(
+        @ColorInt backgroundColor: Int = requireContext().getThemeColor(
+            colorSurfaceVariant
+        )
+    ) {
+        binding.timerContainer.setBackgroundColor(backgroundColor)
     }
 }

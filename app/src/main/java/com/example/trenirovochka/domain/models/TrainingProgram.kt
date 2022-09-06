@@ -3,7 +3,8 @@ package com.example.trenirovochka.domain.models
 import android.content.Context
 import android.os.Parcelable
 import com.example.trenirovochka.R
-import com.example.trenirovochka.domain.models.Exercise.Companion.ExecutionStatus.*
+import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus
+import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.*
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -12,7 +13,28 @@ data class TrainingProgram(
     val name: String,
     val exercise: List<Exercise>,
     val active: Boolean = false,
-) : Parcelable
+) : Parcelable {
+
+    companion object {
+        enum class ExecutionStatus {
+            NOT_STARTED,
+            IN_PROGRESS,
+            IN_PAUSE,
+            COMPLETED,
+        }
+    }
+
+    val status: ExecutionStatus
+        get() = if (exercise.any { it.status == IN_PROGRESS }) {
+            IN_PROGRESS
+        } else if (exercise.any { it.status == IN_PAUSE }) {
+            IN_PAUSE
+        } else if (exercise.all { it.status == COMPLETED }) {
+            COMPLETED
+        } else {
+            NOT_STARTED
+        }
+}
 
 @Parcelize
 data class Exercise(
@@ -24,15 +46,6 @@ data class Exercise(
     val description: String? = null,
     var status: ExecutionStatus = NOT_STARTED,
 ) : Parcelable {
-
-    companion object {
-        enum class ExecutionStatus {
-            NOT_STARTED,
-            IN_PROGRESS,
-            IN_PAUSE,
-            COMPLETED,
-        }
-    }
 
     fun getExecutionDescription(context: Context): String =
         context.getString(

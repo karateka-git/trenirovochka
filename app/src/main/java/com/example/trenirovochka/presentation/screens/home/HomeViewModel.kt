@@ -48,7 +48,7 @@ class HomeViewModel @Inject constructor(
         trainingProgram.value?.let {
             navigateTo(
                 HomeFragmentDirections.actionHomeFragmentToPerformTraining(
-                    it
+                    TrainingProgram(it)
                 )
             )
         }

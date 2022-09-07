@@ -15,6 +15,13 @@ data class TrainingProgram(
     val active: Boolean = false,
 ) : Parcelable {
 
+    constructor(program: TrainingProgram) : this(
+        program.date,
+        program.name,
+        program.exercise.map { it.copy() },
+        program.active
+    )
+
     companion object {
         enum class ExecutionStatus {
             NOT_STARTED,

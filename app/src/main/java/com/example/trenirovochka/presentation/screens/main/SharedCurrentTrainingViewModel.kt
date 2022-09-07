@@ -71,11 +71,21 @@ class SharedCurrentTrainingViewModel @Inject constructor(
         }
     }
 
+    fun cancelTrainingProgram() {
+        resetTimer()
+        updateCurrentTrainingProgram(null)
+    }
+
     private fun updateCountTimer(state: TimerState, time: Duration) {
         countTimer.apply {
             setTime(time)
             setState(state)
             startTimer(viewModelScope)
         }
+    }
+
+    private fun resetTimer() {
+        countTimer.cancelTimer()
+        _timeTraining.value = timeForRelax
     }
 }

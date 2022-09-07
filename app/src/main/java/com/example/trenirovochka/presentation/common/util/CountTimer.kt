@@ -63,6 +63,7 @@ class CountTimer {
     }
 
     fun cancelTimer() {
+        timeDuration = DEFAULT_START_VALUE
         timer?.cancel()
     }
 

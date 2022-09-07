@@ -78,15 +78,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             datePickerBackButton.setOnClickListener {
                 viewModel.updateSelectedDate(ActionWithDate.PREV)
             }
-            startTrainingButton.setOnClickListener {
-                viewModel.onStartTrainingButtonClick()
-            }
         }
     }
 
     private fun handleActiveTrainingProgram(trainingProgram: TrainingProgram?) {
-        binding.apply {
-            startTrainingButton.isEnabled = trainingProgram == null
+        if (trainingProgram == null) {
+            binding.startTrainingButton.setOnClickListener {
+                viewModel.onStartTrainingButtonClick()
+            }
+        } else {
+            binding.startTrainingButton.setOnClickListener {
+                sharedCurrentTrainingViewModel.cancelTrainingProgram()
+            }
         }
     }
 }

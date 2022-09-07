@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
+import androidx.annotation.AttrRes
 import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentPerformTrainingBinding
 import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
+import com.example.trenirovochka.domain.extensions.formatAsTime
 import com.example.trenirovochka.domain.models.RecoveryLevel
-import com.example.trenirovochka.domain.models.TrainingProgram
+import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus
 import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.IN_PROGRESS
 import com.example.trenirovochka.domain.models.UserStatus
 import com.example.trenirovochka.presentation.common.base.BaseFragment
@@ -19,6 +20,7 @@ import com.example.trenirovochka.presentation.common.extensions.getThemeColor
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.common.util.TextMask.TIME_SHORT_MASK
+import com.example.trenirovochka.presentation.screens.main.SharedCurrentTrainingViewModel
 import com.example.trenirovochka.presentation.screens.performTraining.viewHolders.ActiveExerciseViewHolder
 import com.google.android.material.R.attr.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +42,10 @@ class PerformTrainingFragment(
             args.trainingProgram
         )
     }
+
+    private val sharedCurrentTrainingViewModel: SharedCurrentTrainingViewModel by viewModelCreator(
+        ::requireActivity
+    )
 
     private val trainingProgramAdapter by lazy {
         SimpleAdapter(
@@ -63,6 +69,7 @@ class PerformTrainingFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedCurrentTrainingViewModel.updateCurrentTrainingProgram(args.trainingProgram)
         initRecyclers()
         initObservers()
         initListeners()
@@ -75,18 +82,21 @@ class PerformTrainingFragment(
     }
 
     private fun initObservers() {
-        viewModel.apply {
-            binding.apply {
+        binding.apply {
+            viewModel.apply {
                 trainingProgramVM.observe(viewLifecycleOwner) {
                     trainingProgramAdapter.swapItems(it.exercise)
-                    updateProgramState(it)
                 }
-                timeTraining.observe(viewLifecycleOwner) {
-                    timerEditText.setText(it)
+                programStatus.observe(viewLifecycleOwner) {
+                    updateProgramState(it)
                 }
                 userState.observe(viewLifecycleOwner) {
                     updateUserState(it)
                 }
+            }
+            sharedCurrentTrainingViewModel.timeTraining.observe(viewLifecycleOwner) {
+                timerEditText.setText(formatAsTime(it))
+                viewModel.updateUserState(it, sharedCurrentTrainingViewModel.getTimeForRelax())
             }
         }
     }
@@ -95,19 +105,20 @@ class PerformTrainingFragment(
         binding.apply {
             timerEditText.apply {
                 addMaskedChangeListener(TIME_SHORT_MASK)
-                setOnFocusChangeListener { view, isFocusState ->
-                    viewModel.onTimerFocusChange(isFocusState)
+                setOnFocusChangeListener { _, isFocusState ->
+                    sharedCurrentTrainingViewModel.onChangeTimerPauseState(isFocusState)
                 }
                 addKeyDoneListener {
-                    viewModel.changeTimeForRelax(text.toString())
+                    sharedCurrentTrainingViewModel.changeTimeForRelax(text.toString())
                 }
             }
             backButton.setOnClickListener { onBackPressed() }
         }
     }
 
-    private fun updateProgramState(program: TrainingProgram) {
-        binding.timerEditText.isEnabled = program.status != IN_PROGRESS
+    private fun updateProgramState(programStatus: ExecutionStatus) {
+        sharedCurrentTrainingViewModel.programStatusChanged(programStatus)
+        binding.timerEditText.isEnabled = programStatus != IN_PROGRESS
     }
 
     private fun updateUserState(userStatus: UserStatus) {
@@ -134,10 +145,10 @@ class PerformTrainingFragment(
     }
 
     private fun changeBackgroundTimerContainer(
-        @ColorInt backgroundColor: Int = requireContext().getThemeColor(
-            colorSurfaceVariant
-        )
+        @AttrRes backgroundColor: Int = colorSurfaceVariant
     ) {
-        binding.timerContainer.setBackgroundColor(backgroundColor)
+        binding.timerContainer.setBackgroundColor(
+            requireContext().getThemeColor(backgroundColor)
+        )
     }
 }

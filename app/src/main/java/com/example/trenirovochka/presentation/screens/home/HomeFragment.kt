@@ -3,15 +3,17 @@ package com.example.trenirovochka.presentation.screens.home
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import com.example.trenirovochka.R
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.databinding.FragmentHomeBinding
 import com.example.trenirovochka.databinding.ViewHolderExerciseBinding
+import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseFragment
+import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.common.recycler.decorations.VerticalDividerDecoration
 import com.example.trenirovochka.presentation.screens.home.viewHolders.ExerciseViewHolder
+import com.example.trenirovochka.presentation.screens.main.SharedCurrentTrainingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,13 +21,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     FragmentHomeBinding::inflate
 ) {
 
-    override val viewModel: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModelCreator()
+
+    private val sharedCurrentTrainingViewModel: SharedCurrentTrainingViewModel by viewModelCreator(
+        ::requireActivity
+    )
 
     private val trainingProgramAdapter by lazy {
         SimpleAdapter(
-            ViewHolderExerciseBinding::inflate,
-            { ExerciseViewHolder(it) }
-        )
+            ViewHolderExerciseBinding::inflate
+        ) { ExerciseViewHolder(it) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,14 +55,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     }
 
     private fun initObservers() {
-        viewModel.apply {
-            binding.apply {
+        binding.apply {
+            viewModel.apply {
                 trainingProgram.observe(viewLifecycleOwner) {
                     trainingProgramAdapter.swapItems(it.exercise)
                 }
                 selectedDate.observe(viewLifecycleOwner) {
                     datePickerSelectedDateText.text = it
                 }
+            }
+            sharedCurrentTrainingViewModel.trainingProgram.observe(viewLifecycleOwner) {
+                handleActiveTrainingProgram(it)
             }
         }
     }
@@ -73,6 +81,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             startTrainingButton.setOnClickListener {
                 viewModel.onStartTrainingButtonClick()
             }
+        }
+    }
+
+    private fun handleActiveTrainingProgram(trainingProgram: TrainingProgram?) {
+        binding.apply {
+            startTrainingButton.isEnabled = trainingProgram == null
         }
     }
 }

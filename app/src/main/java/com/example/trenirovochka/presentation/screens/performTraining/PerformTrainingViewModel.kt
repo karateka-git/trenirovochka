@@ -10,7 +10,6 @@ import com.example.trenirovochka.domain.models.TrainingProgram.Companion.Executi
 import com.example.trenirovochka.domain.models.UserStatus
 import com.example.trenirovochka.domain.models.UserStatus.InPause.Companion.getRecoveryLevel
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
-import com.example.trenirovochka.presentation.common.navigation.HomeDestination
 import com.example.trenirovochka.presentation.common.util.CountTimer
 import com.example.trenirovochka.presentation.common.util.CountTimer.Companion.DEFAULT_START_VALUE
 import com.example.trenirovochka.presentation.common.util.CountTimer.Companion.TimerState
@@ -29,7 +28,7 @@ interface PerformTrainingViewModelAssistedFactory {
 class PerformTrainingViewModel @AssistedInject constructor(
     @Assisted private val trainingProgram: TrainingProgram,
     private val countTimer: CountTimer,
-) : BaseViewModel<HomeDestination>() {
+) : BaseViewModel() {
 
     init {
         countTimer.setTimerListener {

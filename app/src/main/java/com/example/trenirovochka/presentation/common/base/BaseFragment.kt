@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.trenirovochka.domain.extensions.onDestroyNullable
 
-abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*>>(
+abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(
     private val inflate: (
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -6,7 +6,6 @@ import com.example.trenirovochka.domain.extensions.formatAsFullDate
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
-import com.example.trenirovochka.presentation.common.navigation.HomeDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -15,7 +14,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val programsInteractor: ITrainingProgramsInteractor,
     private val calendar: Calendar
-) : BaseViewModel<HomeDestination>() {
+) : BaseViewModel() {
 
     private val _selectedDate: MutableLiveData<Date> by lazy {
         MutableLiveData<Date>(

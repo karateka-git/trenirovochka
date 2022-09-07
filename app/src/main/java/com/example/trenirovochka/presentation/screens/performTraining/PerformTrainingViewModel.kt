@@ -12,6 +12,7 @@ import com.example.trenirovochka.domain.models.UserStatus.InPause.Companion.getR
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import com.example.trenirovochka.presentation.common.navigation.HomeDestination
 import com.example.trenirovochka.presentation.common.util.CountTimer
+import com.example.trenirovochka.presentation.common.util.CountTimer.Companion.DEFAULT_START_VALUE
 import com.example.trenirovochka.presentation.common.util.CountTimer.Companion.TimerState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -29,10 +30,6 @@ class PerformTrainingViewModel @AssistedInject constructor(
     @Assisted private val trainingProgram: TrainingProgram,
     private val countTimer: CountTimer,
 ) : BaseViewModel<HomeDestination>() {
-
-    companion object {
-        private val DEFAULT_START_VALUE = 0.toDuration(DurationUnit.SECONDS)
-    }
 
     init {
         countTimer.setTimerListener {

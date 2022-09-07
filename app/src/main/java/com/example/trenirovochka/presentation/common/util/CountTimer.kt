@@ -15,6 +15,7 @@ class CountTimer {
         }
 
         val DEFAULT_VALUE_TIMER_CHANGE_IN_SECOND = 1.seconds
+        val DEFAULT_START_VALUE = 0.toDuration(DurationUnit.SECONDS)
     }
 
     private var timer: Job? = null

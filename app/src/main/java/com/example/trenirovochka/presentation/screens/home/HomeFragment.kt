@@ -78,18 +78,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             datePickerBackButton.setOnClickListener {
                 viewModel.updateSelectedDate(ActionWithDate.PREV)
             }
+            startTrainingButton.setOnClickListener {
+                viewModel.onStartTrainingButtonClick()
+            }
+            cancelTrainingButton.setOnClickListener {
+                sharedCurrentTrainingViewModel.cancelTrainingProgram()
+            }
         }
     }
 
-    private fun handleActiveTrainingProgram(trainingProgram: TrainingProgram?) {
-        if (trainingProgram == null) {
-            binding.startTrainingButton.setOnClickListener {
-                viewModel.onStartTrainingButtonClick()
-            }
+    private fun handleActiveTrainingProgram(activeTrainingProgram: TrainingProgram?) {
+        binding.actionButtonContainer.visibleChildId = if (activeTrainingProgram == null) {
+            binding.startTrainingButton.id
         } else {
-            binding.startTrainingButton.setOnClickListener {
-                sharedCurrentTrainingViewModel.cancelTrainingProgram()
-            }
+            binding.activeTrainingButtonContainer.id
         }
     }
 }

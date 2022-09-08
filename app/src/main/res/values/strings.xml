@@ -3,4 +3,6 @@
     <string name="execution_description">%1$d подхода по %2$d раз, %3$s кг</string>
     <string name="active_execution_description">%1$s кг, подход %2$d/%3$d</string>
     <string name="start_training">Приступить</string>
+    <string name="cancel_training">Закончить</string>
+    <string name="continue_training">Продолжить</string>
 </resources>

@@ -59,11 +59,40 @@
         android:background="?attr/colorSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/start_training_button"
+        <com.example.trenirovochka.presentation.common.util.BetterViewAnimator
+            android:id="@+id/action_button_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/ActionButton.Primary"
-            android:text="@string/start_training"/>
+            app:bva_visible_child="@+id/start_training_button">
+
+            <LinearLayout
+                android:id="@+id/active_training_button_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel_training_button"
+                    android:layout_weight="1"
+                    style="@style/ActionButton.Secondary"
+                    android:text="@string/cancel_training"/>
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/continue_training_button"
+                    android:layout_weight="1"
+                    style="@style/ActionButton.Primary"
+                    android:text="@string/continue_training"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/start_training_button"
+                android:layout_width="match_parent"
+                style="@style/ActionButton.Primary"
+                android:text="@string/start_training"/>
+        </com.example.trenirovochka.presentation.common.util.BetterViewAnimator>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

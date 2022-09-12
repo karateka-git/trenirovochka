@@ -23,6 +23,11 @@
         <item name="android:textAppearance">@style/MerriweatherRegular.OnSecondary.18</item>
     </style>
 
+    <style name="ActionButton.Dialog">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/MerriweatherRegular.OnSecondary.18</item>
+    </style>
+
     <style name="ProgressHorizontalIndicator">
         <item name="trackColor">?attr/colorSurfaceVariant</item>
         <item name="indicatorColor">?attr/colorSecondary</item>

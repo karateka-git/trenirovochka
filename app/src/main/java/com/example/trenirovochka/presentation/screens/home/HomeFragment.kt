@@ -9,6 +9,9 @@ import com.example.trenirovochka.databinding.FragmentHomeBinding
 import com.example.trenirovochka.databinding.ViewHolderExerciseBinding
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseFragment
+import com.example.trenirovochka.presentation.common.dialogs.SimpleDialog
+import com.example.trenirovochka.presentation.common.dialogs.SimpleDialog.Companion.SIMPLE_DIALOG_TAG
+import com.example.trenirovochka.presentation.common.dialogs.SimpleDialogListener
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.common.recycler.decorations.VerticalDividerDecoration
@@ -31,6 +34,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         SimpleAdapter(
             ViewHolderExerciseBinding::inflate
         ) { ExerciseViewHolder(it) }
+    }
+
+    private val dialog by lazy {
+        SimpleDialog(
+            requireContext().getString(R.string.training_cancel_dialog_title),
+            object : SimpleDialogListener {
+                override fun onPositiveButtonClick() {
+                    sharedCurrentTrainingViewModel.cancelTrainingProgram()
+                }
+
+                override fun onNegativeButtonClick() {}
+
+                override fun onDismissClick() {
+                    viewModel.isCancelActiveTrainingProgramDialogShow.postValue(false)
+                }
+            }
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,6 +83,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 selectedDate.observe(viewLifecycleOwner) {
                     datePickerSelectedDateText.text = it
                 }
+                isCancelActiveTrainingProgramDialogShow.observe(viewLifecycleOwner) {
+                    if (it) showDialog()
+                }
             }
             sharedCurrentTrainingViewModel.trainingProgram.observe(viewLifecycleOwner) {
                 handleActiveTrainingProgram(it)
@@ -82,7 +105,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 viewModel.onStartTrainingButtonClick()
             }
             cancelTrainingButton.setOnClickListener {
-                sharedCurrentTrainingViewModel.cancelTrainingProgram()
+                viewModel.onCancelTrainingButtonClick()
+            }
+            continueTrainingButton.setOnClickListener {
+                viewModel.onContinueTrainingButtonClick(
+                    sharedCurrentTrainingViewModel.trainingProgram.value
+                )
             }
         }
     }
@@ -93,5 +121,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         } else {
             binding.activeTrainingButtonContainer.id
         }
+    }
+
+    private fun showDialog() {
+        dialog.show(childFragmentManager, SIMPLE_DIALOG_TAG)
     }
 }

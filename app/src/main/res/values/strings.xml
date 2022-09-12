@@ -5,4 +5,8 @@
     <string name="start_training">Приступить</string>
     <string name="cancel_training">Закончить</string>
     <string name="continue_training">Продолжить</string>
+
+    <string name="training_cancel_dialog_title">Вы уже начали тренировку, желаете её закончить?</string>
+    <string name="simple_dialog_yes">Да</string>
+    <string name="simple_dialog_cancel">Отменить</string>
 </resources>

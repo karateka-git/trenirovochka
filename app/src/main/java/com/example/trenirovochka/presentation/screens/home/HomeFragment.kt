@@ -7,6 +7,8 @@ import com.example.trenirovochka.R
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.databinding.FragmentHomeBinding
 import com.example.trenirovochka.databinding.ViewHolderExerciseBinding
+import com.example.trenirovochka.domain.models.PerformedTrainingProgram
+import com.example.trenirovochka.domain.models.Program
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.dialogs.SimpleDialog
@@ -78,7 +80,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         binding.apply {
             viewModel.apply {
                 trainingProgram.observe(viewLifecycleOwner) {
-                    trainingProgramAdapter.swapItems(it.exercise)
+                    updateTrainingProgram(it)
                 }
                 selectedDate.observe(viewLifecycleOwner) {
                     datePickerSelectedDateText.text = it
@@ -91,6 +93,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 handleActiveTrainingProgram(it)
             }
         }
+    }
+
+    private fun updateTrainingProgram(program: Program) {
+        binding.apply {
+            trainingButtonContainer.visibleChildId = when (program) {
+                is PerformedTrainingProgram -> {
+                    performedTrainingText.id
+                }
+                is TrainingProgram -> {
+                    startTrainingButton.id
+                }
+            }
+        }
+        trainingProgramAdapter.swapItems(program.exercise)
     }
 
     private fun initListeners() {
@@ -117,7 +133,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     private fun handleActiveTrainingProgram(activeTrainingProgram: TrainingProgram?) {
         binding.actionButtonContainer.visibleChildId = if (activeTrainingProgram == null) {
-            binding.startTrainingButton.id
+            binding.trainingButtonContainer.id
         } else {
             binding.activeTrainingButtonContainer.id
         }

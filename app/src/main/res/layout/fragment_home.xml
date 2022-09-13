@@ -63,7 +63,7 @@
             android:id="@+id/action_button_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:bva_visible_child="@+id/start_training_button">
+            app:bva_visible_child="@+id/training_button_container">
 
             <LinearLayout
                 android:id="@+id/active_training_button_container"
@@ -88,11 +88,26 @@
                     android:text="@string/continue_training"/>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/start_training_button"
+            <com.example.trenirovochka.presentation.common.util.BetterViewAnimator
+                android:id="@+id/training_button_container"
                 android:layout_width="match_parent"
-                style="@style/ActionButton.Primary"
-                android:text="@string/start_training"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:bva_visible_child="@+id/start_training_button">
+
+                <TextView
+                    android:id="@+id/performed_training_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/MerriweatherRegular.OnSurface.16"
+                    android:text="@string/training_performed"/>
+
+                <Button
+                    android:id="@+id/start_training_button"
+                    android:layout_width="match_parent"
+                    style="@style/ActionButton.Primary"
+                    android:text="@string/start_training"/>
+            </com.example.trenirovochka.presentation.common.util.BetterViewAnimator>
         </com.example.trenirovochka.presentation.common.util.BetterViewAnimator>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

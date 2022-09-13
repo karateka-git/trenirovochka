@@ -8,15 +8,19 @@ import com.example.trenirovochka.domain.models.TrainingProgram.Companion.Executi
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+sealed class Program : Parcelable {
+    abstract val exercise: List<Exercise>
+}
+
 data class TrainingProgram(
-    val date: String,
+    val dayOfWeek: DayOfWeekCalendarAdapter,
     val name: String,
-    val exercise: List<Exercise>,
+    override val exercise: List<Exercise>,
     val active: Boolean = false,
-) : Parcelable {
+) : Program() {
 
     constructor(program: TrainingProgram) : this(
-        program.date,
+        program.dayOfWeek,
         program.name,
         program.exercise.map { it.copy() },
         program.active
@@ -42,6 +46,13 @@ data class TrainingProgram(
             NOT_STARTED
         }
 }
+
+data class PerformedTrainingProgram(
+    val date: String,
+    val name: String,
+    override val exercise: List<Exercise>,
+    val status: ExecutionStatus = COMPLETED
+) : Program()
 
 @Parcelize
 data class Exercise(

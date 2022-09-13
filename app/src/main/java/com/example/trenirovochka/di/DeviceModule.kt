@@ -16,7 +16,6 @@ import javax.inject.Singleton
 abstract class DeviceModule {
 
     companion object {
-        @Singleton
         @Provides
         fun provideCalendar(): Calendar {
             return Calendar.getInstance()

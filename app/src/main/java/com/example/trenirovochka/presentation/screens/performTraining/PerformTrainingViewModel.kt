@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import com.example.trenirovochka.domain.models.Exercise
 import com.example.trenirovochka.domain.models.TrainingProgram
-import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus
 import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.*
 import com.example.trenirovochka.domain.models.UserStatus
 import com.example.trenirovochka.domain.models.UserStatus.InPause.Companion.getRecoveryLevel
@@ -28,9 +27,6 @@ class PerformTrainingViewModel @AssistedInject constructor(
         MutableLiveData(trainingProgram)
     val trainingProgramVM: LiveData<TrainingProgram> = _trainingProgramVM
 
-    private val _programExecutionStatus: MutableLiveData<ExecutionStatus> = MutableLiveData()
-    val programStatus: LiveData<ExecutionStatus> = _programExecutionStatus.distinctUntilChanged()
-
     private val _userState: MutableLiveData<UserStatus> = MutableLiveData(UserStatus.NotStarted)
     val userState: LiveData<UserStatus> = _userState.distinctUntilChanged()
 
@@ -41,7 +37,6 @@ class PerformTrainingViewModel @AssistedInject constructor(
             }
         }
         _trainingProgramVM.value = trainingProgram
-        _programExecutionStatus.value = trainingProgram.status
     }
 
     fun updateUserState(time: Duration, timeForRelax: Duration) {

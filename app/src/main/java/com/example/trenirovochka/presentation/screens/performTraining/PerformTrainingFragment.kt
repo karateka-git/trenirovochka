@@ -10,8 +10,9 @@ import com.example.trenirovochka.databinding.FragmentPerformTrainingBinding
 import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
 import com.example.trenirovochka.domain.extensions.formatAsTime
 import com.example.trenirovochka.domain.models.RecoveryLevel
-import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus
+import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.IN_PROGRESS
+import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.NOT_STARTED
 import com.example.trenirovochka.domain.models.UserStatus
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.addKeyDoneListener
@@ -69,7 +70,6 @@ class PerformTrainingFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedCurrentTrainingViewModel.updateCurrentTrainingProgram(args.trainingProgram)
         initRecyclers()
         initObservers()
         initListeners()
@@ -85,10 +85,8 @@ class PerformTrainingFragment(
         binding.apply {
             viewModel.apply {
                 trainingProgramVM.observe(viewLifecycleOwner) {
-                    trainingProgramAdapter.swapItems(it.exercise)
-                }
-                programStatus.observe(viewLifecycleOwner) {
                     updateProgramState(it)
+                    trainingProgramAdapter.swapItems(it.exercise)
                 }
                 userState.observe(viewLifecycleOwner) {
                     updateUserState(it)
@@ -116,9 +114,12 @@ class PerformTrainingFragment(
         }
     }
 
-    private fun updateProgramState(programStatus: ExecutionStatus) {
-        sharedCurrentTrainingViewModel.programStatusChanged(programStatus)
-        binding.timerEditText.isEnabled = programStatus != IN_PROGRESS
+    private fun updateProgramState(program: TrainingProgram) {
+        if (program.status != NOT_STARTED) {
+            sharedCurrentTrainingViewModel.updateCurrentTrainingProgram(program)
+        }
+        sharedCurrentTrainingViewModel.programStatusChanged(program.status)
+        binding.timerEditText.isEnabled = program.status != IN_PROGRESS
     }
 
     private fun updateUserState(userStatus: UserStatus) {

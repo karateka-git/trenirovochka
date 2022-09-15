@@ -2,10 +2,7 @@ package com.example.trenirovochka.data.remote.repositories
 
 import com.example.trenirovochka.domain.datacontracts.ITrainingProgramRemoteRepository
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
-import com.example.trenirovochka.domain.models.DayOfWeekCalendarAdapter
-import com.example.trenirovochka.domain.models.Exercise
-import com.example.trenirovochka.domain.models.PerformedTrainingProgram
-import com.example.trenirovochka.domain.models.TrainingProgram
+import com.example.trenirovochka.domain.models.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -105,16 +102,12 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
     )
 
     override fun getTrainingProgram(date: Date) = flow {
-        (performedTrainingProgramList.find { it.date == formatAsFullDate(date) } // ktlint-disable wrapping
-            ?: trainingProgramList.find {
-                it.dayOfWeek == DayOfWeekCalendarAdapter.getDayOfWeek(
-                    Calendar.getInstance().apply { time = date }
-                )
-            }
-        )?.let {
-            emit(
-                it
+        val performedTraining = performedTrainingProgramList.find { it.date == formatAsFullDate(date) }
+        val trainingProgram = trainingProgramList.find {
+            it.dayOfWeek == DayOfWeekCalendarAdapter.getDayOfWeek(
+                Calendar.getInstance().apply { time = date }
             )
         }
+        emit((performedTraining ?: trainingProgram ?: EmptyProgram()))
     }.flowOn(ioDispatcher)
 }

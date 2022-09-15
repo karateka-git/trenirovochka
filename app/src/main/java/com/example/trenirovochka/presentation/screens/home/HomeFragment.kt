@@ -7,6 +7,7 @@ import com.example.trenirovochka.R
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.databinding.FragmentHomeBinding
 import com.example.trenirovochka.databinding.ViewHolderExerciseBinding
+import com.example.trenirovochka.domain.models.EmptyProgram
 import com.example.trenirovochka.domain.models.PerformedTrainingProgram
 import com.example.trenirovochka.domain.models.Program
 import com.example.trenirovochka.domain.models.TrainingProgram
@@ -103,6 +104,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 }
                 is TrainingProgram -> {
                     startTrainingButton.id
+                }
+                is EmptyProgram -> {
+                    emptyTrainingDayText.id
                 }
             }
         }

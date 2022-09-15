@@ -54,6 +54,10 @@ data class PerformedTrainingProgram(
     val status: ExecutionStatus = COMPLETED
 ) : Program()
 
+data class EmptyProgram(
+    override val exercise: List<Exercise> = listOf()
+) : Program()
+
 @Parcelize
 data class Exercise(
     val name: String,

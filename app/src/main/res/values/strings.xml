@@ -11,4 +11,5 @@
     <string name="simple_dialog_cancel">Отменить</string>
 
     <string name="training_performed">Вы уже закончили тренировку в этот день.</string>
+    <string name="empty_training_day">На этот день у вас не назначена тренировка.</string>
 </resources>

@@ -96,6 +96,13 @@
                 app:bva_visible_child="@+id/start_training_button">
 
                 <TextView
+                    android:id="@+id/empty_training_day_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/MerriweatherRegular.OnSurface.16"
+                    android:text="@string/empty_training_day"/>
+
+                <TextView
                     android:id="@+id/performed_training_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

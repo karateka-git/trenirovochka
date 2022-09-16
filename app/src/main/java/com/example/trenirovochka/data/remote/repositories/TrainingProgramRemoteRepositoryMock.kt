@@ -5,6 +5,7 @@ import com.example.trenirovochka.domain.extensions.compareWithoutTime
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
 import com.example.trenirovochka.domain.models.*
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import java.util.*
@@ -61,6 +62,7 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
         ),
     )
     private val trainingTypeMock = Training(
+        "Тренировка 1",
         Calendar.getInstance().time,
         listOf(
             DayOfWeekCalendarAdapter.MONDAY,
@@ -114,6 +116,10 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
             )
         )
     )
+
+    override fun getTrainingPlan(): Flow<Training> = flow {
+        emit(trainingTypeMock)
+    }.flowOn(ioDispatcher)
 
     override fun getTrainingProgram(date: Date) = flow {
         val performedTraining =

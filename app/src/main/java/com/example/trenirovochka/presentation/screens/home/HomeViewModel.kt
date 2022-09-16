@@ -5,6 +5,7 @@ import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.domain.models.Program
+import com.example.trenirovochka.domain.models.Training
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,10 +25,15 @@ class HomeViewModel @Inject constructor(
     }
     val selectedDate: LiveData<String> = _selectedDate.map { formatAsFullDate(it) }
 
+    val trainingPlan: LiveData<Training> = programsInteractor.getTrainingPlan().asLiveData()
     val trainingProgram: LiveData<Program> = _selectedDate.switchMap {
         programsInteractor.getTrainingProgram(it).asLiveData()
     }
     val isCancelActiveTrainingProgramDialogShow: MutableLiveData<Boolean> = MutableLiveData()
+
+    fun onEditTrainingPlanClick() {
+        // TODO
+    }
 
     fun updateSelectedDate(action: ActionWithDate) {
         when (action) {

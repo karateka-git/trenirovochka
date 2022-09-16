@@ -7,10 +7,7 @@ import com.example.trenirovochka.R
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.databinding.FragmentHomeBinding
 import com.example.trenirovochka.databinding.ViewHolderExerciseBinding
-import com.example.trenirovochka.domain.models.EmptyProgram
-import com.example.trenirovochka.domain.models.PerformedTrainingProgram
-import com.example.trenirovochka.domain.models.Program
-import com.example.trenirovochka.domain.models.TrainingProgram
+import com.example.trenirovochka.domain.models.*
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.dialogs.SimpleDialog
 import com.example.trenirovochka.presentation.common.dialogs.SimpleDialog.Companion.SIMPLE_DIALOG_TAG
@@ -80,6 +77,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     private fun initObservers() {
         binding.apply {
             viewModel.apply {
+                trainingPlan.observe(viewLifecycleOwner) {
+                    updateTrainingPlan(it)
+                }
                 trainingProgram.observe(viewLifecycleOwner) {
                     updateTrainingProgram(it)
                 }
@@ -96,25 +96,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         }
     }
 
-    private fun updateTrainingProgram(program: Program) {
-        binding.apply {
-            trainingButtonContainer.visibleChildId = when (program) {
-                is PerformedTrainingProgram -> {
-                    performedTrainingText.id
-                }
-                is TrainingProgram -> {
-                    startTrainingButton.id
-                }
-                is EmptyProgram -> {
-                    emptyTrainingDayText.id
-                }
-            }
-        }
-        trainingProgramAdapter.swapItems(program.exercise)
-    }
-
     private fun initListeners() {
         binding.apply {
+            trainingPlanEditIcon.setOnClickListener {
+                viewModel.onEditTrainingPlanClick()
+            }
             datePickerForwardButton.setOnClickListener {
                 viewModel.updateSelectedDate(ActionWithDate.NEXT)
             }
@@ -133,6 +119,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 )
             }
         }
+    }
+
+    private fun updateTrainingPlan(plan: Training) {
+        binding.trainingPlanName.text = plan.name
+    }
+
+    private fun updateTrainingProgram(program: Program) {
+        binding.apply {
+            trainingButtonContainer.visibleChildId = when (program) {
+                is PerformedTrainingProgram -> {
+                    performedTrainingText.id
+                }
+                is TrainingProgram -> {
+                    startTrainingButton.id
+                }
+                is EmptyProgram -> {
+                    emptyTrainingDayText.id
+                }
+            }
+        }
+        trainingProgramAdapter.swapItems(program.exercise)
     }
 
     private fun handleActiveTrainingProgram(activeTrainingProgram: TrainingProgram?) {

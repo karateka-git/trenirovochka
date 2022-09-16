@@ -9,9 +9,9 @@ import kotlinx.parcelize.Parcelize
 import java.util.*
 
 data class Training(
-    val training_start_date: Date,
-    val training_days: List<DayOfWeekCalendarAdapter>,
-    val training_programs: List<Program>
+    val trainingStartDate: Date,
+    val trainingDays: List<DayOfWeekCalendarAdapter>,
+    val trainingPrograms: List<Program>
 )
 
 @Parcelize

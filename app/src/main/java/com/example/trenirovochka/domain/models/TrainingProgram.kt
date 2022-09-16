@@ -6,6 +6,13 @@ import com.example.trenirovochka.R
 import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus
 import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.*
 import kotlinx.parcelize.Parcelize
+import java.util.*
+
+data class Training(
+    val training_start_date: Date,
+    val training_days: List<DayOfWeekCalendarAdapter>,
+    val training_programs: List<Program>
+)
 
 @Parcelize
 sealed class Program : Parcelable {
@@ -13,14 +20,12 @@ sealed class Program : Parcelable {
 }
 
 data class TrainingProgram(
-    val dayOfWeek: DayOfWeekCalendarAdapter,
     val name: String,
     override val exercise: List<Exercise>,
     val active: Boolean = false,
 ) : Program() {
 
     constructor(program: TrainingProgram) : this(
-        program.dayOfWeek,
         program.name,
         program.exercise.map { it.copy() },
         program.active

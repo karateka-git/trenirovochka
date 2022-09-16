@@ -24,3 +24,19 @@ fun formatAsFullDate(date: Date): String = fullDateFormatter.format(date ?: "")
  * @return [Date] class instance or null if parse not successful.
  */
 fun parseFullDate(input: String): Date? = fullDateFormatter.parse(input)
+
+fun Date.compareWithoutTime(anotherDate: Date): Boolean {
+    val first = this.withoutTime()
+    val second = anotherDate.withoutTime()
+
+    return first <= second
+}
+
+fun Date.withoutTime(): Date =
+    Calendar.getInstance().apply {
+        time = this@withoutTime
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }.time

@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_homeFragment_to_performTraining"
             app:destination="@id/performTrainingFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_editTrainingPlanFragment"
+            app:destination="@id/editTrainingPlanFragment"/>
     </fragment>
 
     <fragment
@@ -21,5 +24,15 @@
             android:name="trainingProgram"
             app:nullable="false"
             app:argType="com.example.trenirovochka.domain.models.TrainingProgram"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/editTrainingPlanFragment"
+        android:name="com.example.trenirovochka.presentation.screens.editTrainingPlan.EditTrainingPlanFragment"
+        android:label="EditTrainingPlan">
+        <argument
+            android:name="trainingPlan"
+            app:nullable="false"
+            app:argType="com.example.trenirovochka.domain.models.Training"/>
     </fragment>
 </navigation>

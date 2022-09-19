@@ -32,7 +32,9 @@ class HomeViewModel @Inject constructor(
     val isCancelActiveTrainingProgramDialogShow: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onEditTrainingPlanClick() {
-        // TODO
+        trainingPlan.value?.let {
+            navigateTo(HomeFragmentDirections.actionHomeFragmentToEditTrainingPlanFragment(it))
+        }
     }
 
     fun updateSelectedDate(action: ActionWithDate) {

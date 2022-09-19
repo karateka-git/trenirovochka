@@ -8,12 +8,13 @@ import com.example.trenirovochka.domain.models.TrainingProgram.Companion.Executi
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
+@Parcelize
 data class Training(
     val name: String,
     val trainingStartDate: Date,
     val trainingDays: List<DayOfWeekCalendarAdapter>,
     val trainingPrograms: List<Program>
-)
+) : Parcelable
 
 @Parcelize
 sealed class Program : Parcelable {

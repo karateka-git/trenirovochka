@@ -12,7 +12,7 @@ import java.util.*
 data class Training(
     val name: String,
     val trainingStartDate: Date,
-    val trainingDays: List<DayOfWeekCalendarAdapter>,
+    val trainingDays: List<DayOfWeek>,
     val trainingPrograms: List<Program>
 ) : Parcelable
 

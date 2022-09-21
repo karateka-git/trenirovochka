@@ -12,4 +12,6 @@
 
     <string name="training_performed">Вы уже закончили тренировку в этот день.</string>
     <string name="empty_training_day">На этот день у вас не назначена тренировка.</string>
+
+    <string name="edit_training_plan_title">Редактирование тренировочного плана</string>
 </resources>

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:st_title="@string/app_name"/>
+        app:st_title="@string/edit_training_plan_title"/>
 
     <EditText
         android:id="@+id/training_plan_name"

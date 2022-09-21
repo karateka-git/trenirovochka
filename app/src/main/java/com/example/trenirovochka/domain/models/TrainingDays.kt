@@ -2,7 +2,7 @@ package com.example.trenirovochka.domain.models
 
 import java.util.*
 
-enum class DayOfWeek {
+enum class TrainingDays(var isSelected: Boolean = false) {
     MONDAY,
     TUESDAY,
     WEDNESDAY,
@@ -12,7 +12,7 @@ enum class DayOfWeek {
     SUNDAY;
 
     companion object {
-        fun getDayOfWeek(calendar: Calendar): DayOfWeek {
+        fun getDayOfWeek(calendar: Calendar): TrainingDays {
             return when (calendar.get(Calendar.DAY_OF_WEEK)) {
                 Calendar.MONDAY -> MONDAY
                 Calendar.TUESDAY -> TUESDAY

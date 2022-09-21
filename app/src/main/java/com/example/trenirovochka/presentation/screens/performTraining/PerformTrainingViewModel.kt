@@ -31,12 +31,15 @@ class PerformTrainingViewModel @AssistedInject constructor(
     val userState: LiveData<UserStatus> = _userState.distinctUntilChanged()
 
     fun updateExercises(item: Exercise) {
-        trainingProgram.exercise.forEach {
+        val newExercise = trainingProgram.exercise.toMutableList()
+        newExercise.forEachIndexed { index, it ->
             if (it == item || it.isStatusInProgress()) {
-                it.updateExecutionStatus()
+                newExercise[index] = it.copy().apply { updateExecutionStatus() }
             }
         }
-        _trainingProgramVM.value = trainingProgram
+        _trainingProgramVM.value = trainingProgram.apply {
+            exercise = newExercise
+        }
     }
 
     fun updateUserState(time: Duration, timeForRelax: Duration) {

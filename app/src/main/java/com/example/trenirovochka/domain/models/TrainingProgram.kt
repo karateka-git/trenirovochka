@@ -12,7 +12,7 @@ import java.util.*
 data class Training(
     val name: String,
     val trainingStartDate: Date,
-    val trainingDays: List<DayOfWeek>,
+    val trainingDays: List<TrainingDays>,
     val trainingPrograms: List<Program>
 ) : Parcelable
 
@@ -23,7 +23,7 @@ sealed class Program : Parcelable {
 
 data class TrainingProgram(
     val name: String,
-    override val exercise: List<Exercise>,
+    override var exercise: List<Exercise>,
     val active: Boolean = false,
 ) : Program() {
 

@@ -64,11 +64,16 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
     private val trainingTypeMock = Training(
         "Тренировка 1",
         Calendar.getInstance().time,
-        listOf(
-            DayOfWeek.MONDAY,
-            DayOfWeek.WEDNESDAY,
-            DayOfWeek.FRIDAY
-        ),
+        TrainingDays.values().map {
+            it.apply {
+                isSelected = when (it) {
+                    TrainingDays.MONDAY,
+                    TrainingDays.WEDNESDAY,
+                    TrainingDays.FRIDAY -> true
+                    else -> false
+                }
+            }
+        },
         trainingProgramList,
     )
     private val performedTrainingProgramList = listOf(
@@ -130,7 +135,7 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
     }.flowOn(ioDispatcher)
 
     private fun getTrainingProgramFromTrainingType(date: Date): Program {
-        val dayOfWeek = DayOfWeek.getDayOfWeek(
+        val dayOfWeek = TrainingDays.getDayOfWeek(
             Calendar.getInstance().apply { time = date }
         )
         return if (Calendar.getInstance().time.compareWithoutTime(date) &&
@@ -141,7 +146,7 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
                     .toInt(DurationUnit.DAYS)
             val trainingDayNumber =
                 trainingTypeMock.trainingDays.indexOf(dayOfWeek) + dayOnStart /
-                    DayOfWeek.values().size * trainingTypeMock.trainingDays.size
+                    TrainingDays.values().size * trainingTypeMock.trainingDays.size
 
             trainingTypeMock.trainingPrograms.get(trainingDayNumber % trainingTypeMock.trainingPrograms.size)
         } else {

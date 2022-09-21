@@ -3,4 +3,9 @@
     <declare-styleable name="BetterViewAnimator">
         <attr name="bva_visible_child" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="SimpleToolbar">
+        <attr name="st_title" format="string" />
+        <attr name="st_is_visible_back_button" format="boolean" />
+    </declare-styleable>
 </resources>

@@ -110,7 +110,7 @@ class PerformTrainingFragment(
                     sharedCurrentTrainingViewModel.changeTimeForRelax(text.toString())
                 }
             }
-            backButton.setOnClickListener { onBackPressed() }
+            toolbar.setBackButtonOnClickListener { onBackPressed() }
         }
     }
 

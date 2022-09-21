@@ -40,7 +40,9 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
 
     private fun updateTrainingPlan(trainingPlan: Training) {
         binding.apply {
-            trainingPlanName.text = trainingPlan.name
+            toolbar.setBackButtonOnClickListener {
+                viewModel.exit()
+            }
         }
     }
 }

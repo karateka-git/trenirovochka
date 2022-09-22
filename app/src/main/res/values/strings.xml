@@ -14,4 +14,6 @@
     <string name="empty_training_day">На этот день у вас не назначена тренировка.</string>
 
     <string name="edit_training_plan_title">Редактирование тренировочного плана</string>
+    <string name="edit_training_plan_name_hint">Название</string>
+    <string name="edit_training_plan_first_day_hint">Выберите первый день тренировки</string>
 </resources>

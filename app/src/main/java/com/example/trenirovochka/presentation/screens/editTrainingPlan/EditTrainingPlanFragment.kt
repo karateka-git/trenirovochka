@@ -5,6 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentEditTrainingPlanBinding
 import com.example.trenirovochka.databinding.ViewHolderTrainingDayBinding
+import com.example.trenirovochka.domain.extensions.formatAsFullDate
 import com.example.trenirovochka.domain.models.Training
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
@@ -62,6 +63,8 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
             toolbar.setBackButtonOnClickListener {
                 viewModel.exit()
             }
+            trainingPlanNameEditText.setText(trainingPlan.name)
+            trainingPlanFirstDayText.setText(formatAsFullDate(trainingPlan.trainingStartDate))
         }
     }
 }

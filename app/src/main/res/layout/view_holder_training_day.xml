@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RadioButton
+        android:id="@+id/training_day_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+        android:gravity="center"
+        style="@style/MerriweatherBold.OnSurface.20"
+        tools:text="ПН"/>
+</FrameLayout>

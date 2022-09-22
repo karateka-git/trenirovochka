@@ -64,14 +64,12 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
     private val trainingTypeMock = Training(
         "Тренировка 1",
         Calendar.getInstance().time,
-        TrainingDays.values().map {
-            it.apply {
-                isSelected = when (it) {
-                    TrainingDays.MONDAY,
-                    TrainingDays.WEDNESDAY,
-                    TrainingDays.FRIDAY -> true
-                    else -> false
-                }
+        DaysOfWeek.values().map {
+            when (it) {
+                DaysOfWeek.MONDAY,
+                DaysOfWeek.WEDNESDAY,
+                DaysOfWeek.FRIDAY -> TrainingDay(it, true)
+                else -> TrainingDay(it)
             }
         },
         trainingProgramList,
@@ -135,18 +133,18 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
     }.flowOn(ioDispatcher)
 
     private fun getTrainingProgramFromTrainingType(date: Date): Program {
-        val dayOfWeek = TrainingDays.getDayOfWeek(
+        val dayOfWeek = DaysOfWeek.getDayOfWeek(
             Calendar.getInstance().apply { time = date }
         )
         return if (Calendar.getInstance().time.compareWithoutTime(date) &&
-            trainingTypeMock.trainingDays.contains(dayOfWeek)
+            trainingTypeMock.trainingDays.filter { it.isSelected }.map { it.dayOfWeek }.contains(dayOfWeek)
         ) {
             val dayOnStart =
                 (trainingTypeMock.trainingStartDate.time - date.time).toDuration(DurationUnit.DAYS)
                     .toInt(DurationUnit.DAYS)
             val trainingDayNumber =
-                trainingTypeMock.trainingDays.indexOf(dayOfWeek) + dayOnStart /
-                    TrainingDays.values().size * trainingTypeMock.trainingDays.size
+                trainingTypeMock.trainingDays.filter { it.isSelected }.map { it.dayOfWeek }.indexOf(dayOfWeek) + dayOnStart /
+                    DaysOfWeek.values().size * trainingTypeMock.trainingDays.size
 
             trainingTypeMock.trainingPrograms.get(trainingDayNumber % trainingTypeMock.trainingPrograms.size)
         } else {

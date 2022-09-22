@@ -12,8 +12,14 @@ import java.util.*
 data class Training(
     val name: String,
     val trainingStartDate: Date,
-    val trainingDays: List<TrainingDays>,
+    var trainingDays: List<TrainingDay>,
     val trainingPrograms: List<Program>
+) : Parcelable
+
+@Parcelize
+data class TrainingDay(
+    val dayOfWeek: DaysOfWeek,
+    var isSelected: Boolean = false
 ) : Parcelable
 
 @Parcelize

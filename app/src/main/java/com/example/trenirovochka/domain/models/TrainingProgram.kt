@@ -13,7 +13,7 @@ data class Training(
     val name: String,
     val trainingStartDate: Date,
     var trainingDays: List<TrainingDay>,
-    val trainingPrograms: List<Program>
+    val trainingPrograms: List<TrainingProgram>
 ) : Parcelable
 
 @Parcelize

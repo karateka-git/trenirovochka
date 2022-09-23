@@ -5,12 +5,14 @@ import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentEditTrainingPlanBinding
 import com.example.trenirovochka.databinding.ViewHolderTrainingDayBinding
+import com.example.trenirovochka.databinding.ViewHolderTrainingProgramBinding
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
 import com.example.trenirovochka.domain.models.Training
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.viewHolders.TrainingDayViewHolder
+import com.example.trenirovochka.presentation.screens.editTrainingPlan.viewHolders.TrainingProgramViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,12 +31,22 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
         )
     }
 
-    private val trainingDays by lazy {
+    private val trainingDaysAdapter by lazy {
         SimpleAdapter(
             ViewHolderTrainingDayBinding::inflate
         ) {
             TrainingDayViewHolder(it) { item ->
                 viewModel.updateSelectedTrainingDays(item)
+            }
+        }
+    }
+
+    private val trainingProgramsAdapter by lazy {
+        SimpleAdapter(
+            ViewHolderTrainingProgramBinding::inflate
+        ) {
+            TrainingProgramViewHolder(it) { item ->
+                // TODO
             }
         }
     }
@@ -46,7 +58,10 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
     }
 
     private fun initRecyclers() {
-        binding.trainingDays.adapter = trainingDays
+        binding.apply {
+            trainingDays.adapter = trainingDaysAdapter
+            trainingPlanProgramsRecycler.adapter = trainingProgramsAdapter
+        }
     }
 
     private fun initObservers() {
@@ -58,7 +73,8 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
     }
 
     private fun updateTrainingPlan(trainingPlan: Training) {
-        trainingDays.swapItems(trainingPlan.trainingDays)
+        trainingDaysAdapter.swapItems(trainingPlan.trainingDays)
+        trainingProgramsAdapter.swapItems(trainingPlan.trainingPrograms)
         binding.apply {
             toolbar.setBackButtonOnClickListener {
                 viewModel.exit()

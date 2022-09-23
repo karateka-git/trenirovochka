@@ -9,8 +9,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
+import kotlin.time.Duration.Companion.days
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -20,6 +22,46 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
 ) : ITrainingProgramRemoteRepository {
 
     private val trainingProgramList = listOf(
+        TrainingProgram(
+            "test name",
+            listOf(
+                Exercise(
+                    "Ги",
+                    3,
+                    0,
+                    10,
+                    "5",
+                ),
+                Exercise(
+                    "Гипер",
+                    3,
+                    0,
+                    10,
+                    "5",
+                ),
+                Exercise(
+                    "Гиперэкс",
+                    3,
+                    0,
+                    10,
+                    "5",
+                ),
+                Exercise(
+                    "Гиперэкстен",
+                    3,
+                    0,
+                    10,
+                    "5",
+                ),
+                Exercise(
+                    "Гиперэкстензия",
+                    3,
+                    0,
+                    10,
+                    "5",
+                )
+            )
+        ),
         TrainingProgram(
             "test name",
             listOf(
@@ -139,9 +181,10 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
         return if (Calendar.getInstance().time.compareWithoutTime(date) &&
             trainingTypeMock.trainingDays.filter { it.isSelected }.map { it.dayOfWeek }.contains(dayOfWeek)
         ) {
-            val dayOnStart =
-                (trainingTypeMock.trainingStartDate.time - date.time).toDuration(DurationUnit.DAYS)
-                    .toInt(DurationUnit.DAYS)
+            val dayOnStart = TimeUnit.DAYS.convert(
+                (trainingTypeMock.trainingStartDate.time - date.time),
+                TimeUnit.MILLISECONDS
+            ).toInt()
             val trainingDayNumber =
                 trainingTypeMock.trainingDays.filter { it.isSelected }.map { it.dayOfWeek }.indexOf(dayOfWeek) + dayOnStart /
                     DaysOfWeek.values().size * trainingTypeMock.trainingDays.size

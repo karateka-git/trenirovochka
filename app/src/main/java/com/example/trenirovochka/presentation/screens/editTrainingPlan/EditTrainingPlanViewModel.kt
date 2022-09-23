@@ -29,4 +29,8 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
         }
         _trainingPlanVM.value = trainingPlan
     }
+
+    fun onTrainingPlanNameChanged(text: String) {
+        if (trainingPlan.name != text) trainingPlan.apply { name = text }
+    }
 }

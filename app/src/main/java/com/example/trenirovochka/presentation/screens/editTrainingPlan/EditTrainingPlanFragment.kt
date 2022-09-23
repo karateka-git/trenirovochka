@@ -2,6 +2,7 @@ package com.example.trenirovochka.presentation.screens.editTrainingPlan
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentEditTrainingPlanBinding
 import com.example.trenirovochka.databinding.ViewHolderTrainingDayBinding
@@ -55,6 +56,7 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
         super.onViewCreated(view, savedInstanceState)
         initRecyclers()
         initObservers()
+        initListeners()
     }
 
     private fun initRecyclers() {
@@ -68,6 +70,14 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
         viewModel.apply {
             trainingPlanVM.observe(viewLifecycleOwner) {
                 updateTrainingPlan(it)
+            }
+        }
+    }
+
+    private fun initListeners() {
+        binding.apply {
+            trainingPlanNameEditText.doOnTextChanged { text, start, before, count ->
+                viewModel.onTrainingPlanNameChanged(text.toString())
             }
         }
     }

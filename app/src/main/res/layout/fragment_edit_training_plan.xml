@@ -46,19 +46,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-            android:id="@+id/training_plan_first_day_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="16dp"
-            style="@style/MerriweatherBold.OnSurface.18"
-            android:importantForAutofill="no"
-            tools:text="27.08.2020 (ВТ)"
-            app:layout_constraintTop_toBottomOf="@+id/training_days"
-            tools:ignore="LabelFor" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/training_plan_programs_recycler"
             android:layout_width="0dp"
@@ -67,7 +54,7 @@
             android:clipToPadding="false"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/training_plan_first_day_text"
+            app:layout_constraintTop_toBottomOf="@+id/training_days"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.trenirovochka.domain.extensions
 
+import android.annotation.SuppressLint
 import com.example.trenirovochka.domain.extensions.DateConstants.DATE_FORMAT_FULL_DATE_SPACED_PATTERN
 import java.text.SimpleDateFormat
 import java.util.*
@@ -8,8 +9,9 @@ object DateConstants {
     const val DATE_FORMAT_FULL_DATE_SPACED_PATTERN = "d MMMM yyyy" // 31 December 2021
 }
 
+@SuppressLint("ConstantLocale")
 private val fullDateFormatter =
-    SimpleDateFormat(DATE_FORMAT_FULL_DATE_SPACED_PATTERN, Locale.ROOT)
+    SimpleDateFormat(DATE_FORMAT_FULL_DATE_SPACED_PATTERN, Locale.getDefault())
 
 /**
  * @param date [Date] class instance.

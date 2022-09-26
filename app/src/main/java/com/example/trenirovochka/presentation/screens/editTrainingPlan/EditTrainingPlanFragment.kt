@@ -7,7 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentEditTrainingPlanBinding
 import com.example.trenirovochka.databinding.ViewHolderTrainingDayBinding
 import com.example.trenirovochka.databinding.ViewHolderTrainingProgramBinding
-import com.example.trenirovochka.domain.models.Training
+import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
@@ -81,7 +81,7 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
         }
     }
 
-    private fun updateTrainingPlan(trainingPlan: Training) {
+    private fun updateTrainingPlan(trainingPlan: TrainingPlan) {
         trainingDaysAdapter.swapItems(trainingPlan.trainingDays)
         trainingProgramsAdapter.swapItems(trainingPlan.trainingPrograms)
         binding.apply {

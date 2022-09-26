@@ -6,10 +6,9 @@ import com.example.trenirovochka.R
 import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus
 import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.*
 import kotlinx.parcelize.Parcelize
-import java.util.*
 
 @Parcelize
-data class Training(
+data class TrainingPlan(
     var name: String,
     var trainingDays: List<TrainingDay>,
     val trainingPrograms: List<TrainingProgram>

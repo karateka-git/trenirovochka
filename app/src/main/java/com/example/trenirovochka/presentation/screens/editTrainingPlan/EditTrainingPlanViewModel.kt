@@ -2,7 +2,7 @@ package com.example.trenirovochka.presentation.screens.editTrainingPlan
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.trenirovochka.domain.models.Training
+import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.domain.models.TrainingDay
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import dagger.assisted.Assisted
@@ -11,15 +11,15 @@ import dagger.assisted.AssistedInject
 
 @AssistedFactory
 interface EditTrainingPlanViewModelAssistedFactory {
-    fun create(trainingPlan: Training): EditTrainingPlanViewModel
+    fun create(trainingPlan: TrainingPlan): EditTrainingPlanViewModel
 }
 
 class EditTrainingPlanViewModel @AssistedInject constructor(
-    @Assisted private val trainingPlan: Training,
+    @Assisted private val trainingPlan: TrainingPlan,
 ) : BaseViewModel() {
 
-    private val _trainingPlanVM: MutableLiveData<Training> = MutableLiveData(trainingPlan)
-    val trainingPlanVM: LiveData<Training> = _trainingPlanVM
+    private val _trainingPlanVM: MutableLiveData<TrainingPlan> = MutableLiveData(trainingPlan)
+    val trainingPlanVM: LiveData<TrainingPlan> = _trainingPlanVM
 
     fun updateSelectedTrainingDays(trainingDay: TrainingDay) {
         trainingPlan.trainingDays = trainingPlan.trainingDays.toMutableList().let { list ->

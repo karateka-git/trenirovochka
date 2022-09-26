@@ -121,7 +121,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         }
     }
 
-    private fun updateTrainingPlan(plan: Training) {
+    private fun updateTrainingPlan(plan: TrainingPlan) {
         binding.trainingPlanName.text = plan.name
     }
 

@@ -99,7 +99,7 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
             )
         ),
     )
-    private val trainingTypeMock = Training(
+    private val trainingTypeMock = TrainingPlan(
         "Тренировка 1",
         DaysOfWeek.values().map {
             when (it) {
@@ -157,7 +157,7 @@ class TrainingProgramRemoteRepositoryMock @Inject constructor(
         )
     )
 
-    override fun getTrainingPlan(): Flow<Training> = flow {
+    override fun getTrainingPlan(): Flow<TrainingPlan> = flow {
         emit(trainingTypeMock)
     }.flowOn(ioDispatcher)
 

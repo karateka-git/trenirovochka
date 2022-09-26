@@ -1,7 +1,7 @@
 package com.example.trenirovochka.presentation.screens.editTrainingPlan.viewHolders
 
-import com.example.trenirovochka.databinding.ViewHolderProgramExerciseBinding
 import com.example.trenirovochka.databinding.ViewHolderTrainingProgramBinding
+import com.example.trenirovochka.databinding.ViewHolderTrainingProgramExerciseBinding
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.common.recycler.SimpleViewHolder
@@ -13,9 +13,9 @@ class TrainingProgramViewHolder(
 
     private val exerciseAdapter by lazy {
         SimpleAdapter(
-            ViewHolderProgramExerciseBinding::inflate
+            ViewHolderTrainingProgramExerciseBinding::inflate
         ) {
-            ProgramExerciseViewHolder(it)
+            TrainingProgramExerciseViewHolder(it)
         }
     }
 

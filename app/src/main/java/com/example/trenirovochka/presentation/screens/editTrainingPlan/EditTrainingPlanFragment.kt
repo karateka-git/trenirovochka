@@ -45,7 +45,7 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
         SimpleAdapter(
             ViewHolderTrainingProgramBinding::inflate
         ) {
-            TrainingProgramViewHolder(it) { item ->
+            TrainingProgramViewHolder(it) { _ ->
                 // TODO
             }
         }
@@ -75,7 +75,7 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
 
     private fun initListeners() {
         binding.apply {
-            trainingPlanNameEditText.doOnTextChanged { text, start, before, count ->
+            trainingPlanNameEditText.doOnTextChanged { text, _, _, _ ->
                 viewModel.onTrainingPlanNameChanged(text.toString())
             }
         }

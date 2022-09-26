@@ -27,7 +27,7 @@ fun formatAsFullDate(date: Date): String = fullDateFormatter.format(date ?: "")
  */
 fun parseFullDate(input: String): Date? = fullDateFormatter.parse(input)
 
-fun Date.compareWithoutTime(anotherDate: Date): Boolean {
+fun Date.beforeOrEqualWithoutTime(anotherDate: Date): Boolean {
     val first = this.withoutTime()
     val second = anotherDate.withoutTime()
 

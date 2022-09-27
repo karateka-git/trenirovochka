@@ -34,5 +34,14 @@
             android:name="trainingPlan"
             app:nullable="false"
             app:argType="com.example.trenirovochka.domain.models.TrainingPlan"/>
+        <action
+            android:id="@+id/action_editTrainingPlanFragment_to_editTrainingProgramFragment"
+            app:destination="@id/editTrainingProgramFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editTrainingProgramFragment"
+        android:name="com.example.trenirovochka.presentation.screens.editTrainingProgram.EditTrainingProgramFragment"
+        android:label="EditTrainingProgram">
     </fragment>
 </navigation>

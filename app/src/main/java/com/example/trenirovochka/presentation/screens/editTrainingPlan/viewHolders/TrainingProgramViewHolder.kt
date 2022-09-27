@@ -20,7 +20,7 @@ class TrainingProgramViewHolder(
     }
 
     init {
-        binding.root.setOnClickListener {
+        binding.trainingProgramClickContainer.setOnClickListener {
             getItem()?.let {
                 actionClickListener(it)
             }

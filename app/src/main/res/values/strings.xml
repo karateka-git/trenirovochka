@@ -16,4 +16,6 @@
     <string name="edit_training_plan_title">Редактирование тренировочного плана</string>
     <string name="edit_training_plan_name_hint">Название</string>
     <string name="edit_training_plan_first_day_hint">Выберите первый день тренировки</string>
+
+    <string name="edit_training_program_title">Редактирование тренировочной программы</string>
 </resources>

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.domain.models.TrainingDay
+import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -32,5 +33,9 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
 
     fun onTrainingPlanNameChanged(text: String) {
         if (trainingPlan.name != text) trainingPlan.apply { name = text }
+    }
+
+    fun onTrainingProgramClick(trainingProgram: TrainingProgram) {
+        navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment())
     }
 }

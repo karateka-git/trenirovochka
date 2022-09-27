@@ -45,8 +45,8 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
         SimpleAdapter(
             ViewHolderTrainingProgramBinding::inflate
         ) {
-            TrainingProgramViewHolder(it) { _ ->
-                // TODO
+            TrainingProgramViewHolder(it) { trainingProgram ->
+                viewModel.onTrainingProgramClick(trainingProgram)
             }
         }
     }
@@ -78,6 +78,9 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
             trainingPlanNameEditText.doOnTextChanged { text, _, _, _ ->
                 viewModel.onTrainingPlanNameChanged(text.toString())
             }
+            toolbar.setBackButtonOnClickListener {
+                viewModel.exit()
+            }
         }
     }
 
@@ -85,9 +88,6 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
         trainingDaysAdapter.swapItems(trainingPlan.trainingDays)
         trainingProgramsAdapter.swapItems(trainingPlan.trainingPrograms)
         binding.apply {
-            toolbar.setBackButtonOnClickListener {
-                viewModel.exit()
-            }
             trainingPlanNameEditText.setText(trainingPlan.name)
         }
     }

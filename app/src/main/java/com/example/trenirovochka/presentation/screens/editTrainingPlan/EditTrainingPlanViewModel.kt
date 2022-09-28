@@ -2,8 +2,8 @@ package com.example.trenirovochka.presentation.screens.editTrainingPlan
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.domain.models.TrainingDay
+import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import dagger.assisted.Assisted
@@ -36,6 +36,6 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     }
 
     fun onTrainingProgramClick(trainingProgram: TrainingProgram) {
-        navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment())
+        navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingProgram))
     }
 }

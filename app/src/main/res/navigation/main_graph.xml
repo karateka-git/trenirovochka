@@ -43,5 +43,9 @@
         android:id="@+id/editTrainingProgramFragment"
         android:name="com.example.trenirovochka.presentation.screens.editTrainingProgram.EditTrainingProgramFragment"
         android:label="EditTrainingProgram">
+        <argument
+            android:name="trainingProgram"
+            app:nullable="false"
+            app:argType="com.example.trenirovochka.domain.models.TrainingProgram"/>
     </fragment>
 </navigation>

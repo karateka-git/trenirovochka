@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_surface"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/exercise_name_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_training_plan_name_hint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/exercise_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                style="@style/MerriweatherBold.OnSurface.18" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/exercise_total_sets_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_exercise_number_of_total_sets">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/exercise_total_sets_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                style="@style/MerriweatherBold.OnSurface.18" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/exercise_total_repetitions_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_exercise_number_of_total_repetitions">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/exercise_total_repetitions_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                style="@style/MerriweatherBold.OnSurface.18" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/exercise_weight_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_exercise_used_weight">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/exercise_weight_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                style="@style/MerriweatherBold.OnSurface.18" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/exercise_description_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_exercise_description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/exercise_description_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                style="@style/MerriweatherBold.OnSurface.18" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/negative_button"
+                android:layout_weight="1"
+                style="@style/ActionButton.Dialog"
+                android:text="@string/common_cancel"/>
+
+            <Button
+                android:id="@+id/positive_button"
+                android:layout_weight="1"
+                style="@style/ActionButton.Dialog"
+                android:text="@string/common_save"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

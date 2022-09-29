@@ -35,4 +35,12 @@ class EditTrainingProgramViewModel @Inject constructor(
             }
         }
     }
+
+    fun addExerciseToTrainingProgram(newExercise: EditExercise) {
+        _trainingProgram.value = _trainingProgram.value?.apply {
+            exercise = exercise.toMutableList().apply {
+                add(newExercise)
+            }
+        }
+    }
 }

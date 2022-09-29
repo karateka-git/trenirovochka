@@ -23,7 +23,7 @@
             android:id="@+id/negative_button"
             android:layout_weight="1"
             style="@style/ActionButton.Dialog"
-            android:text="@string/simple_dialog_cancel"/>
+            android:text="@string/common_cancel"/>
 
         <Space
             android:layout_width="8dp"
@@ -33,6 +33,6 @@
             android:id="@+id/positive_button"
             android:layout_weight="1"
             style="@style/ActionButton.Dialog"
-            android:text="@string/simple_dialog_yes"/>
+            android:text="@string/common_yes"/>
     </LinearLayout>
 </LinearLayout>

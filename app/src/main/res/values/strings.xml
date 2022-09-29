@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">trenirovochka</string>
+
+    <string name="common_yes">Да</string>
+    <string name="common_cancel">Отменить</string>
+    <string name="common_save">Сохранить</string>
+
     <string name="execution_description">%1$d подхода по %2$d раз, %3$s кг</string>
     <string name="active_execution_description">%1$s кг, подход %2$d/%3$d</string>
     <string name="start_training">Приступить</string>
@@ -7,8 +12,6 @@
     <string name="continue_training">Продолжить</string>
 
     <string name="training_cancel_dialog_title">Вы уже начали тренировку, желаете её закончить?</string>
-    <string name="simple_dialog_yes">Да</string>
-    <string name="simple_dialog_cancel">Отменить</string>
 
     <string name="training_performed">Вы уже закончили тренировку в этот день.</string>
     <string name="empty_training_day">На этот день у вас не назначена тренировка.</string>
@@ -18,4 +21,11 @@
     <string name="edit_training_plan_first_day_hint">Выберите первый день тренировки</string>
 
     <string name="edit_training_program_title">Редактирование тренировочной программы</string>
+    <string name="add_exercise">Добавить упражнение</string>
+
+    <string name="edit_exercise_number_of_total_sets">Колличество подходов</string>
+    <string name="edit_exercise_number_of_total_repetitions">Колличество повторений</string>
+    <string name="edit_exercise_used_weight">Используемый вес</string>
+    <string name="edit_exercise_description">Описание</string>
+
 </resources>

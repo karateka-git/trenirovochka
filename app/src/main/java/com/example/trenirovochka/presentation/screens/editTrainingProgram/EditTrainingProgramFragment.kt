@@ -11,6 +11,7 @@ import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialog.
 import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialogListener
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
+import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditExercise
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditTrainingProgram
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.toEditExercise
 import com.example.trenirovochka.presentation.screens.editTrainingProgram.viewHolders.EditExerciseViewHolder
@@ -49,6 +50,9 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
             trainingProgram.observe(viewLifecycleOwner) {
                 updateTrainingProgram(it)
             }
+            selectedExercise.observe(viewLifecycleOwner) {
+                updateBottomContainer(it != null)
+            }
         }
     }
 
@@ -60,13 +64,28 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
             addExerciseToTrainingProgramButton.setOnClickListener {
                 EditExerciseDialog(
                     listener = object : EditExerciseDialogListener {
-                        override fun onPositiveButtonClick(exercise: Exercise) {
-                            viewModel.addExerciseToTrainingProgram(exercise.toEditExercise())
+                        override fun onPositiveButtonClick(exercise: EditExercise) {
+                            viewModel.addExerciseToTrainingProgram(exercise)
                         }
 
                         override fun onNegativeButtonClick() {}
                     }
                 ).show(childFragmentManager, EDIT_EXERCISE_DIALOG_TAG)
+            }
+            editExerciseButton.setOnClickListener {
+                EditExerciseDialog(
+                    exercise = viewModel.selectedExercise.value,
+                    listener = object : EditExerciseDialogListener {
+                        override fun onPositiveButtonClick(exercise: EditExercise) {
+                            viewModel.editExerciseToTrainingProgram(viewModel.selectedExercise.value, exercise)
+                        }
+
+                        override fun onNegativeButtonClick() {}
+                    }
+                ).show(childFragmentManager, EDIT_EXERCISE_DIALOG_TAG)
+            }
+            removeExerciseButton.setOnClickListener {
+                viewModel.removeExerciseFromTrainingProgram(viewModel.selectedExercise.value)
             }
         }
     }
@@ -75,6 +94,17 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
         binding.apply {
             exerciseAdapter.swapItems(trainingProgram.exercise)
             trainingProgramNameEditText.setText(trainingProgram.name)
+        }
+    }
+
+    private fun updateBottomContainer(isSelectedExercise: Boolean) {
+        binding.apply {
+            bottomContainerViewAnimator.visibleChildId =
+                if (isSelectedExercise) {
+                    editExerciseContainer.id
+                } else {
+                    addExerciseToTrainingProgramButton.id
+                }
         }
     }
 }

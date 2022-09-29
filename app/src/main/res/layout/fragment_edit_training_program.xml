@@ -52,9 +52,41 @@
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/add_exercise_to_training_program_button"
-            style="@style/ActionButton.Primary"
-            android:text="@string/add_exercise" />
+        <com.example.trenirovochka.presentation.common.util.BetterViewAnimator
+            android:id="@+id/bottom_container_view_animator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bva_visible_child="@id/edit_exercise_container">
+
+            <Button
+                android:id="@+id/add_exercise_to_training_program_button"
+                style="@style/ActionButton.Primary"
+                android:text="@string/add_exercise" />
+
+            <LinearLayout
+                android:id="@+id/edit_exercise_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/remove_exercise_button"
+                    android:layout_weight="1"
+                    style="@style/ActionButton.Secondary"
+                    android:layout_width="wrap_content"
+                    android:text="@string/remove_exercise"/>
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/edit_exercise_button"
+                    android:layout_weight="1"
+                    style="@style/ActionButton.Primary"
+                    android:layout_width="wrap_content"
+                    android:text="@string/edit_exercise"/>
+            </LinearLayout>
+        </com.example.trenirovochka.presentation.common.util.BetterViewAnimator>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

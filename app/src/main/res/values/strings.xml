@@ -22,6 +22,8 @@
 
     <string name="edit_training_program_title">Редактирование тренировочной программы</string>
     <string name="add_exercise">Добавить упражнение</string>
+    <string name="edit_exercise">Редактировать</string>
+    <string name="remove_exercise">Удалить</string>
 
     <string name="edit_exercise_number_of_total_sets">Колличество подходов</string>
     <string name="edit_exercise_number_of_total_repetitions">Колличество повторений</string>

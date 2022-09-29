@@ -60,27 +60,14 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
                 viewModel.exit()
             }
             addExerciseToTrainingProgramButton.setOnClickListener {
-                EditExerciseDialog(
-                    listener = object : EditExerciseDialogListener {
-                        override fun onPositiveButtonClick(exercise: EditExercise) {
-                            viewModel.addExerciseToTrainingProgram(exercise)
-                        }
-
-                        override fun onNegativeButtonClick() {}
-                    }
-                ).show(childFragmentManager, EDIT_EXERCISE_DIALOG_TAG)
+                showEditExerciseDialog(viewModel.selectedExercise.value) {
+                    viewModel.addExerciseToTrainingProgram(it)
+                }
             }
             editExerciseButton.setOnClickListener {
-                EditExerciseDialog(
-                    exercise = viewModel.selectedExercise.value,
-                    listener = object : EditExerciseDialogListener {
-                        override fun onPositiveButtonClick(exercise: EditExercise) {
-                            viewModel.editExerciseToTrainingProgram(viewModel.selectedExercise.value, exercise)
-                        }
-
-                        override fun onNegativeButtonClick() {}
-                    }
-                ).show(childFragmentManager, EDIT_EXERCISE_DIALOG_TAG)
+                showEditExerciseDialog(viewModel.selectedExercise.value) {
+                    viewModel.editExerciseToTrainingProgram(viewModel.selectedExercise.value, it)
+                }
             }
             removeExerciseButton.setOnClickListener {
                 viewModel.removeExerciseFromTrainingProgram(viewModel.selectedExercise.value)
@@ -104,5 +91,18 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
                     addExerciseToTrainingProgramButton.id
                 }
         }
+    }
+
+    private fun showEditExerciseDialog(exercise: EditExercise?, onPositiveButtonClick: (exercise: EditExercise) -> Unit) {
+        EditExerciseDialog(
+            exercise = exercise,
+            listener = object : EditExerciseDialogListener {
+                override fun onPositiveButtonClick(exercise: EditExercise) {
+                    onPositiveButtonClick(exercise)
+                }
+
+                override fun onNegativeButtonClick() {}
+            }
+        ).show(childFragmentManager, EDIT_EXERCISE_DIALOG_TAG)
     }
 }

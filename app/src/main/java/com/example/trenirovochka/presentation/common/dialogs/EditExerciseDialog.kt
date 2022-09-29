@@ -34,11 +34,11 @@ class EditExerciseDialog(
     private fun getNewExercise(): EditExercise {
         binding.apply {
             return EditExercise(
-                exerciseNameEditText.text.toString(),
-                exerciseTotalSetsEditText.text.toString().toInt(),
-                exerciseTotalRepetitionsEditText.text.toString().toInt(),
-                exerciseWeightEditText.text.toString().toInt(),
-                exerciseDescriptionEditText.text.toString()
+                name = exerciseNameEditText.text.toString(),
+                numberOfTotalSets = exerciseTotalSetsEditText.text.toString().toInt(),
+                numberOfRepetitions = exerciseTotalRepetitionsEditText.text.toString().toInt(),
+                usedWeight = exerciseWeightEditText.text.toString(),
+                description = exerciseDescriptionEditText.text.toString()
             )
         }
     }

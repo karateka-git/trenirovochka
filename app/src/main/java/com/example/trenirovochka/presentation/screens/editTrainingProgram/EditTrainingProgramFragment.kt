@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.example.trenirovochka.databinding.FragmentEditTrainingProgramBinding
 import com.example.trenirovochka.databinding.ViewHolderEditExerciseBinding
-import com.example.trenirovochka.domain.models.Exercise
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialog
 import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialog.Companion.EDIT_EXERCISE_DIALOG_TAG
@@ -13,7 +12,6 @@ import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditExercise
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditTrainingProgram
-import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.toEditExercise
 import com.example.trenirovochka.presentation.screens.editTrainingProgram.viewHolders.EditExerciseViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -92,7 +90,7 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
 
     private fun updateTrainingProgram(trainingProgram: EditTrainingProgram) {
         binding.apply {
-            exerciseAdapter.swapItems(trainingProgram.exercise)
+            exerciseAdapter.swapItems(trainingProgram.exercises)
             trainingProgramNameEditText.setText(trainingProgram.name)
         }
     }

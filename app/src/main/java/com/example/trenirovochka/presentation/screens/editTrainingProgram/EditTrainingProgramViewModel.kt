@@ -23,12 +23,12 @@ class EditTrainingProgramViewModel @Inject constructor(
     private val _trainingProgram: MutableLiveData<EditTrainingProgram> = MutableLiveData(args.trainingProgram.toEditTrainingProgram())
     val trainingProgram: LiveData<EditTrainingProgram> = _trainingProgram
     val selectedExercise: LiveData<EditExercise?> = _trainingProgram.map { program ->
-        program.exercise.find { it.isSelected }
+        program.exercises.find { it.isSelected }
     }
 
     fun onEditExerciseSelectClick(selectedExercise: EditExercise) {
         _trainingProgram.value = _trainingProgram.value?.apply {
-            exercise = exercise.toMutableList().apply {
+            exercises = exercises.toMutableList().apply {
                 forEachIndexed { index, editExercise ->
                     if (editExercise == selectedExercise) {
                         set(index, editExercise.copy(isSelected = editExercise.isSelected.not()))
@@ -42,7 +42,7 @@ class EditTrainingProgramViewModel @Inject constructor(
 
     fun addExerciseToTrainingProgram(newExercise: EditExercise) {
         _trainingProgram.value = _trainingProgram.value?.apply {
-            exercise = exercise.toMutableList().apply {
+            exercises = exercises.toMutableList().apply {
                 add(newExercise)
             }
         }
@@ -51,7 +51,7 @@ class EditTrainingProgramViewModel @Inject constructor(
     fun removeExerciseFromTrainingProgram(selectedExercise: EditExercise?) {
         selectedExercise?.let {
             _trainingProgram.value = _trainingProgram.value?.apply {
-                exercise = exercise.toMutableList().apply {
+                exercises = exercises.toMutableList().apply {
                     remove(selectedExercise)
                 }
             }
@@ -60,7 +60,7 @@ class EditTrainingProgramViewModel @Inject constructor(
 
     fun editExerciseToTrainingProgram(oldExercise: EditExercise?, editExercise: EditExercise) {
         _trainingProgram.value = _trainingProgram.value?.apply {
-            exercise = exercise.toMutableList().apply {
+            exercises = exercises.toMutableList().apply {
                 forEachIndexed { index, eachExercise ->
                     if (eachExercise == oldExercise) {
                         set(index, editExercise)

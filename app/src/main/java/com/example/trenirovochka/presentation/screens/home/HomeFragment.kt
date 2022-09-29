@@ -139,7 +139,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 }
             }
         }
-        trainingProgramAdapter.swapItems(program.exercise)
+        trainingProgramAdapter.swapItems(program.exercises)
     }
 
     private fun handleActiveTrainingProgram(activeTrainingProgram: TrainingProgram?) {

@@ -7,7 +7,7 @@ import com.example.trenirovochka.domain.models.TrainingProgram
 
 data class EditTrainingProgram(
     var name: String,
-    var exercise: List<EditExercise>,
+    var exercises: List<EditExercise>,
 )
 
 data class EditExercise(
@@ -32,7 +32,7 @@ data class EditExercise(
 fun TrainingProgram.toEditTrainingProgram(): EditTrainingProgram {
     return EditTrainingProgram(
         name,
-        exercise.map { it.toEditExercise() }.toMutableList(),
+        exercises.map { it.toEditExercise() }.toMutableList(),
     )
 }
 

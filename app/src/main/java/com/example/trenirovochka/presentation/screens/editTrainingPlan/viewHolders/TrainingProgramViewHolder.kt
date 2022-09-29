@@ -30,7 +30,7 @@ class TrainingProgramViewHolder(
 
     override fun bindTo(item: TrainingProgram, pos: Int) {
         super.bindTo(item, pos)
-        exerciseAdapter.swapItems(item.exercise)
+        exerciseAdapter.swapItems(item.exercises)
         binding.apply {
             trainingProgramName.text = item.name
         }

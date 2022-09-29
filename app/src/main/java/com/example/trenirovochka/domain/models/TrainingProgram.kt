@@ -22,18 +22,18 @@ data class TrainingDay(
 
 @Parcelize
 sealed class Program : Parcelable {
-    abstract val exercise: List<Exercise>
+    abstract val exercises: List<Exercise>
 }
 
 data class TrainingProgram(
     val name: String,
-    override var exercise: List<Exercise>,
+    override var exercises: List<Exercise>,
     val active: Boolean = false,
 ) : Program() {
 
     constructor(program: TrainingProgram) : this(
         program.name,
-        program.exercise.map { it.copy() },
+        program.exercises.map { it.copy() },
         program.active
     )
 
@@ -47,11 +47,11 @@ data class TrainingProgram(
     }
 
     val status: ExecutionStatus
-        get() = if (exercise.any { it.status == IN_PROGRESS }) {
+        get() = if (exercises.any { it.status == IN_PROGRESS }) {
             IN_PROGRESS
-        } else if (exercise.any { it.status == IN_PAUSE }) {
+        } else if (exercises.any { it.status == IN_PAUSE }) {
             IN_PAUSE
-        } else if (exercise.all { it.status == COMPLETED }) {
+        } else if (exercises.all { it.status == COMPLETED }) {
             COMPLETED
         } else {
             NOT_STARTED
@@ -61,12 +61,12 @@ data class TrainingProgram(
 data class PerformedTrainingProgram(
     val date: String,
     val name: String,
-    override val exercise: List<Exercise>,
+    override val exercises: List<Exercise>,
     val status: ExecutionStatus = COMPLETED
 ) : Program()
 
 data class EmptyProgram(
-    override val exercise: List<Exercise> = listOf()
+    override val exercises: List<Exercise> = listOf()
 ) : Program()
 
 @Parcelize

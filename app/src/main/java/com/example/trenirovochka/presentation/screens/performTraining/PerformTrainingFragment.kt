@@ -86,7 +86,7 @@ class PerformTrainingFragment(
             viewModel.apply {
                 trainingProgramVM.observe(viewLifecycleOwner) {
                     updateProgramState(it)
-                    trainingProgramAdapter.swapItems(it.exercise)
+                    trainingProgramAdapter.swapItems(it.exercises)
                 }
                 userState.observe(viewLifecycleOwner) {
                     updateUserState(it)

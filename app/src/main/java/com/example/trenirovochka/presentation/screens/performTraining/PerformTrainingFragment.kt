@@ -11,8 +11,8 @@ import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
 import com.example.trenirovochka.domain.extensions.formatAsTime
 import com.example.trenirovochka.domain.models.RecoveryLevel
 import com.example.trenirovochka.domain.models.TrainingProgram
-import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.IN_PROGRESS
-import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.NOT_STARTED
+import com.example.trenirovochka.domain.models.ExecutionStatus.IN_PROGRESS
+import com.example.trenirovochka.domain.models.ExecutionStatus.NOT_STARTED
 import com.example.trenirovochka.domain.models.UserStatus
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.addKeyDoneListener

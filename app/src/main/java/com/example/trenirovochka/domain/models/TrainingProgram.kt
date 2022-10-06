@@ -3,15 +3,14 @@ package com.example.trenirovochka.domain.models
 import android.content.Context
 import android.os.Parcelable
 import com.example.trenirovochka.R
-import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus
-import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.*
+import com.example.trenirovochka.domain.models.ExecutionStatus.*
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TrainingPlan(
     var name: String,
     var trainingDays: List<TrainingDay>,
-    val trainingPrograms: List<TrainingProgram>
+    var trainingPrograms: List<TrainingProgram>
 ) : Parcelable
 
 @Parcelize
@@ -22,29 +21,24 @@ data class TrainingDay(
 
 @Parcelize
 sealed class Program : Parcelable {
+    abstract val id: String
+    abstract val name: String
     abstract val exercises: List<Exercise>
 }
 
 data class TrainingProgram(
-    val name: String,
+    override val id: String,
+    override val name: String,
     override var exercises: List<Exercise>,
     val active: Boolean = false,
 ) : Program() {
 
     constructor(program: TrainingProgram) : this(
+        program.id,
         program.name,
         program.exercises.map { it.copy() },
         program.active
     )
-
-    companion object {
-        enum class ExecutionStatus {
-            NOT_STARTED,
-            IN_PROGRESS,
-            IN_PAUSE,
-            COMPLETED,
-        }
-    }
 
     val status: ExecutionStatus
         get() = if (exercises.any { it.status == IN_PROGRESS }) {
@@ -59,13 +53,16 @@ data class TrainingProgram(
 }
 
 data class PerformedTrainingProgram(
+    override val id: String,
     val date: String,
-    val name: String,
+    override val name: String,
     override val exercises: List<Exercise>,
     val status: ExecutionStatus = COMPLETED
 ) : Program()
 
 data class EmptyProgram(
+    override val id: String = "",
+    override val name: String = "пустая программа",
     override val exercises: List<Exercise> = listOf()
 ) : Program()
 
@@ -119,4 +116,11 @@ data class Exercise(
     fun isStatusInProgress(): Boolean {
         return status == IN_PROGRESS
     }
+}
+
+enum class ExecutionStatus {
+    NOT_STARTED,
+    IN_PROGRESS,
+    IN_PAUSE,
+    COMPLETED,
 }

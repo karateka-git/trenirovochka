@@ -2,8 +2,7 @@ package com.example.trenirovochka.presentation.screens.performTraining.viewHolde
 
 import com.example.trenirovochka.databinding.ViewHolderActiveExerciseBinding
 import com.example.trenirovochka.domain.models.Exercise
-import com.example.trenirovochka.domain.models.TrainingProgram
-import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.NOT_STARTED
+import com.example.trenirovochka.domain.models.ExecutionStatus.NOT_STARTED
 import com.example.trenirovochka.presentation.common.extensions.setVisible
 import com.example.trenirovochka.presentation.common.recycler.SimpleViewHolder
 

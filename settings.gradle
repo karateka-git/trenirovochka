@@ -27,6 +27,8 @@ dependencyResolutionManagement {
             plugin('safeargs', 'androidx.navigation.safeargs').versionRef('navigation')
 
             version('inputMask', '6.1.0')
+
+            version('room', '2.4.3')
         }
     }
 }

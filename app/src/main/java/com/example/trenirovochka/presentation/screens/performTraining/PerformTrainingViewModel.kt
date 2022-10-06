@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import com.example.trenirovochka.domain.models.Exercise
 import com.example.trenirovochka.domain.models.TrainingProgram
-import com.example.trenirovochka.domain.models.TrainingProgram.Companion.ExecutionStatus.*
+import com.example.trenirovochka.domain.models.ExecutionStatus.*
 import com.example.trenirovochka.domain.models.UserStatus
 import com.example.trenirovochka.domain.models.UserStatus.InPause.Companion.getRecoveryLevel
 import com.example.trenirovochka.presentation.common.base.BaseViewModel

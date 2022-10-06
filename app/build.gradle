@@ -67,6 +67,10 @@ dependencies {
     implementation("com.github.RedMadRobot:input-mask-android:${libs.versions.inputMask.get()}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${libs.versions.kotlin.get()}")
 
+    // Room
+    implementation "androidx.room:room-ktx:${libs.versions.room.get()}"
+    kapt "androidx.room:room-compiler:${libs.versions.room.get()}"
+
     // Test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

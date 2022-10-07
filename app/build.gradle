@@ -71,6 +71,9 @@ dependencies {
     implementation "androidx.room:room-ktx:${libs.versions.room.get()}"
     kapt "androidx.room:room-compiler:${libs.versions.room.get()}"
 
+    // Gson
+    implementation "com.google.code.gson:gson:${libs.versions.gson.get()}"
+
     // Test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

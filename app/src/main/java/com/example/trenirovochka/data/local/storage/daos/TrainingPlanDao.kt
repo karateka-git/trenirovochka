@@ -1,13 +1,11 @@
 package com.example.trenirovochka.data.local.storage.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.example.trenirovochka.data.local.storage.entities.TrainingExerciseEntity
 import com.example.trenirovochka.data.local.storage.entities.TrainingPlanEntity
 import com.example.trenirovochka.data.local.storage.entities.TrainingPlanJoinEntity
 import com.example.trenirovochka.data.local.storage.entities.TrainingProgramEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TrainingPlanDao {
@@ -22,16 +20,20 @@ interface TrainingPlanDao {
         }
     }
 
-    @Insert
-    fun insert(trainingExerciseEntity: TrainingExerciseEntity)
-
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(trainingPlanEntity: TrainingPlanEntity)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(trainingProgramEntity: TrainingProgramEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(trainingExerciseEntity: TrainingExerciseEntity)
 
     @Transaction
     @Query("SELECT * FROM trainingPlan")
     suspend fun getAll(): List<TrainingPlanJoinEntity>
+
+    @Transaction
+    @Query("SELECT * FROM trainingPlan LIMIT 1") // TODO change for selected training plan
+    fun getSelectedTrainingPlan(): Flow<TrainingPlanJoinEntity>
 }

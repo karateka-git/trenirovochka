@@ -31,9 +31,9 @@
         android:name="com.example.trenirovochka.presentation.screens.editTrainingPlan.EditTrainingPlanFragment"
         android:label="EditTrainingPlan">
         <argument
-            android:name="trainingPlan"
-            app:nullable="false"
-            app:argType="com.example.trenirovochka.domain.models.TrainingPlan"/>
+            android:name="trainingPlanId"
+            app:nullable="true"
+            app:argType="string"/>
         <action
             android:id="@+id/action_editTrainingPlanFragment_to_editTrainingProgramFragment"
             app:destination="@id/editTrainingProgramFragment" />
@@ -44,8 +44,8 @@
         android:name="com.example.trenirovochka.presentation.screens.editTrainingProgram.EditTrainingProgramFragment"
         android:label="EditTrainingProgram">
         <argument
-            android:name="trainingProgram"
+            android:name="trainingProgramId"
             app:nullable="false"
-            app:argType="com.example.trenirovochka.domain.models.TrainingProgram"/>
+            app:argType="string"/>
     </fragment>
 </navigation>

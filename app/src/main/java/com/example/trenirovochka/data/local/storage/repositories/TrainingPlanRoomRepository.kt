@@ -3,6 +3,7 @@ package com.example.trenirovochka.data.local.storage.repositories
 import com.example.trenirovochka.data.local.storage.daos.TrainingPlanDao
 import com.example.trenirovochka.data.local.storage.entities.TrainingPlanJoinEntity
 import com.example.trenirovochka.domain.datacontracts.storage.ITrainingPlanStorageRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TrainingPlanRoomRepository @Inject constructor(
@@ -14,5 +15,9 @@ class TrainingPlanRoomRepository @Inject constructor(
 
     override suspend fun getPlans(): List<TrainingPlanJoinEntity> {
         return trainingPlanDao.getAll()
+    }
+
+    override fun getSelectedTrainingPlan(): Flow<TrainingPlanJoinEntity> {
+        return trainingPlanDao.getSelectedTrainingPlan()
     }
 }

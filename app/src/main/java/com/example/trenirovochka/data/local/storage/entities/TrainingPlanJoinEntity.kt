@@ -1,9 +1,9 @@
 package com.example.trenirovochka.data.local.storage.entities
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Relation
+import androidx.room.*
+import com.example.trenirovochka.domain.models.TrainingDay
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 data class TrainingPlanJoinEntity(
     @Embedded
@@ -18,7 +18,29 @@ data class TrainingPlanJoinEntity(
 )
 
 @Entity(tableName = "trainingPlan")
+@TypeConverters(TrainingDaysConverter::class)
 data class TrainingPlanEntity(
     @PrimaryKey val id: Long,
     val name: String,
+    val trainingDays: List<TrainingDay>,
 )
+
+class TrainingDaysConverter {
+
+    val gson = Gson()
+
+    @TypeConverter
+    fun fromJson(jsonString: String): List<TrainingDay> {
+        return if (jsonString.isEmpty()) {
+            emptyList()
+        } else {
+            gson.fromJson(
+                jsonString,
+                object : TypeToken<List<TrainingDay>>() {}.type
+            )
+        }
+    }
+
+    @TypeConverter
+    fun toJson(value: List<TrainingDay>): String = gson.toJson(value)
+}

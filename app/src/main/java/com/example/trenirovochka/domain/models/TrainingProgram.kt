@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TrainingPlan(
+    val id: Long,
     var name: String,
     var trainingDays: List<TrainingDay>,
     var trainingPrograms: List<TrainingProgram>
@@ -68,6 +69,7 @@ data class EmptyProgram(
 
 @Parcelize
 data class Exercise(
+    val id: Long = 0, // default value for autogenerate
     val name: String,
     val numberOfTotalSets: Int,
     var numberOfCompletedSets: Int = 0,

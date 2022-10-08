@@ -27,7 +27,7 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
 
     override val viewModel: EditTrainingPlanViewModel by viewModelCreator {
         assistedFactory.create(
-            args.trainingPlan
+            args.trainingPlanId
         )
     }
 

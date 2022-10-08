@@ -6,7 +6,15 @@ import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
 interface ITrainingProgramsInteractor {
-    fun getTrainingPlan(): Flow<TrainingPlan>
+    suspend fun updateTrainingPlan(newTrainingPlan: TrainingPlan)
+
+    fun getTrainingPlan(): Flow<TrainingPlan?>
 
     fun getTrainingProgram(date: Date): Flow<Program>
+
+    fun getTrainingProgram(id: String): Flow<Program>
+
+    fun updateTrainingProgram(program: Program)
+
+//    suspend fun test()
 }

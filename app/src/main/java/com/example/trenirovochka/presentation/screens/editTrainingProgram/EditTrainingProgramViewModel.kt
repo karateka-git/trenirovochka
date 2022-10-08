@@ -1,26 +1,26 @@
 package com.example.trenirovochka.presentation.screens.editTrainingProgram
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.map
+import androidx.lifecycle.*
+import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditExercise
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditTrainingProgram
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.toEditTrainingProgram
+import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.toTrainingProgram
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class EditTrainingProgramViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val programsInteractor: ITrainingProgramsInteractor,
 ) : BaseViewModel() {
 
     private val args: EditTrainingProgramFragmentArgs by lazy {
         EditTrainingProgramFragmentArgs.fromSavedStateHandle(savedStateHandle)
     }
 
-    private val _trainingProgram: MutableLiveData<EditTrainingProgram> = MutableLiveData(args.trainingProgram.toEditTrainingProgram())
+    private val _trainingProgram: MutableLiveData<EditTrainingProgram> = getTrainingProgram(args.trainingProgramId)
     val trainingProgram: LiveData<EditTrainingProgram> = _trainingProgram
     val selectedExercise: LiveData<EditExercise?> = _trainingProgram.map { program ->
         program.exercises.find { it.isSelected }
@@ -45,6 +45,7 @@ class EditTrainingProgramViewModel @Inject constructor(
             exercises = exercises.toMutableList().apply {
                 add(newExercise)
             }
+            programsInteractor.updateTrainingProgram(this.toTrainingProgram())
         }
     }
 
@@ -68,5 +69,9 @@ class EditTrainingProgramViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun getTrainingProgram(id: String): MutableLiveData<EditTrainingProgram> {
+        return programsInteractor.getTrainingProgram(id).asLiveData().map { it.toEditTrainingProgram() } as MutableLiveData<EditTrainingProgram>
     }
 }

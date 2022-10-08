@@ -15,7 +15,7 @@ import com.example.trenirovochka.domain.models.ExecutionStatus
     ]
 )
 data class TrainingExerciseEntity(
-    @PrimaryKey val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val programId: Long,
     val name: String,
     val numberOfTotalSets: Int,

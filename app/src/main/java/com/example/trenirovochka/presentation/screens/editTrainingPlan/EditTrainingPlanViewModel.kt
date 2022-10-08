@@ -1,7 +1,8 @@
 package com.example.trenirovochka.presentation.screens.editTrainingPlan
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
+import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
+import com.example.trenirovochka.domain.models.DaysOfWeek
 import com.example.trenirovochka.domain.models.TrainingDay
 import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.domain.models.TrainingProgram
@@ -9,33 +10,56 @@ import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.launch
 
 @AssistedFactory
 interface EditTrainingPlanViewModelAssistedFactory {
-    fun create(trainingPlan: TrainingPlan): EditTrainingPlanViewModel
+    fun create(trainingPlanId: String? = null): EditTrainingPlanViewModel
 }
 
 class EditTrainingPlanViewModel @AssistedInject constructor(
-    @Assisted private val trainingPlan: TrainingPlan,
+    @Assisted private val trainingPlanId: String?, // TODO use this id
+    private val programsInteractor: ITrainingProgramsInteractor,
 ) : BaseViewModel() {
 
-    private val _trainingPlanVM: MutableLiveData<TrainingPlan> = MutableLiveData(trainingPlan)
-    val trainingPlanVM: LiveData<TrainingPlan> = _trainingPlanVM
+    val trainingPlanVM: LiveData<TrainingPlan> = programsInteractor.getTrainingPlan().asLiveData().map { trainingPlan ->
+        trainingPlan ?: TrainingPlan(
+            0,
+            "Название плана",
+            DaysOfWeek.values().map { TrainingDay(it) },
+            listOf()
+        )
+    }
 
     fun updateSelectedTrainingDays(trainingDay: TrainingDay) {
-        trainingPlan.trainingDays = trainingPlan.trainingDays.toMutableList().let { list ->
-            list.apply {
-                set(list.indexOf(trainingDay), trainingDay.copy().apply { isSelected = !isSelected })
+        trainingPlanVM.value?.let { currentTrainingPlan ->
+            viewModelScope.launch {
+                programsInteractor.updateTrainingPlan(
+                    currentTrainingPlan.copy(
+                        trainingDays = currentTrainingPlan.trainingDays.toMutableList().let { list ->
+                            list.apply {
+                                set(list.indexOf(trainingDay), trainingDay.copy().apply { isSelected = !isSelected })
+                            }
+                        }
+                    )
+                )
             }
         }
-        _trainingPlanVM.value = trainingPlan
     }
 
     fun onTrainingPlanNameChanged(text: String) {
-        if (trainingPlan.name != text) trainingPlan.apply { name = text }
+        trainingPlanVM.value?.let { currentTrainingPlan ->
+            if (currentTrainingPlan.name != text) {
+                viewModelScope.launch {
+                    programsInteractor.updateTrainingPlan(
+                        currentTrainingPlan.copy(name = text)
+                    )
+                }
+            }
+        }
     }
 
     fun onTrainingProgramClick(trainingProgram: TrainingProgram) {
-        navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingProgram))
+        navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingProgram.id))
     }
 }

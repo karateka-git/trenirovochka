@@ -78,7 +78,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         binding.apply {
             viewModel.apply {
                 trainingPlan.observe(viewLifecycleOwner) {
-                    updateTrainingPlan(it)
+                    if (it != null) {
+                        updateTrainingPlan(it)
+                    }
                 }
                 trainingProgram.observe(viewLifecycleOwner) {
                     updateTrainingProgram(it)

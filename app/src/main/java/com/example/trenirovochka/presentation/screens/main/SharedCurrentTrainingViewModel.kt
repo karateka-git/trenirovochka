@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.trenirovochka.domain.extensions.parseTime
+import com.example.trenirovochka.domain.models.ExecutionStatus
+import com.example.trenirovochka.domain.models.ExecutionStatus.*
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import com.example.trenirovochka.presentation.common.util.CountTimer
@@ -58,16 +60,16 @@ class SharedCurrentTrainingViewModel @Inject constructor(
         }
     }
 
-    fun programStatusChanged(exerciseStatus: TrainingProgram.Companion.ExecutionStatus) {
+    fun programStatusChanged(exerciseStatus: ExecutionStatus) {
         when (exerciseStatus) {
-            TrainingProgram.Companion.ExecutionStatus.NOT_STARTED -> {}
-            TrainingProgram.Companion.ExecutionStatus.IN_PROGRESS -> {
+            NOT_STARTED -> {}
+            IN_PROGRESS -> {
                 updateCountTimer(TimerState.TIMER_UP, CountTimer.DEFAULT_START_VALUE)
             }
-            TrainingProgram.Companion.ExecutionStatus.IN_PAUSE -> {
+            IN_PAUSE -> {
                 updateCountTimer(TimerState.TIMER_DOWN, timeForRelax)
             }
-            TrainingProgram.Companion.ExecutionStatus.COMPLETED -> {}
+            COMPLETED -> {}
         }
     }
 

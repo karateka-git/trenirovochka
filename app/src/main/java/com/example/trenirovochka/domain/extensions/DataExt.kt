@@ -2,6 +2,7 @@ package com.example.trenirovochka.domain.extensions
 
 import com.example.trenirovochka.data.local.storage.entities.*
 import com.example.trenirovochka.domain.models.Exercise
+import com.example.trenirovochka.domain.models.Program
 import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.domain.models.TrainingProgram
 
@@ -15,7 +16,7 @@ fun TrainingPlanJoinEntity.toTrainingPlanDomain() =
 
 fun TrainingProgramJoinEntity.toTrainingProgramDomain() =
     TrainingProgram(
-        trainingProgram.id.toString(),
+        trainingProgram.id,
         trainingProgram.name,
         exercises.map {
             it.toTrainingExerciseDomain()
@@ -44,10 +45,10 @@ fun TrainingPlan.toTrainingPlanJoinEntity() =
         trainingPrograms.map { it.toTrainingProgramJoinEntity(id) }
     )
 
-fun TrainingProgram.toTrainingProgramJoinEntity(planId: Long) =
+fun Program.toTrainingProgramJoinEntity(planId: Long) =
     TrainingProgramJoinEntity(
         TrainingProgramEntity(
-            id.toLong(),
+            id,
             planId,
             name
         ),

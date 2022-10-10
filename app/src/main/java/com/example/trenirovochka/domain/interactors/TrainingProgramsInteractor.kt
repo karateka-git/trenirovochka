@@ -2,9 +2,7 @@ package com.example.trenirovochka.domain.interactors
 
 import com.example.trenirovochka.domain.datacontracts.ITrainingProgramRemoteRepository
 import com.example.trenirovochka.domain.datacontracts.storage.ITrainingPlanStorageRepository
-import com.example.trenirovochka.domain.extensions.beforeOrEqualWithoutTime
-import com.example.trenirovochka.domain.extensions.toTrainingPlanDomain
-import com.example.trenirovochka.domain.extensions.toTrainingPlanJoinEntity
+import com.example.trenirovochka.domain.extensions.*
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.domain.models.DaysOfWeek
 import com.example.trenirovochka.domain.models.EmptyProgram
@@ -24,20 +22,24 @@ class TrainingProgramsInteractor @Inject constructor(
         trainingPlanStorageRepository.savePlan(newTrainingPlan.toTrainingPlanJoinEntity())
     }
 
-    override fun getTrainingPlan(): Flow<TrainingPlan?> {
-        return trainingPlanStorageRepository.getSelectedTrainingPlan().map { it?.toTrainingPlanDomain() }
+    override fun getTrainingPlan(): Flow<TrainingPlan> {
+        return trainingPlanStorageRepository.getSelectedTrainingPlan().map { it.toTrainingPlanDomain() }
     }
 
     override fun getTrainingProgram(date: Date): Flow<Program> =
         trainingPlanStorageRepository.getSelectedTrainingPlan().map {
-            getTrainingProgramFromTrainingPlan(date, it?.toTrainingPlanDomain())
+            getTrainingProgramFromTrainingPlan(date, it.toTrainingPlanDomain())
         }
 
-    override fun getTrainingProgram(id: String): Flow<Program> =
-        trainingProgramRemoteRepository.getTrainingProgram(id)
+    override fun getTrainingProgram(id: Long): Flow<Program> =
+        trainingPlanStorageRepository.getSelectedTrainingPlan().map { trainingPlan ->
+            trainingPlan.trainingPrograms.find {
+                it.trainingProgram.id == id
+            }?.toTrainingProgramDomain() ?: EmptyProgram()
+        }
 
-    override fun updateTrainingProgram(program: Program) {
-        trainingProgramRemoteRepository.updateTrainingProgram(program)
+    override suspend fun updateTrainingProgram(planId: Long, program: Program) {
+        trainingPlanStorageRepository.updateTrainingProgram(program.toTrainingProgramJoinEntity(planId))
     }
 
     private fun getTrainingProgramFromTrainingPlan(date: Date, trainingPlan: TrainingPlan?): Program {

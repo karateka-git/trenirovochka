@@ -1,8 +1,9 @@
 package com.example.trenirovochka.presentation.screens.editTrainingPlan
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
-import com.example.trenirovochka.domain.models.DaysOfWeek
 import com.example.trenirovochka.domain.models.TrainingDay
 import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.domain.models.TrainingProgram
@@ -14,22 +15,15 @@ import kotlinx.coroutines.launch
 
 @AssistedFactory
 interface EditTrainingPlanViewModelAssistedFactory {
-    fun create(trainingPlanId: String? = null): EditTrainingPlanViewModel
+    fun create(trainingPlanId: Long): EditTrainingPlanViewModel
 }
 
 class EditTrainingPlanViewModel @AssistedInject constructor(
-    @Assisted private val trainingPlanId: String?, // TODO use this id
+    @Assisted private val trainingPlanId: Long, // TODO use this id
     private val programsInteractor: ITrainingProgramsInteractor,
 ) : BaseViewModel() {
 
-    val trainingPlanVM: LiveData<TrainingPlan> = programsInteractor.getTrainingPlan().asLiveData().map { trainingPlan ->
-        trainingPlan ?: TrainingPlan(
-            0,
-            "Название плана",
-            DaysOfWeek.values().map { TrainingDay(it) },
-            listOf()
-        )
-    }
+    val trainingPlanVM: LiveData<TrainingPlan> = programsInteractor.getTrainingPlan().asLiveData()
 
     fun updateSelectedTrainingDays(trainingDay: TrainingDay) {
         trainingPlanVM.value?.let { currentTrainingPlan ->
@@ -60,6 +54,16 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     }
 
     fun onTrainingProgramClick(trainingProgram: TrainingProgram) {
-        navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingProgram.id))
+        navigateTo(
+            EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(
+                trainingPlanId
+            ).apply {
+                trainingProgramId = trainingProgram.id
+            }
+        )
+    }
+
+    fun addTrainingProgram() {
+        navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingPlanId))
     }
 }

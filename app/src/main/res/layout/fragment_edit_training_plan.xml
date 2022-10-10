@@ -18,7 +18,7 @@
         android:layout_height="0dp"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/add_training_program_container">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/training_plan_name_input_layout"
@@ -58,4 +58,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/add_training_program_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurfaceVariant"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/add_training_program_container_button"
+            style="@style/ActionButton.Primary"
+            android:text="@string/add_training_program" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

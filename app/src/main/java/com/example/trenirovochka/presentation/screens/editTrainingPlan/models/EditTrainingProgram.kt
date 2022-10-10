@@ -7,7 +7,7 @@ import com.example.trenirovochka.domain.models.Program
 import com.example.trenirovochka.domain.models.TrainingProgram
 
 data class EditTrainingProgram(
-    val id: String,
+    val id: Long,
     var name: String,
     var exercises: List<EditExercise>,
 )

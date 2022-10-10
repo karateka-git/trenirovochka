@@ -81,6 +81,9 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
             toolbar.setBackButtonOnClickListener {
                 viewModel.exit()
             }
+            addTrainingProgramContainerButton.setOnClickListener {
+                viewModel.addTrainingProgram()
+            }
         }
     }
 

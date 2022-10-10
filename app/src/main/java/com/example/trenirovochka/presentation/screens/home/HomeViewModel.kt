@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
     }
     val selectedDate: LiveData<String> = _selectedDate.map { formatAsFullDate(it) }
 
-    val trainingPlan: LiveData<TrainingPlan?> = programsInteractor.getTrainingPlan().asLiveData()
+    val trainingPlan: LiveData<TrainingPlan> = programsInteractor.getTrainingPlan().asLiveData()
 
     val trainingProgram: LiveData<Program> = _selectedDate.switchMap {
         programsInteractor.getTrainingProgram(it).asLiveData()
@@ -33,11 +33,11 @@ class HomeViewModel @Inject constructor(
     val isCancelActiveTrainingProgramDialogShow: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onEditTrainingPlanClick() {
-        navigateTo(
-            HomeFragmentDirections.actionHomeFragmentToEditTrainingPlanFragment(
-                trainingPlan.value?.name
+        trainingPlan.value?.let {
+            navigateTo(
+                HomeFragmentDirections.actionHomeFragmentToEditTrainingPlanFragment(it.id)
             )
-        )
+        }
     }
 
     fun updateSelectedDate(action: ActionWithDate) {

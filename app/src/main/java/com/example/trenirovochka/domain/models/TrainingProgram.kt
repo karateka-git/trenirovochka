@@ -22,13 +22,13 @@ data class TrainingDay(
 
 @Parcelize
 sealed class Program : Parcelable {
-    abstract val id: String
+    abstract val id: Long
     abstract val name: String
     abstract val exercises: List<Exercise>
 }
 
 data class TrainingProgram(
-    override val id: String,
+    override val id: Long,
     override val name: String,
     override var exercises: List<Exercise>,
     val active: Boolean = false,
@@ -54,7 +54,7 @@ data class TrainingProgram(
 }
 
 data class PerformedTrainingProgram(
-    override val id: String,
+    override val id: Long,
     val date: String,
     override val name: String,
     override val exercises: List<Exercise>,
@@ -62,7 +62,7 @@ data class PerformedTrainingProgram(
 ) : Program()
 
 data class EmptyProgram(
-    override val id: String = "",
+    override val id: Long = 0,
     override val name: String = "пустая программа",
     override val exercises: List<Exercise> = listOf()
 ) : Program()

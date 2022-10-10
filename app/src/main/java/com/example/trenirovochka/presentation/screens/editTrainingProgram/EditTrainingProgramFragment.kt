@@ -2,6 +2,7 @@ package com.example.trenirovochka.presentation.screens.editTrainingProgram
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import com.example.trenirovochka.databinding.FragmentEditTrainingProgramBinding
 import com.example.trenirovochka.databinding.ViewHolderEditExerciseBinding
 import com.example.trenirovochka.presentation.common.base.BaseFragment
@@ -26,8 +27,8 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
         SimpleAdapter(
             ViewHolderEditExerciseBinding::inflate
         ) {
-            EditExerciseViewHolder(it) {
-                viewModel.onEditExerciseSelectClick(it)
+            EditExerciseViewHolder(it) { exercise ->
+                viewModel.selectExercise(exercise)
             }
         }
     }
@@ -64,13 +65,16 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
                     viewModel.addExerciseToTrainingProgram(it)
                 }
             }
+            trainingProgramNameEditText.doOnTextChanged { text, _, _, _ ->
+                viewModel.onTrainingProgramNameChanged(text.toString())
+            }
             editExerciseButton.setOnClickListener {
                 showEditExerciseDialog(viewModel.selectedExercise.value) {
-                    viewModel.editExerciseToTrainingProgram(viewModel.selectedExercise.value, it)
+                    viewModel.editSelectedExercise(it)
                 }
             }
             removeExerciseButton.setOnClickListener {
-                viewModel.removeExerciseFromTrainingProgram(viewModel.selectedExercise.value)
+                viewModel.removeSelectedExercise()
             }
         }
     }

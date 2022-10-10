@@ -8,13 +8,13 @@ import java.util.Date
 interface ITrainingProgramsInteractor {
     suspend fun updateTrainingPlan(newTrainingPlan: TrainingPlan)
 
-    fun getTrainingPlan(): Flow<TrainingPlan?>
+    fun getTrainingPlan(): Flow<TrainingPlan>
 
     fun getTrainingProgram(date: Date): Flow<Program>
 
-    fun getTrainingProgram(id: String): Flow<Program>
+    fun getTrainingProgram(id: Long): Flow<Program>
 
-    fun updateTrainingProgram(program: Program)
+    suspend fun updateTrainingProgram(planId: Long, program: Program)
 
 //    suspend fun test()
 }

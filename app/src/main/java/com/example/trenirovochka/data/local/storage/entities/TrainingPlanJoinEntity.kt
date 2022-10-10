@@ -20,7 +20,7 @@ data class TrainingPlanJoinEntity(
 @Entity(tableName = "trainingPlan")
 @TypeConverters(TrainingDaysConverter::class)
 data class TrainingPlanEntity(
-    @PrimaryKey val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val name: String,
     val trainingDays: List<TrainingDay>,
 )

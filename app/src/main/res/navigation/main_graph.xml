@@ -32,8 +32,7 @@
         android:label="EditTrainingPlan">
         <argument
             android:name="trainingPlanId"
-            app:nullable="true"
-            app:argType="string"/>
+            app:argType="long"/>
         <action
             android:id="@+id/action_editTrainingPlanFragment_to_editTrainingProgramFragment"
             app:destination="@id/editTrainingProgramFragment" />
@@ -44,8 +43,11 @@
         android:name="com.example.trenirovochka.presentation.screens.editTrainingProgram.EditTrainingProgramFragment"
         android:label="EditTrainingProgram">
         <argument
+            android:name="trainingPlanId"
+            app:argType="long"/>
+        <argument
             android:name="trainingProgramId"
-            app:nullable="false"
-            app:argType="string"/>
+            app:argType="long"
+            android:defaultValue="0L"/>
     </fragment>
 </navigation>

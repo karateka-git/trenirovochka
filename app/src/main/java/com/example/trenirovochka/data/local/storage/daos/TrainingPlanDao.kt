@@ -1,10 +1,7 @@
 package com.example.trenirovochka.data.local.storage.daos
 
 import androidx.room.*
-import com.example.trenirovochka.data.local.storage.entities.TrainingExerciseEntity
-import com.example.trenirovochka.data.local.storage.entities.TrainingPlanEntity
-import com.example.trenirovochka.data.local.storage.entities.TrainingPlanJoinEntity
-import com.example.trenirovochka.data.local.storage.entities.TrainingProgramEntity
+import com.example.trenirovochka.data.local.storage.entities.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -13,15 +10,20 @@ interface TrainingPlanDao {
     suspend fun insert(trainingPlanEntity: TrainingPlanJoinEntity) {
         insert(trainingPlanEntity.trainingPlan)
         trainingPlanEntity.trainingPrograms.forEach {
-            insert(it.trainingProgram)
-            it.exercises.forEach {
-                insert(it)
-            }
+            insert(it)
         }
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(trainingPlanEntity: TrainingPlanEntity)
+
+    @Transaction
+    suspend fun insert(trainingProgramJoinEntity: TrainingProgramJoinEntity) {
+        insert(trainingProgramJoinEntity.trainingProgram)
+        trainingProgramJoinEntity.exercises.forEach {
+            insert(it)
+        }
+    }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(trainingProgramEntity: TrainingProgramEntity)

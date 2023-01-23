@@ -27,7 +27,7 @@ data class TrainingPlanEntity(
 
 class TrainingDaysConverter {
 
-    val gson = Gson()
+    private val gson = Gson()
 
     @TypeConverter
     fun fromJson(jsonString: String): List<TrainingDay> {

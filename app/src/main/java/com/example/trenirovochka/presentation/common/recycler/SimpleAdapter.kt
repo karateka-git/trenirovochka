@@ -17,7 +17,9 @@ open class SimpleAdapter<T : Any, VB : ViewBinding>(
         this,
         object : DiffUtil.ItemCallback<T>() {
             override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-                return oldItem === newItem
+                // oldItem === newItem, заменил, потому что мы зависим от сервера, а там всегда создаются новые объекты
+                // TODO в будущем рассмотреть подробней
+                return true
             }
 
             @SuppressLint("DiffUtilEquals")

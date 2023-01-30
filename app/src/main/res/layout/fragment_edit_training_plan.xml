@@ -31,6 +31,9 @@
                 android:id="@+id/training_plan_name_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:inputType="text"
                 style="@style/MerriweatherBold.OnSurface.18" />
         </com.google.android.material.textfield.TextInputLayout>
 

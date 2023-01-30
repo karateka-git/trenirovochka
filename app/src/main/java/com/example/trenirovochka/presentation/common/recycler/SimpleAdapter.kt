@@ -19,7 +19,7 @@ open class SimpleAdapter<T : Any, VB : ViewBinding>(
             override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
                 // oldItem === newItem, заменил, потому что мы зависим от сервера, а там всегда создаются новые объекты
                 // TODO в будущем рассмотреть подробней
-                return true
+                return oldItem === newItem
             }
 
             @SuppressLint("DiffUtilEquals")

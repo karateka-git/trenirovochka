@@ -1,6 +1,8 @@
 package com.example.trenirovochka.presentation.screens.editTrainingPlan
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
@@ -23,16 +25,30 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     private val programsInteractor: ITrainingProgramsInteractor,
 ) : BaseViewModel() {
 
-    val trainingPlanVM: LiveData<TrainingPlan> = programsInteractor.getTrainingPlan().asLiveData()
+    // TODO сделать локальное изменение
+    private var _trainingPlanLD: MutableLiveData<TrainingPlan> = MutableLiveData()
+    val trainingPlanLD: LiveData<TrainingPlan> = MediatorLiveData<TrainingPlan>().apply {
+        addSource(programsInteractor.getTrainingPlan().asLiveData()) {
+            value = it
+        }
+        addSource(_trainingPlanLD) {
+            value = it
+        }
+    }
 
     fun updateSelectedTrainingDays(trainingDay: TrainingDay) {
-        trainingPlanVM.value?.let { currentTrainingPlan ->
+        trainingPlanLD.value?.let { currentTrainingPlan ->
             viewModelScope.launch {
-                programsInteractor.updateTrainingPlan(
+                _trainingPlanLD.postValue(
                     currentTrainingPlan.copy(
                         trainingDays = currentTrainingPlan.trainingDays.toMutableList().let { list ->
                             list.apply {
-                                set(list.indexOf(trainingDay), trainingDay.copy().apply { isSelected = !isSelected })
+                                set(
+                                    list.indexOf(trainingDay),
+                                    trainingDay.copy().apply {
+                                        isSelected = !isSelected
+                                    }
+                                )
                             }
                         }
                     )
@@ -42,10 +58,10 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     }
 
     fun onTrainingPlanNameChanged(text: String) {
-        trainingPlanVM.value?.let { currentTrainingPlan ->
+        trainingPlanLD.value?.let { currentTrainingPlan ->
             if (currentTrainingPlan.name != text) {
                 viewModelScope.launch {
-                    programsInteractor.updateTrainingPlan(
+                    _trainingPlanLD.postValue(
                         currentTrainingPlan.copy(name = text)
                     )
                 }
@@ -54,6 +70,7 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     }
 
     fun onTrainingProgramClick(trainingProgram: TrainingProgram) {
+        // TODO добавить обновление сущности в базе данных
         navigateTo(
             EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(
                 trainingPlanId
@@ -64,6 +81,7 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     }
 
     fun addTrainingProgram() {
+        // TODO добавить обновление сущности в базе данных
         navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingPlanId))
     }
 }

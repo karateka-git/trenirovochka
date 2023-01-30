@@ -67,7 +67,7 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
 
     private fun initObservers() {
         viewModel.apply {
-            trainingPlanVM.observe(viewLifecycleOwner) {
+            trainingPlanLD.observe(viewLifecycleOwner) {
                 updateTrainingPlan(it)
             }
         }
@@ -90,8 +90,11 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
     private fun updateTrainingPlan(trainingPlan: TrainingPlan) {
         trainingDaysAdapter.swapItems(trainingPlan.trainingDays)
         trainingProgramsAdapter.swapItems(trainingPlan.trainingPrograms)
-        binding.apply {
-            trainingPlanNameEditText.setText(trainingPlan.name)
+        binding.trainingPlanNameEditText.apply {
+            if (trainingPlan.name != text.toString()) {
+                setText(trainingPlan.name)
+                setSelection(trainingPlan.name.length)
+            }
         }
     }
 }

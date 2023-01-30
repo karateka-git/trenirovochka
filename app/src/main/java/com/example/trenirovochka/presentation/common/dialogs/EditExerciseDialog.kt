@@ -4,7 +4,7 @@ import com.example.trenirovochka.databinding.DialogEditExerciseBinding
 import com.example.trenirovochka.domain.models.Exercise
 import com.example.trenirovochka.presentation.common.base.BaseDialogActionListener
 import com.example.trenirovochka.presentation.common.base.BaseDialogFragment
-import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditExercise
+import com.example.trenirovochka.presentation.screens.editTrainingProgram.models.EditExercise
 
 class EditExerciseDialog(
     private val exercise: EditExercise? = null,

@@ -2,7 +2,7 @@ package com.example.trenirovochka.presentation.screens.editTrainingProgram.viewH
 
 import com.example.trenirovochka.databinding.ViewHolderEditExerciseBinding
 import com.example.trenirovochka.presentation.common.recycler.SimpleViewHolder
-import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditExercise
+import com.example.trenirovochka.presentation.screens.editTrainingProgram.models.EditExercise
 
 class EditExerciseViewHolder(
     private val binding: ViewHolderEditExerciseBinding,

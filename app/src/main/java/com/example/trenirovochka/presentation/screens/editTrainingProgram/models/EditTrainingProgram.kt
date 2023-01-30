@@ -1,4 +1,4 @@
-package com.example.trenirovochka.presentation.screens.editTrainingPlan.models
+package com.example.trenirovochka.presentation.screens.editTrainingProgram.models
 
 import android.content.Context
 import com.example.trenirovochka.R

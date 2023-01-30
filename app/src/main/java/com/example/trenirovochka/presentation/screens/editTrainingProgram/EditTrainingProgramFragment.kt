@@ -11,8 +11,8 @@ import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialog.
 import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialogListener
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
-import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditExercise
-import com.example.trenirovochka.presentation.screens.editTrainingPlan.models.EditTrainingProgram
+import com.example.trenirovochka.presentation.screens.editTrainingProgram.models.EditExercise
+import com.example.trenirovochka.presentation.screens.editTrainingProgram.models.EditTrainingProgram
 import com.example.trenirovochka.presentation.screens.editTrainingProgram.viewHolders.EditExerciseViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -25,7 +25,6 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     private val programsInteractor: ITrainingProgramsInteractor,
 ) : BaseViewModel() {
 
-    // TODO сделать локальное изменение
     private var _trainingPlanLD: MutableLiveData<TrainingPlan> = MutableLiveData()
     val trainingPlanLD: LiveData<TrainingPlan> = MediatorLiveData<TrainingPlan>().apply {
         addSource(programsInteractor.getTrainingPlan().asLiveData()) {
@@ -70,7 +69,7 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     }
 
     fun onTrainingProgramClick(trainingProgram: TrainingProgram) {
-        // TODO добавить обновление сущности в базе данных
+        updateDatabaseTrainingPlan()
         navigateTo(
             EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(
                 trainingPlanId
@@ -81,7 +80,15 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     }
 
     fun addTrainingProgram() {
-        // TODO добавить обновление сущности в базе данных
+        updateDatabaseTrainingPlan()
         navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingPlanId))
+    }
+
+    private fun updateDatabaseTrainingPlan() {
+        trainingPlanLD.value?.let { currentTrainingPlan ->
+            viewModelScope.launch {
+                programsInteractor.updateTrainingPlan(currentTrainingPlan)
+            }
+        }
     }
 }

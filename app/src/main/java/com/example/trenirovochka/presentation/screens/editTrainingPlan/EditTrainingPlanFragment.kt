@@ -2,13 +2,13 @@ package com.example.trenirovochka.presentation.screens.editTrainingPlan
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.navArgs
 import com.example.trenirovochka.databinding.FragmentEditTrainingPlanBinding
 import com.example.trenirovochka.databinding.ViewHolderTrainingDayBinding
 import com.example.trenirovochka.databinding.ViewHolderTrainingProgramBinding
 import com.example.trenirovochka.domain.models.TrainingPlan
 import com.example.trenirovochka.presentation.common.base.BaseFragment
+import com.example.trenirovochka.presentation.common.extensions.addKeyDoneListener
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.screens.editTrainingPlan.viewHolders.TrainingDayViewHolder
@@ -58,6 +58,14 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
         initListeners()
     }
 
+    override fun keyboardIsVisibleChanged(isVisible: Boolean) {
+        if (isVisible.not()) {
+            viewModel.onTrainingPlanNameChanged(
+                binding.trainingPlanNameEditText.text.toString()
+            )
+        }
+    }
+
     private fun initRecyclers() {
         binding.apply {
             trainingDays.adapter = trainingDaysAdapter
@@ -75,8 +83,8 @@ class EditTrainingPlanFragment : BaseFragment<FragmentEditTrainingPlanBinding, E
 
     private fun initListeners() {
         binding.apply {
-            trainingPlanNameEditText.doOnTextChanged { text, _, _, _ ->
-                viewModel.onTrainingPlanNameChanged(text.toString())
+            trainingPlanNameEditText.addKeyDoneListener {
+                viewModel.onTrainingPlanNameChanged(trainingPlanNameEditText.text.toString())
             }
             toolbar.setBackButtonOnClickListener {
                 viewModel.exit()

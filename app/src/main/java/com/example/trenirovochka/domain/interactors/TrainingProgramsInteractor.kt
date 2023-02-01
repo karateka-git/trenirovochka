@@ -52,6 +52,7 @@ class TrainingProgramsInteractor @Inject constructor(
         val selectedTrainingDays = trainingPlan.trainingDays.filter { it.isSelected }.map { it.dayOfWeek }
 
         return if (currentDay.beforeOrEqualWithoutTime(date) &&
+            trainingPlan.trainingPrograms.size >= selectedTrainingDays.size &&
             selectedTrainingDays.contains(dayOfWeek)
         ) {
             trainingPlan.trainingPrograms[

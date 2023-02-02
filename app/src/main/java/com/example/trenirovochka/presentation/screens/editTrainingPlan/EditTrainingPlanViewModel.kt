@@ -1,10 +1,6 @@
 package com.example.trenirovochka.presentation.screens.editTrainingPlan
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.domain.models.TrainingDay
 import com.example.trenirovochka.domain.models.TrainingPlan
@@ -32,6 +28,13 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
         }
         addSource(_trainingPlanLD) {
             value = it
+        }
+    }
+
+    override fun exit() {
+        viewModelScope.launch {
+            updateDatabaseTrainingPlan()
+            super.exit()
         }
     }
 
@@ -69,26 +72,28 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
     }
 
     fun onTrainingProgramClick(trainingProgram: TrainingProgram) {
-        updateDatabaseTrainingPlan()
-        navigateTo(
-            EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(
-                trainingPlanId
-            ).apply {
-                trainingProgramId = trainingProgram.id
-            }
-        )
+        viewModelScope.launch {
+            updateDatabaseTrainingPlan()
+            navigateTo(
+                EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(
+                    trainingPlanId
+                ).apply {
+                    trainingProgramId = trainingProgram.id
+                }
+            )
+        }
     }
 
     fun addTrainingProgram() {
-        updateDatabaseTrainingPlan()
-        navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingPlanId))
+        viewModelScope.launch {
+            updateDatabaseTrainingPlan()
+            navigateTo(EditTrainingPlanFragmentDirections.actionEditTrainingPlanFragmentToEditTrainingProgramFragment(trainingPlanId))
+        }
     }
 
-    private fun updateDatabaseTrainingPlan() {
+    private suspend fun updateDatabaseTrainingPlan() {
         trainingPlanLD.value?.let { currentTrainingPlan ->
-            viewModelScope.launch {
-                programsInteractor.updateTrainingPlan(currentTrainingPlan)
-            }
+            programsInteractor.updateTrainingPlan(currentTrainingPlan)
         }
     }
 }

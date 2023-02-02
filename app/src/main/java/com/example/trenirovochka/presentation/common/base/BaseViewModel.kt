@@ -1,5 +1,6 @@
 package com.example.trenirovochka.presentation.common.base
 
+import androidx.annotation.CallSuper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +16,8 @@ abstract class BaseViewModel : ViewModel() {
         withNavController { navigate(direction) }
     }
 
-    fun exit() {
+    @CallSuper
+    open fun exit() {
         withNavController { navigateUp() }
     }
 

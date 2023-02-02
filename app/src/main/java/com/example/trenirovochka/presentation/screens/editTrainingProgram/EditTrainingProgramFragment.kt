@@ -9,6 +9,7 @@ import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialog
 import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialog.Companion.EDIT_EXERCISE_DIALOG_TAG
 import com.example.trenirovochka.presentation.common.dialogs.EditExerciseDialogListener
+import com.example.trenirovochka.presentation.common.extensions.addKeyDoneListener
 import com.example.trenirovochka.presentation.common.extensions.viewModelCreator
 import com.example.trenirovochka.presentation.common.recycler.SimpleAdapter
 import com.example.trenirovochka.presentation.screens.editTrainingProgram.models.EditExercise
@@ -46,7 +47,7 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
 
     private fun initObservers() {
         viewModel.apply {
-            trainingProgram.observe(viewLifecycleOwner) {
+            trainingProgramLD.observe(viewLifecycleOwner) {
                 updateTrainingProgram(it)
             }
             selectedExercise.observe(viewLifecycleOwner) {
@@ -65,8 +66,8 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
                     viewModel.addExerciseToTrainingProgram(it)
                 }
             }
-            trainingProgramNameEditText.doOnTextChanged { text, _, _, _ ->
-                viewModel.onTrainingProgramNameChanged(text.toString())
+            trainingProgramNameEditText.addKeyDoneListener {
+                viewModel.onTrainingProgramNameChanged(trainingProgramNameEditText.text.toString())
             }
             editExerciseButton.setOnClickListener {
                 showEditExerciseDialog(viewModel.selectedExercise.value) {
@@ -82,7 +83,12 @@ class EditTrainingProgramFragment : BaseFragment<FragmentEditTrainingProgramBind
     private fun updateTrainingProgram(trainingProgram: EditTrainingProgram) {
         binding.apply {
             exerciseAdapter.swapItems(trainingProgram.exercises)
-            trainingProgramNameEditText.setText(trainingProgram.name)
+            trainingProgramNameEditText.apply {
+                if (trainingProgram.name != text.toString()) {
+                    setText(trainingProgram.name)
+                    setSelection(trainingProgram.name.length)
+                }
+            }
         }
     }
 

@@ -69,7 +69,7 @@ class EditTrainingProgramViewModel @Inject constructor(
     }
 
     fun addExerciseToTrainingProgram(newExercise: EditExercise) {
-        _trainingProgramLD.value?.let { currentTrainingProgram ->
+        trainingProgramLD.value?.let { currentTrainingProgram ->
             viewModelScope.launch {
                 _trainingProgramLD.postValue(
                     currentTrainingProgram.copy(
@@ -82,7 +82,7 @@ class EditTrainingProgramViewModel @Inject constructor(
     }
 
     fun removeSelectedExercise() {
-        _trainingProgramLD.value?.let { currentTrainingProgram ->
+        trainingProgramLD.value?.let { currentTrainingProgram ->
             viewModelScope.launch {
                 _trainingProgramLD.postValue(
                     currentTrainingProgram.copy(
@@ -96,7 +96,7 @@ class EditTrainingProgramViewModel @Inject constructor(
 
     // TODO mb change
     fun editSelectedExercise(editExercise: EditExercise) {
-        _trainingProgramLD.value?.let { currentTrainingProgram ->
+        trainingProgramLD.value?.let { currentTrainingProgram ->
             viewModelScope.launch {
                 _trainingProgramLD.postValue(
                     currentTrainingProgram.copy(

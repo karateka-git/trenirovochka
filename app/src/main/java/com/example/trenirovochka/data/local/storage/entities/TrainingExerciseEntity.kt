@@ -19,7 +19,7 @@ data class TrainingExerciseEntity(
     val programId: Long,
     val name: String,
     val numberOfTotalSets: Int,
-    var numberOfCompletedSets: Int = 0,
+    val numberOfCompletedSets: Int = 0,
     val numberOfRepetitions: Int,
     val usedWeight: String,
     val description: String? = null,

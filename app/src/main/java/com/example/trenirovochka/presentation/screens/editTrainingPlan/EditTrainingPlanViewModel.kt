@@ -47,9 +47,9 @@ class EditTrainingPlanViewModel @AssistedInject constructor(
                             list.apply {
                                 set(
                                     list.indexOf(trainingDay),
-                                    trainingDay.copy().apply {
-                                        isSelected = !isSelected
-                                    }
+                                    trainingDay.copy(
+                                        isSelected = trainingDay.isSelected.not()
+                                    )
                                 )
                             }
                         }

@@ -8,19 +8,19 @@ import com.example.trenirovochka.domain.models.TrainingProgram
 
 data class EditTrainingProgram(
     val id: Long,
-    var name: String,
-    var exercises: List<EditExercise>,
+    val name: String,
+    val exercises: List<EditExercise>,
 )
 
 data class EditExercise(
     val id: Long = 0, // default value for autogenerate
     val name: String,
     val numberOfTotalSets: Int,
-    var numberOfCompletedSets: Int = 0,
+    val numberOfCompletedSets: Int = 0,
     val numberOfRepetitions: Int,
     val usedWeight: String,
     val description: String? = null,
-    var isSelected: Boolean = false,
+    val isSelected: Boolean = false,
 ) {
 
     fun getExecutionDescription(context: Context): String =

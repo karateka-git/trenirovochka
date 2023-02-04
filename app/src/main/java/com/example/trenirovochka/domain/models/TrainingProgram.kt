@@ -9,15 +9,15 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TrainingPlan(
     val id: Long,
-    var name: String,
-    var trainingDays: List<TrainingDay>,
-    var trainingPrograms: List<TrainingProgram>
+    val name: String,
+    val trainingDays: List<TrainingDay>,
+    val trainingPrograms: List<TrainingProgram>
 ) : Parcelable
 
 @Parcelize
 data class TrainingDay(
     val dayOfWeek: DaysOfWeek,
-    var isSelected: Boolean = false
+    val isSelected: Boolean = false
 ) : Parcelable
 
 @Parcelize
@@ -30,15 +30,13 @@ sealed class Program : Parcelable {
 data class TrainingProgram(
     override val id: Long,
     override val name: String,
-    override var exercises: List<Exercise>,
-    val active: Boolean = false,
+    override val exercises: List<Exercise>,
 ) : Program() {
 
     constructor(program: TrainingProgram) : this(
         program.id,
         program.name,
         program.exercises.map { it.copy() },
-        program.active
     )
 
     val status: ExecutionStatus
@@ -95,7 +93,7 @@ data class Exercise(
             numberOfTotalSets
         )
 
-    fun addCompletedSet() {
+    private fun addCompletedSet() {
         numberOfCompletedSets += 1
     }
 

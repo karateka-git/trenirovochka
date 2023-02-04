@@ -55,15 +55,21 @@ class EditTrainingProgramViewModel @Inject constructor(
     }
 
     fun selectExercise(selectedExercise: EditExercise) {
-        _trainingProgramLD.value = trainingProgramLD.value?.apply {
-            exercises = exercises.toMutableList().apply {
-                forEachIndexed { index, editExercise ->
-                    if (editExercise == selectedExercise) {
-                        set(index, editExercise.copy(isSelected = editExercise.isSelected.not()))
-                    } else if (editExercise.isSelected) {
-                        set(index, editExercise.copy(isSelected = false))
-                    }
-                }
+        trainingProgramLD.value?.let { currentTrainingProgram ->
+            viewModelScope.launch {
+                _trainingProgramLD.postValue(
+                    currentTrainingProgram.copy(
+                        exercises = currentTrainingProgram.exercises.toMutableList().apply {
+                            forEachIndexed { index, editExercise ->
+                                if (editExercise == selectedExercise) {
+                                    set(index, editExercise.copy(isSelected = editExercise.isSelected.not()))
+                                } else if (editExercise.isSelected) {
+                                    set(index, editExercise.copy(isSelected = false))
+                                }
+                            }
+                        }
+                    )
+                )
             }
         }
     }
@@ -94,21 +100,16 @@ class EditTrainingProgramViewModel @Inject constructor(
         }
     }
 
-    // TODO mb change
     fun editSelectedExercise(editExercise: EditExercise) {
         trainingProgramLD.value?.let { currentTrainingProgram ->
             viewModelScope.launch {
                 _trainingProgramLD.postValue(
-                    currentTrainingProgram.copy(
-                        exercises = currentTrainingProgram.exercises.toMutableList()
-                            .apply {
-                                forEachIndexed { index, eachExercise ->
-                                    if (eachExercise == selectedExercise.value) {
-                                        set(index, editExercise)
-                                    }
-                                }
+                    currentTrainingProgram
+                        .copy(
+                            exercises = currentTrainingProgram.exercises.toMutableList().apply {
+                                set(indexOf(selectedExercise.value), editExercise)
                             }
-                    )
+                        )
                 )
             }
         }

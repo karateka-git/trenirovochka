@@ -33,12 +33,6 @@ data class TrainingProgram(
     override val exercises: List<Exercise>,
 ) : Program() {
 
-    constructor(program: TrainingProgram) : this(
-        program.id,
-        program.name,
-        program.exercises.map { it.copy() },
-    )
-
     val status: ExecutionStatus
         get() = if (exercises.any { it.status == IN_PROGRESS }) {
             IN_PROGRESS

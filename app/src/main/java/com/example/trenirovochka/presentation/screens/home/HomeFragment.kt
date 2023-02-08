@@ -112,9 +112,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             startTrainingButton.setOnClickListener {
                 viewModel.trainingProgram.value?.let {
                     sharedCurrentTrainingViewModel.updateCurrentTrainingProgram(
-                        TrainingProgram(
-                            it as TrainingProgram
-                        )
+                        it as TrainingProgram
                     )
                     viewModel.onStartTrainingButtonClick()
                 }

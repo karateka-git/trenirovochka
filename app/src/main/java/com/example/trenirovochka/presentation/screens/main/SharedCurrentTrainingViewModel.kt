@@ -2,10 +2,12 @@ package com.example.trenirovochka.presentation.screens.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.trenirovochka.domain.extensions.parseTime
 import com.example.trenirovochka.domain.models.ExecutionStatus
 import com.example.trenirovochka.domain.models.ExecutionStatus.*
+import com.example.trenirovochka.domain.models.Exercise
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import com.example.trenirovochka.presentation.common.util.CountTimer
@@ -38,7 +40,11 @@ class SharedCurrentTrainingViewModel @Inject constructor(
     val timeTraining: LiveData<Duration> = _timeTraining
 
     private val _trainingProgram: MutableLiveData<TrainingProgram?> = MutableLiveData(null)
-    val trainingProgram: LiveData<TrainingProgram?> = _trainingProgram
+    val trainingProgram: LiveData<TrainingProgram?> = _trainingProgram.map {
+        it?.apply {
+            programStatusChanged(status)
+        }
+    }
 
     fun updateCurrentTrainingProgram(program: TrainingProgram?) {
         _trainingProgram.value = program
@@ -60,7 +66,26 @@ class SharedCurrentTrainingViewModel @Inject constructor(
         }
     }
 
-    fun programStatusChanged(exerciseStatus: ExecutionStatus) {
+    fun updateExercises(item: Exercise) {
+        trainingProgram.value?.let { trainingProgram ->
+            val newExercise = trainingProgram.exercises.toMutableList()
+            newExercise.forEachIndexed { index, it ->
+                if (it == item || it.isStatusInProgress()) {
+                    newExercise[index] = it.copy().apply { updateExecutionStatus() }
+                }
+            }
+            _trainingProgram.value = trainingProgram.copy(
+                exercises = newExercise
+            )
+        }
+    }
+
+    fun cancelTrainingProgram() {
+        resetTimer()
+        updateCurrentTrainingProgram(null)
+    }
+
+    private fun programStatusChanged(exerciseStatus: ExecutionStatus) {
         when (exerciseStatus) {
             NOT_STARTED -> {}
             IN_PROGRESS -> {
@@ -73,13 +98,9 @@ class SharedCurrentTrainingViewModel @Inject constructor(
         }
     }
 
-    fun cancelTrainingProgram() {
-        resetTimer()
-        updateCurrentTrainingProgram(null)
-    }
-
     private fun updateCountTimer(state: TimerState, time: Duration) {
         countTimer.apply {
+            cancelTimer()
             setTime(time)
             setState(state)
             startTimer(viewModelScope)

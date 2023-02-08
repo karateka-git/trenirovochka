@@ -12,7 +12,6 @@ import com.example.trenirovochka.domain.extensions.formatAsTime
 import com.example.trenirovochka.domain.models.RecoveryLevel
 import com.example.trenirovochka.domain.models.TrainingProgram
 import com.example.trenirovochka.domain.models.ExecutionStatus.IN_PROGRESS
-import com.example.trenirovochka.domain.models.ExecutionStatus.NOT_STARTED
 import com.example.trenirovochka.domain.models.UserStatus
 import com.example.trenirovochka.presentation.common.base.BaseFragment
 import com.example.trenirovochka.presentation.common.extensions.addKeyDoneListener
@@ -33,16 +32,7 @@ class PerformTrainingFragment(
 ) : BaseFragment<FragmentPerformTrainingBinding, PerformTrainingViewModel>(
     FragmentPerformTrainingBinding::inflate
 ) {
-    private val args by navArgs<PerformTrainingFragmentArgs>()
-
-    @Inject
-    lateinit var assistedFactory: PerformTrainingViewModelAssistedFactory
-
-    override val viewModel: PerformTrainingViewModel by viewModelCreator {
-        assistedFactory.create(
-            args.trainingProgram
-        )
-    }
+    override val viewModel: PerformTrainingViewModel by viewModelCreator()
 
     private val sharedCurrentTrainingViewModel: SharedCurrentTrainingViewModel by viewModelCreator(
         ::requireActivity
@@ -53,7 +43,7 @@ class PerformTrainingFragment(
             ViewHolderActiveExerciseBinding::inflate
         ) {
             ActiveExerciseViewHolder(it) { item ->
-                viewModel.updateExercises(item)
+                sharedCurrentTrainingViewModel.updateExercises(item)
             }
         }
     }
@@ -84,17 +74,27 @@ class PerformTrainingFragment(
     private fun initObservers() {
         binding.apply {
             viewModel.apply {
-                trainingProgramVM.observe(viewLifecycleOwner) {
-                    updateProgramState(it)
-                    trainingProgramAdapter.swapItems(it.exercises)
-                }
                 userState.observe(viewLifecycleOwner) {
                     updateUserState(it)
                 }
             }
-            sharedCurrentTrainingViewModel.timeTraining.observe(viewLifecycleOwner) {
-                timerEditText.setText(formatAsTime(it))
-                viewModel.updateUserState(it, sharedCurrentTrainingViewModel.getTimeForRelax())
+            sharedCurrentTrainingViewModel.apply {
+                timeTraining.observe(viewLifecycleOwner) {
+                    timerEditText.setText(formatAsTime(it))
+                    trainingProgram.value?.let { currentProgram ->
+                        viewModel.updateUserState(
+                            it,
+                            sharedCurrentTrainingViewModel.getTimeForRelax(),
+                            currentProgram.status
+                        )
+                    }
+                }
+                trainingProgram.observe(viewLifecycleOwner) {
+                    it?.let {
+                        updateProgramState(it)
+                        trainingProgramAdapter.swapItems(it.exercises)
+                    }
+                }
             }
         }
     }
@@ -115,10 +115,6 @@ class PerformTrainingFragment(
     }
 
     private fun updateProgramState(program: TrainingProgram) {
-        if (program.status != NOT_STARTED) {
-            sharedCurrentTrainingViewModel.updateCurrentTrainingProgram(program)
-        }
-        sharedCurrentTrainingViewModel.programStatusChanged(program.status)
         binding.timerEditText.isEnabled = program.status != IN_PROGRESS
     }
 

@@ -51,7 +51,6 @@ class CountTimer {
     fun startTimer(
         scope: CoroutineScope,
     ) {
-        cancelTimer()
         timer = startCoroutineTimer(scope) {
             timeDuration = actionWithTime(timeDuration)
             scope.launch(Dispatchers.Main) {

@@ -60,9 +60,7 @@ class HomeViewModel @Inject constructor(
     fun onStartTrainingButtonClick() {
         trainingProgram.value?.let {
             navigateTo(
-                HomeFragmentDirections.actionHomeFragmentToPerformTraining(
-                    TrainingProgram(it as TrainingProgram)
-                )
+                HomeFragmentDirections.actionHomeFragmentToPerformTraining()
             )
         }
     }
@@ -74,9 +72,7 @@ class HomeViewModel @Inject constructor(
     fun onContinueTrainingButtonClick(activeTrainingProgram: TrainingProgram?) {
         activeTrainingProgram?.let {
             navigateTo(
-                HomeFragmentDirections.actionHomeFragmentToPerformTraining(
-                    TrainingProgram(it)
-                )
+                HomeFragmentDirections.actionHomeFragmentToPerformTraining()
             )
         }
     }

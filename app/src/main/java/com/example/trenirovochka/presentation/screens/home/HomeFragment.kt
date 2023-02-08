@@ -110,7 +110,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 viewModel.updateSelectedDate(ActionWithDate.PREV)
             }
             startTrainingButton.setOnClickListener {
-                viewModel.onStartTrainingButtonClick()
+                viewModel.trainingProgram.value?.let {
+                    sharedCurrentTrainingViewModel.updateCurrentTrainingProgram(
+                        TrainingProgram(
+                            it as TrainingProgram
+                        )
+                    )
+                    viewModel.onStartTrainingButtonClick()
+                }
             }
             cancelTrainingButton.setOnClickListener {
                 viewModel.onCancelTrainingButtonClick()

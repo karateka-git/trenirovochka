@@ -20,10 +20,6 @@
         android:id="@+id/performTrainingFragment"
         android:name="com.example.trenirovochka.presentation.screens.performTraining.PerformTrainingFragment"
         android:label="PerformTraining">
-        <argument
-            android:name="trainingProgram"
-            app:nullable="false"
-            app:argType="com.example.trenirovochka.domain.models.TrainingProgram"/>
     </fragment>
 
     <fragment

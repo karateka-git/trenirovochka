@@ -3,6 +3,7 @@ package com.example.trenirovochka.presentation.screens.home
 import androidx.lifecycle.*
 import com.example.trenirovochka.data.local.models.ActionWithDate
 import com.example.trenirovochka.domain.extensions.formatAsFullDate
+import com.example.trenirovochka.domain.interactors.interfaces.ICompletedTrainingProgramsInteractor
 import com.example.trenirovochka.domain.interactors.interfaces.ITrainingProgramsInteractor
 import com.example.trenirovochka.domain.models.Program
 import com.example.trenirovochka.domain.models.TrainingPlan
@@ -14,6 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    private val completedProgramsInteractor: ICompletedTrainingProgramsInteractor,
     private val programsInteractor: ITrainingProgramsInteractor,
     private val calendar: Calendar
 ) : BaseViewModel() {
@@ -27,8 +29,25 @@ class HomeViewModel @Inject constructor(
 
     val trainingPlan: LiveData<TrainingPlan> = programsInteractor.getTrainingPlan().asLiveData()
 
-    val trainingProgram: LiveData<Program> = _selectedDate.switchMap {
+    private val completedTrainingProgram: LiveData<Program?> = _selectedDate.switchMap {
+        completedProgramsInteractor.get(it).asLiveData()
+    }
+
+    private val trainingProgramFromPlan: LiveData<Program> = _selectedDate.switchMap {
         programsInteractor.getTrainingProgram(it).asLiveData()
+    }
+
+    val trainingProgram: MediatorLiveData<Program> = MediatorLiveData<Program>().apply {
+        addSource(completedTrainingProgram) {
+            it?.let {
+                value = it
+            }
+        }
+        addSource(trainingProgramFromPlan) {
+            if (completedTrainingProgram.value == null) {
+                value = it
+            }
+        }
     }
     val isCancelActiveTrainingProgramDialogShow: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -58,11 +77,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onStartTrainingButtonClick() {
-        trainingProgram.value?.let {
-            navigateTo(
-                HomeFragmentDirections.actionHomeFragmentToPerformTraining()
-            )
-        }
+        navigateTo(
+            HomeFragmentDirections.actionHomeFragmentToPerformTraining()
+        )
     }
 
     fun onCancelTrainingButtonClick() {

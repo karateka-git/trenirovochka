@@ -5,6 +5,7 @@ import android.os.Parcelable
 import com.example.trenirovochka.R
 import com.example.trenirovochka.domain.models.ExecutionStatus.*
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 @Parcelize
 data class TrainingPlan(
@@ -45,10 +46,10 @@ data class TrainingProgram(
         }
 }
 
-data class PerformedTrainingProgram(
+data class CompletedTrainingProgram(
     override val id: Long,
-    val date: String,
     override val name: String,
+    val date: Date,
     override val exercises: List<Exercise>,
     val status: ExecutionStatus = COMPLETED
 ) : Program()

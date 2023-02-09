@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.trenirovochka.data.local.storage.StorageDatabase
+import com.example.trenirovochka.data.local.storage.daos.CompletedTrainingProgramsDao
 import com.example.trenirovochka.data.local.storage.daos.TrainingPlanDao
 import com.example.trenirovochka.data.local.storage.entities.TrainingPlanEntity
 import com.example.trenirovochka.data.local.storage.entities.TrainingPlanJoinEntity
@@ -51,6 +52,13 @@ class DatabaseModule {
         database: StorageDatabase,
     ): TrainingPlanDao =
         database.trainingPlanDao()
+
+    @Singleton
+    @Provides
+    fun provideCompletedTrainingProgramsDao(
+        database: StorageDatabase,
+    ): CompletedTrainingProgramsDao =
+        database.completedTrainingProgramsDao()
 
     inner class PrepopulateTrainingPlanCallback(
         private val trainingPlanProvider: Provider<TrainingPlanDao>

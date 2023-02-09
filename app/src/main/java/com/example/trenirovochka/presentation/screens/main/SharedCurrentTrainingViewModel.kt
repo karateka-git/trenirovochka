@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.trenirovochka.domain.extensions.parseTime
+import com.example.trenirovochka.domain.interactors.interfaces.ICompletedTrainingProgramsInteractor
+import com.example.trenirovochka.domain.models.CompletedTrainingProgram
 import com.example.trenirovochka.domain.models.ExecutionStatus
 import com.example.trenirovochka.domain.models.ExecutionStatus.*
 import com.example.trenirovochka.domain.models.Exercise
@@ -13,6 +15,8 @@ import com.example.trenirovochka.presentation.common.base.BaseViewModel
 import com.example.trenirovochka.presentation.common.util.CountTimer
 import com.example.trenirovochka.presentation.common.util.CountTimer.Companion.TimerState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
@@ -20,6 +24,7 @@ import kotlin.time.toDuration
 
 @HiltViewModel
 class SharedCurrentTrainingViewModel @Inject constructor(
+    private val completedProgramsInteractor: ICompletedTrainingProgramsInteractor,
     private val countTimer: CountTimer,
 ) : BaseViewModel() {
 
@@ -81,6 +86,19 @@ class SharedCurrentTrainingViewModel @Inject constructor(
     }
 
     fun cancelTrainingProgram() {
+        viewModelScope.launch {
+            trainingProgram.value?.let {
+                completedProgramsInteractor.add(
+                    CompletedTrainingProgram(
+                        it.id,
+                        it.name,
+                        Calendar.getInstance().time,
+                        it.exercises,
+                        it.status
+                    )
+                )
+            }
+        }
         resetTimer()
         updateCurrentTrainingProgram(null)
     }

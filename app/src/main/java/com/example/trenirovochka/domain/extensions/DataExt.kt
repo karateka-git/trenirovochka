@@ -1,10 +1,7 @@
 package com.example.trenirovochka.domain.extensions
 
 import com.example.trenirovochka.data.local.storage.entities.*
-import com.example.trenirovochka.domain.models.Exercise
-import com.example.trenirovochka.domain.models.Program
-import com.example.trenirovochka.domain.models.TrainingPlan
-import com.example.trenirovochka.domain.models.TrainingProgram
+import com.example.trenirovochka.domain.models.*
 
 fun TrainingPlanJoinEntity.toTrainingPlanDomain() =
     TrainingPlan(
@@ -59,6 +56,51 @@ fun Exercise.toTrainingExerciseEntity(programId: Long) =
     TrainingExerciseEntity(
         id,
         programId,
+        name,
+        numberOfTotalSets,
+        numberOfCompletedSets,
+        numberOfRepetitions,
+        usedWeight,
+        description,
+        status
+    )
+
+fun CompletedTrainingProgram.toCompletedTrainingProgramJoinEntity() =
+    CompletedTrainingProgramJoinEntity(
+        CompletedTrainingProgramEntity(
+            id,
+            name,
+            date,
+            status
+        ),
+        exercises.map { it.toCompletedExerciseEntity(id) }
+    )
+
+fun Exercise.toCompletedExerciseEntity(programId: Long) =
+    CompletedTrainingExerciseEntity(
+        id,
+        programId,
+        name,
+        numberOfTotalSets,
+        numberOfCompletedSets,
+        numberOfRepetitions,
+        usedWeight,
+        description,
+        status
+    )
+
+fun CompletedTrainingProgramJoinEntity.toCompletedTrainingProgramDomain() =
+    CompletedTrainingProgram(
+        trainingProgram.id,
+        trainingProgram.name,
+        trainingProgram.date,
+        exercises.map { it.toCompletedExerciseDomain() },
+        trainingProgram.status,
+    )
+
+fun CompletedTrainingExerciseEntity.toCompletedExerciseDomain() =
+    Exercise(
+        id,
         name,
         numberOfTotalSets,
         numberOfCompletedSets,

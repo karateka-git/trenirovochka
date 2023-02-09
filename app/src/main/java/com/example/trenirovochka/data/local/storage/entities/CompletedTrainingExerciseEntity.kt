@@ -5,17 +5,17 @@ import com.example.trenirovochka.data.local.storage.ExecutionStatusConverter
 import com.example.trenirovochka.domain.models.ExecutionStatus
 
 @Entity(
-    tableName = "trainingExercise",
+    tableName = "completedExercise",
     foreignKeys = [
         ForeignKey(
-            entity = TrainingProgramEntity::class,
+            entity = CompletedTrainingProgramEntity::class,
             parentColumns = ["id"],
             childColumns = ["programId"],
             onDelete = ForeignKey.CASCADE
         ),
     ]
 )
-data class TrainingExerciseEntity(
+data class CompletedTrainingExerciseEntity(
     @PrimaryKey(autoGenerate = true) val id: Long,
     val programId: Long,
     val name: String,

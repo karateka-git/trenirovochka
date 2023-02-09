@@ -135,7 +135,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     private fun updateTrainingProgram(program: Program) {
         binding.apply {
             trainingButtonContainer.visibleChildId = when (program) {
-                is PerformedTrainingProgram -> {
+                is CompletedTrainingProgram -> {
                     performedTrainingText.id
                 }
                 is TrainingProgram -> {
